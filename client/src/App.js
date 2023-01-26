@@ -15,10 +15,9 @@ import Reset from './components/screens/Reset'
 import NewPassword from './components/screens/Newpassword'
 import Requests from './components/screens/Requests';
 import CreateRequest from './components/screens/CreateRequest';
-import Inbox from './components/screens/messenger/Messenger';
+import Messenger from './components/screens/Messenger';
 
 export const UserContext = createContext()
-
 
 const Routing = ()=>{
   const history = useHistory()
@@ -68,7 +67,7 @@ const Routing = ()=>{
         <CreateRequest />
       </Route>
       <Route path="/inbox">
-        <Inbox/>
+        <Messenger/>
       </Route>
     </Switch>
   )

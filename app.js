@@ -22,12 +22,17 @@ mongoose.connection.on('error',(err)=>{
 require('./models/user.cjs')
 require('./models/post.cjs')  
 require('./models/gigModel.cjs')
+require('./models/Message.cjs')
+require('./models/Conversation.cjs')
 
 app.use(express.json())
 app.use(require('./routes/auth.cjs'))
 app.use(require('./routes/post.cjs'))
 app.use(require('./routes/user.cjs'))  
-app.use(require('./routes/request.cjs'))  
+app.use(require('./routes/request.cjs'))    
+app.use(require('./routes/conversations.cjs'))
+app.use(require('./routes/messages.cjs'))  
+
 //app.use('/gigroutes', gigRoutes)//???????????????
 
 if(process.env.NODE_ENV=="production"){

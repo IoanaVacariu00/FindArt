@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "timeago.js";
 
-const Message = ()=>{
+const Message = ({ message, own })=>{
     return (
   
         <div className={own ? "message own" : "message"}>

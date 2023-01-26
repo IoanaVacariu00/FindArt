@@ -1,9 +1,7 @@
 
-import "./messenger.css";
-import Topbar from "../../components/topbar/Topbar";
 import Conversation from "./Conversations";
 import Message from "./Message";
-import ChatOnline from "../../components/chatOnline/ChatOnline";
+import ChatOnline from './ChatOnline';
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
