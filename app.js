@@ -25,6 +25,8 @@ require('./models/gigModel.cjs')
 require('./models/Message.cjs')
 require('./models/Conversation.cjs')
 
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 app.use(express.json())
 app.use(require('./routes/auth.cjs'))
 app.use(require('./routes/post.cjs'))
