@@ -1,9 +1,10 @@
 
-import Conversation from "./Conversations";
-import Message from "./Message";
-import ChatOnline from './ChatOnline';
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import Conversation from "../Conversations.js";
+import Message from "../Message";
+import ChatOnline from '../ChatOnline';
+import React, { useContext, useEffect, useRef, useState } from "react";
+//import { AuthContext } from "../../context/AuthContext";
+import {UserContext} from '../../App'
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -15,7 +16,8 @@ import { io } from "socket.io-client";
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
-  const { user } = useContext(AuthContext);
+  //const { user } = useContext(UserContext); //AuthContext
+  const { state, dispatch } = useContext(UserContext);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -36,30 +38,30 @@ import { io } from "socket.io-client";
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", user._id);
+    socket.current.emit("addUser", state._id);
     socket.current.on("getUsers", (users) => {
       setOnlineUsers(
-        user.followings.filter((f) => users.some((u) => u.userId === f))
+        state.followings.filter((f) => users.some((u) => u.userId === f))
       );
     });
-  }, [user]);
+  }, [state]);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user._id);
+        const res = await axios.get("/inbox/conversations/" + state._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getConversations();
-  }, [user._id]);
+  }, [state._id]);
 
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id);
+        const res = await axios.get("/inbox/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -71,23 +73,23 @@ import { io } from "socket.io-client";
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      sender: user._id,
+      sender: state._id,
       text: newMessage,
       conversationId: currentChat._id,
     };
 
     const receiverId = currentChat.members.find(
-      (member) => member !== user._id
+      (member) => member !== state._id
     );
 
     socket.current.emit("sendMessage", {
-      senderId: user._id,
+      senderId: state._id,
       receiverId,
       text: newMessage,
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("/inbox/", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -101,14 +103,14 @@ import { io } from "socket.io-client";
 
   return (
     <>
-      <Topbar />
+      {/* <Topbar /> */}
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input placeholder="Search for friends" className="chatMenuInput" />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
+                <Conversation conversation={c} currentUser={state} />
               </div>
             ))}
           </div>
@@ -120,7 +122,7 @@ import { io } from "socket.io-client";
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id} />
+                      <Message message={m} own={m.sender === state._id} />
                     </div>
                   ))}
                 </div>
@@ -147,7 +149,7 @@ import { io } from "socket.io-client";
           <div className="chatOnlineWrapper">
             <ChatOnline
               onlineUsers={onlineUsers}
-              currentId={user._id}
+              currentId={state._id}
               setCurrentChat={setCurrentChat}
             />
           </div>

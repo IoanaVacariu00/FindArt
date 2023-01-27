@@ -1,10 +1,11 @@
 
 const router = require("express").Router();
-const Message = require("../models/Message");
+const mongoose = require('mongoose')
+const Message = mongoose.model('Message') //require("./models/Message.cjs");
 
 //add
 
-router.post("/", async (req, res) => {
+router.post("/inbox", async (req, res) => {
   const newMessage = new Message(req.body);
 
   try {
@@ -17,7 +18,7 @@ router.post("/", async (req, res) => {
 
 //get
 
-router.get("/:conversationId", async (req, res) => {
+router.get("/inbox/:conversationId", async (req, res) => {
   try {
     const messages = await Message.find({
       conversationId: req.params.conversationId,

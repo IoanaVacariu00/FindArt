@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Conversation = ({ conversation, currentUser })=>{
     const [user, setUser] = useState(null);
@@ -10,7 +10,7 @@ const Conversation = ({ conversation, currentUser })=>{
   
       const getUser = async () => {
         try {
-          const res = await axios("/users?userId=" + friendId);
+          const res = await axios("/inbox/users?userId=" + friendId);
           setUser(res.data);
         } catch (err) {
           console.log(err);

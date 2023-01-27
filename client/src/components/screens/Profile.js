@@ -29,7 +29,6 @@ const Profile  = ()=>{
         .then(res=>res.json())
         .then(data=>{
     
-       
            fetch('/updatepic',{
                method:"put",
                headers:{
@@ -108,12 +107,10 @@ const Profile  = ()=>{
                        )
                    })
                }
-
-           
+        
            </div>
        </div>
    )
 }
-
-
+  
 export default Profile
