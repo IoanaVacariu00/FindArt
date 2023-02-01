@@ -66,7 +66,7 @@ const Routing = ()=>{
       <Route path="/createrequest">
         <CreateRequest />
       </Route>
-      <Route path="/inbox">
+      <Route path="/messenger">
         <Messenger/>
       </Route>
     </Switch>

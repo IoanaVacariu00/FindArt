@@ -75,13 +75,17 @@ a{
 
 .home-card{
   max-width: 500px;
-  height: 500px;
+  height: fit-content;
   margin: 26px auto;
-  object-fit: cover;
   
 }
 .collection-item{
   width: 100%;
+}
+
+.card-image > img {
+  object-fit: cover;
+  max-height: 500px ;
 }
 
 #toast-container{
@@ -180,21 +184,11 @@ a{
   flex: 3;
 }
 
-.chatMenuWrapper, .chatBoxWrapper, .chatWrapper {
-  padding: 10px;
-  height: 100%;
-}
-
 .conversation {
   display: flex;
   align-items: center;
   padding: 10px;
   cursor: pointer;
-}
-
-.conversation:hover {
-
-  background-color: #ccc;
 }
 
 .conversationImg {
@@ -209,29 +203,8 @@ a{
   font-weight: 500;
 }
 
-.message {
-  display: flex;
-  flex-direction: column;
-}
-
 .messageTop {
   display: flex;
-}
-
-.messageImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.messageText {
-  padding: 10px;
-  border-radius: 20px;
-  background-color: grey;
-  max-width: 300px;
-
 }
 
 .messageBottom {
@@ -247,10 +220,6 @@ a{
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-}
-
-.messageTop{
-    display: flex;
 }
 
 .messageImg {
@@ -269,11 +238,6 @@ a{
     max-width: 300px;
 }
 
-.messageBottom{
-    font-size: 12px;
-    margin-top: 10px;
-}
-
 .message.own{
     align-items: flex-end;
 }
@@ -282,13 +246,7 @@ a{
     background-color: rgb(245, 241, 241);
     color: black;
 }
-.conversation {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-}
+
 
 .conversation:hover {
   background-color: rgb(245, 243, 243);
@@ -302,10 +260,6 @@ a{
   margin-right: 20px;
 }
 
-.conversationName {
-  font-weight: 500;
-}
-
 @media screen and (max-width: 768px) {
   .conversationName {
     display: none;
@@ -315,10 +269,6 @@ a{
 .messenger {
   height: calc(100vh - 70px);
   display: flex;
-}
-
-.chatMenu {
-  flex: 3.5;
 }
 
 .chatMenuInput {
@@ -449,26 +399,12 @@ a{
   margin-top: 20px;
 }
 
-.conversation:hover {
-  background-color: rgb(245, 243, 243);
-}
-
 .conversationImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 20px;
-}
-
-.conversationName {
-  font-weight: 500;
-}
-
-@media screen and (max-width: 768px) {
-  .conversationName {
-    display: none;
-  }
 }
 
 .sidebarFriend {

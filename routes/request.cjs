@@ -38,7 +38,7 @@ router.post('/createrequest',requireLogin,(req,res)=>{
     req.user.password = undefined//?
     const request = new Gig({
        
-        maintitle,
+         maintitle,
          notes, 
          category, 
          medium, 

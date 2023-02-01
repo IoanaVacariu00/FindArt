@@ -1,12 +1,12 @@
-import React,{useEffect,useState,useContext} from 'react'
+import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
-const Profile  = ()=>{
+const Profile = ()=>{
     const [userProfile,setProfile] = useState(null)
     
-    const {state,dispatch} = useContext(UserContext)
+    const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
-    const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
+    const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
     useEffect(()=>{
        fetch(`/user/${userid}`,{
            headers:{
@@ -14,12 +14,9 @@ const Profile  = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-           //console.log(result)
-         
-            setProfile(result)
+           setProfile(result)
        })
     },[])
-
 
     const followUser = ()=>{
         fetch('/follow',{
@@ -95,7 +92,7 @@ const Profile  = ()=>{
                </div>
                <div>
                    <h4>{userProfile.user.name}</h4>
-                   <h5>{userProfile.user.email}</h5>
+                   {/* <h5>{userProfile.user.email}</h5> */}
                    <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                        <h6>{userProfile.posts.length} posts</h6>
                        <h6>{userProfile.user.followers.length} followers</h6>
@@ -123,9 +120,6 @@ const Profile  = ()=>{
                         UnFollow
                     </button>
                     }
-                   
-                  
-
                </div>
            </div>
      
@@ -141,10 +135,7 @@ const Profile  = ()=>{
            
            </div>
        </div>
-       
-       
        : <h2>loading...!</h2>}
-       
        </>
    )
 }

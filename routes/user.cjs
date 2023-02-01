@@ -67,8 +67,7 @@ router.put('/unfollow',requireLogin,(req,res)=>{
     }
     )
 })
-
-
+ 
 router.put('/updatepic',requireLogin,(req,res)=>{
     User.findByIdAndUpdate(req.user._id,{$set:{pic:req.body.pic}},{new:true},
         (err,result)=>{
@@ -78,9 +77,7 @@ router.put('/updatepic',requireLogin,(req,res)=>{
          res.json(result)
     })
 })
-
-
-
+    
 router.post('/search-users',(req,res)=>{
     let userPattern = new RegExp("^"+req.body.query)
     User.find({email:{$regex:userPattern}})
@@ -93,9 +90,9 @@ router.post('/search-users',(req,res)=>{
 
 })
 
+//get friends 
 
-//get friends
-router.get("inbox/friends/:userId", async (req, res) => {
+router.get("/friends/:userId", async (req, res) => {
     try {
       const user = await User.findById(req.params.userId);
       const friends = await Promise.all(
@@ -105,8 +102,8 @@ router.get("inbox/friends/:userId", async (req, res) => {
       );
       let friendList = [];
       friends.map((friend) => {
-        const { _id, username, profilePicture } = friend;
-        friendList.push({ _id, username, profilePicture });
+        const { _id, username, pic } = friend;
+        friendList.push({ _id, username, pic });
       });
       res.status(200).json(friendList)
     } catch (err) {

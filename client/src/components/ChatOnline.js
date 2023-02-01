@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get("/inbox/users/friends/" + currentId);
+      const res = await axios.get("/users/friends/" + currentId);
       setFriends(res.data);
     };
 
@@ -22,7 +22,7 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
   const handleClick = async (user) => {
     try {
       const res = await axios.get(
-        `/inbox/conversations/find/${currentId}/${user._id}`
+        `/conversations/find/${currentId}/${user._id}`
       );
       setCurrentChat(res.data);
     } catch (err) {
@@ -38,15 +38,15 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
             <img
               className="chatOnlineImg"
               src={
-                o?.profilePicture
-                  ? PF + o.profilePicture
-                  : PF + "person/noAvatar.png"
+                o?.pic
+                  ? o.pic
+                  : 'https://assets.stickpng.com/thumbs/589eec6964b351149f22a88a.png' // PF + "person/noAvatar.png"
               }
               alt=""
             />
             <div className="chatOnlineBadge"></div>
           </div>
-          <span className="chatOnlineName">{o?.username}</span>
+          <span className="chatOnlineName">{o?.name}</span>
         </div>
       ))}
     </div>

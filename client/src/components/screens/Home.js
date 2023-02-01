@@ -3,9 +3,9 @@ import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'
 const Home  = ()=>{
     const [data,setData] = useState([])
-    const {state,dispatch} = useContext(UserContext)
+    const {state, dispatch} = useContext(UserContext)
     useEffect(()=>{
-       fetch('/allpost',{
+       fetch('/allposts',{
            headers:{
                "Authorization":"Bearer "+localStorage.getItem("jwt")
            }
@@ -28,7 +28,7 @@ const Home  = ()=>{
               })
           }).then(res=>res.json())
           .then(result=>{
-                   //   console.log(result)
+                   
             const newData = data.map(item=>{
                 if(item._id==result._id){
                     return result

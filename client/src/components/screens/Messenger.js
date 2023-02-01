@@ -1,5 +1,5 @@
 
-import Conversation from "../Conversations.js";
+import Conversation from "../Conversation.js";
 import Message from "../Message";
 import ChatOnline from '../ChatOnline';
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -41,7 +41,7 @@ import { io } from "socket.io-client";
     socket.current.emit("addUser", state._id);
     socket.current.on("getUsers", (users) => {
       setOnlineUsers(
-        state.followings.filter((f) => users.some((u) => u.userId === f))
+        state.following.filter((f) => users.some((u) => u.userId === f))
       );
     });
   }, [state]);
@@ -49,7 +49,7 @@ import { io } from "socket.io-client";
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/inbox/conversations/" + state._id);
+        const res = await axios.get("/conversations/" + state._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -61,7 +61,7 @@ import { io } from "socket.io-client";
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/inbox/" + currentChat?._id);
+        const res = await axios.get("/messages/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -89,7 +89,7 @@ import { io } from "socket.io-client";
     });
 
     try {
-      const res = await axios.post("/inbox/", message);
+      const res = await axios.post("/messages/", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -106,7 +106,7 @@ import { io } from "socket.io-client";
       {/* <Topbar /> */}
       <div className="messenger">
         <div className="chatMenu">
-          <div className="chatMenuWrapper">
+          <div className="chatMenuWrapper" style={{"border": "1px solid red"}}>
             <input placeholder="Search for friends" className="chatMenuInput" />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
@@ -115,7 +115,7 @@ import { io } from "socket.io-client";
             ))}
           </div>
         </div>
-        <div className="chatBox">
+        <div className="chatBox" style={{"border": "1px solid green"}}>
           <div className="chatBoxWrapper">
             {currentChat ? (
               <>
@@ -145,7 +145,7 @@ import { io } from "socket.io-client";
             )}
           </div>
         </div>
-        <div className="chatOnline">
+        <div className="chatOnline" style={{"border": "1px solid grey"}}>
           <div className="chatOnlineWrapper">
             <ChatOnline
               onlineUsers={onlineUsers}

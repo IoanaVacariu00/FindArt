@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const ConversationSchema = new mongoose.Schema({
+const conversationSchema = new mongoose.Schema({
     members:{
         type:Array,
     },
 },{timestamps:true})
 
-mongoose.model("Conversation",ConversationSchema)
+mongoose.model("Conversation",conversationSchema)
