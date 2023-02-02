@@ -8,7 +8,7 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
 
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get("/users/friends/" + currentId);
+      const res = await axios.get("/user/friends/" + currentId);
       setFriends(res.data);
     };
 
@@ -38,9 +38,10 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
             <img
               className="chatOnlineImg"
               src={
-                o?.pic
-                  ? o.pic
-                  : 'https://assets.stickpng.com/thumbs/589eec6964b351149f22a88a.png' // PF + "person/noAvatar.png"
+                o.pic
+                // o?.pic
+                //   ? o.pic
+                //   : 'https://assets.stickpng.com/thumbs/589eec6964b351149f22a88a.png' // PF + "person/noAvatar.png"
               }
               alt=""
             />

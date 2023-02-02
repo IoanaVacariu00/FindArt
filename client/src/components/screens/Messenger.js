@@ -1,14 +1,14 @@
-
 import Conversation from "../Conversation.js";
 import Message from "../Message";
 import ChatOnline from '../ChatOnline';
 import React, { useContext, useEffect, useRef, useState } from "react";
 //import { AuthContext } from "../../context/AuthContext";
-import {UserContext} from '../../App'
+import { UserContext } from '../../App'
 import axios from "axios";
 import { io } from "socket.io-client";
 
-  const Messenger = ()=>{
+const Messenger = ()=>{
+   
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ import { io } from "socket.io-client";
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   //const { user } = useContext(UserContext); //AuthContext
-  const { state, dispatch} = useContext(UserContext); console.log("state: " + state);
+  const {state, dispatch} = useContext(UserContext); console.log(state);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -103,7 +103,6 @@ import { io } from "socket.io-client";
 
   return (
     <>
-      {/* <Topbar /> */}
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper" style={{"border": "1px solid red"}}>

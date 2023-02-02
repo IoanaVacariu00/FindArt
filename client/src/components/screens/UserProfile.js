@@ -10,7 +10,7 @@ const Profile = ()=>{
     useEffect(()=>{
        fetch(`/user/${userid}`,{
            headers:{
-               "Authorization":"Bearer "+localStorage.getItem("jwt")
+               "Authorization":"Bearer " + localStorage.getItem("jwt")
            }
        }).then(res=>res.json())
        .then(result=>{

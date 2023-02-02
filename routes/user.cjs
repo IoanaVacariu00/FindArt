@@ -22,7 +22,7 @@ router.get('/user/:id',requireLogin,(req,res)=>{
         return res.status(404).json({error:"User not found"})
     })
 })
-
+    
 
 router.put('/follow',requireLogin,(req,res)=>{
     User.findByIdAndUpdate(req.body.followId,{

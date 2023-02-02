@@ -49,7 +49,7 @@ app.use(require('./routes/message.cjs'))
 
 app.use('/conversations', require('./routes/conversation.cjs'))
 app.use('/messages', require('./routes/message.cjs'))
-// app.use("/users", userRoute)
+app.use("/user", require('./routes/user.cjs'))
 
 
 if(process.env.NODE_ENV=="production"){

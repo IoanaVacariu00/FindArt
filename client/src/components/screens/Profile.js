@@ -3,7 +3,7 @@ import {UserContext} from '../../App'
 
 const Profile  = ()=>{
     const [mypics,setPics] = useState([])
-    const {state,dispatch} = useContext(UserContext)
+    const {state,dispatch} = useContext(UserContext); console.log(state);
     const [image,setImage] = useState("")
     useEffect(()=>{
        fetch('/mypost',{
@@ -12,7 +12,7 @@ const Profile  = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-           console.log(result)
+        //    console.log(result)
            setPics(result.mypost)
        })
     },[])
@@ -43,7 +43,7 @@ const Profile  = ()=>{
                console.log(result)
                localStorage.setItem("user",JSON.stringify({...state,pic:result.pic}))
                dispatch({type:"UPDATEPIC",payload:result.pic})
-               //window.location.reload()
+               window.location.reload()
            })
        
         })
@@ -61,7 +61,7 @@ const Profile  = ()=>{
                margin:"18px 0px",
                borderBottom:"1px solid grey"
            }}>
-
+        
          
            <div style={{
                display:"flex",
@@ -76,7 +76,7 @@ const Profile  = ()=>{
                </div>
                <div>
                    <h4>{state?state.name:"loading"}</h4>
-                   {/* <h5>{state?state.email:"loading"}</h5> */}
+                   <h5>{state?state.email:"loading"}</h5>
                    <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                        <h6>{mypics.length} posts</h6>
                        <h6>{state?state.followers.length:"0"} followers</h6>
