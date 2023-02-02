@@ -7,7 +7,7 @@ const io = require("socket.io")(8900, {
   let users = [];
   
   const addUser = (userId, socketId) => {
-    !users.some((user) => user.userId === userId) &&
+    !users.some((user) => user.id === userId) &&
       users.push({ userId, socketId });
   };
   
@@ -16,7 +16,7 @@ const io = require("socket.io")(8900, {
   };
   
   const getUser = (userId) => {
-    return users.find((user) => user.userId === userId);
+    return users.find((user) => user.id === userId);
   };
   
   io.on("connection", (socket) => {

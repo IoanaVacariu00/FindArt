@@ -7,7 +7,6 @@ const Conversation = ({ conversation, currentUser })=>{
   
     useEffect(() => {
       const friendId = conversation.members.find((m) => m !== currentUser._id);
-  
       const getUser = async () => {
         try {
           const res = await axios("/users?userId=" + friendId);

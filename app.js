@@ -9,6 +9,9 @@ const mongoose  = require('mongoose')
 const PORT = process.env.PORT || 5000
 const {MONGOURI} = require('./config/keys.cjs') 
 
+// const userRoute = require('./routes/user.cjs')
+// const messageRoute = require('./routes/message.cjs')
+// const conversationRoute = require('./routes/conversation.cjs')
 
 //connect to mongodb
 mongoose.connect(MONGOURI,{
@@ -26,8 +29,9 @@ mongoose.connection.on('error',(err)=>{
 require('./models/user.cjs')
 require('./models/post.cjs')  
 require('./models/gigModel.cjs')
-require('./models/message.cjs')
 require('./models/conversation.cjs')
+require('./models/message.cjs')
+
 
 // app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -45,8 +49,8 @@ app.use(require('./routes/message.cjs'))
 
 app.use('/conversations', require('./routes/conversation.cjs'))
 app.use('/messages', require('./routes/message.cjs'))
-app.use("/users", require('./routes/user.cjs'))
-//app.use('/gigroutes', gigRoutes)//???????????????
+// app.use("/users", userRoute)
+
 
 if(process.env.NODE_ENV=="production"){
     app.use(express.static('client/build'))

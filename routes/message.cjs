@@ -1,7 +1,8 @@
+// const express = require('express')
+const router = require("express").Router(); //express.Router();
 
-const router = require("express").Router();
 const mongoose = require('mongoose')
-const Message = mongoose.model('Message') //require("./models/Message.cjs");
+const Message = mongoose.model('Message'); //require("../models/message.cjs");
 
 //add
 

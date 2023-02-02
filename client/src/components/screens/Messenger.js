@@ -17,7 +17,7 @@ import { io } from "socket.io-client";
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   //const { user } = useContext(UserContext); //AuthContext
-  const { state, dispatch } = useContext(UserContext);
+  const { state, dispatch} = useContext(UserContext); console.log("state: " + state);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ import { io } from "socket.io-client";
     socket.current.emit("addUser", state._id);
     socket.current.on("getUsers", (users) => {
       setOnlineUsers(
-        state.following.filter((f) => users.some((u) => u.userId === f))
+        state.following.filter((f) => users.some((u) => u.id === f))
       );
     });
   }, [state]);
