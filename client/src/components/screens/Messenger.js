@@ -17,7 +17,7 @@ const Messenger = ()=>{
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   //const { user } = useContext(UserContext); //AuthContext
-  const {state, dispatch} = useContext(UserContext); console.log(state);
+  const {state, dispatch} = useContext(UserContext); console.log(state.name);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -57,13 +57,14 @@ const Messenger = ()=>{
     };
     getConversations();
   }, [state._id]);
-
+    // console.log(conversations);
   useEffect(() => {
     const getMessages = async () => {
       try {
         const res = await axios.get("/messages/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
+      
         console.log(err);
       }
     };
@@ -77,7 +78,7 @@ const Messenger = ()=>{
       text: newMessage,
       conversationId: currentChat._id,
     };
-
+  // console.log('message: ', message)
     const receiverId = currentChat.members.find(
       (member) => member !== state._id
     );
@@ -89,7 +90,7 @@ const Messenger = ()=>{
     });
 
     try {
-      const res = await axios.post("/messages/", message);
+      const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -105,7 +106,7 @@ const Messenger = ()=>{
     <>
       <div className="messenger">
         <div className="chatMenu">
-          <div className="chatMenuWrapper" style={{"border": "1px solid red"}}>
+          <div className="chatMenuWrapper" style={{"border": "1px solid grey"}}>
             <input placeholder="Search for friends" className="chatMenuInput" />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
@@ -114,7 +115,7 @@ const Messenger = ()=>{
             ))}
           </div>
         </div>
-        <div className="chatBox" style={{"border": "1px solid green"}}>
+        <div className="chatBox" style={{"border": "1px solid grey"}}>
           <div className="chatBoxWrapper">
             {currentChat ? (
               <>

@@ -8,7 +8,7 @@ const Message = ({ message, own })=>{
             <div className="messageTop">
                 <img
                     className="messageImg"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg/1200px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg"
+                    src=""
                     alt=""
                 />
             

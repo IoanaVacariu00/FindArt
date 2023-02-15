@@ -91,24 +91,68 @@ router.post('/search-users',(req,res)=>{
 })
 
 //get friends 
+   
+// router.get("/friends/:id", requireLogin, (req, res) => {
+//     const user = User.find({_id:req.params.id})
+//     const friends = 
+//         user.following.map((friendId) => {
+//           return User.find(friendId);
+//         });
+    
+//     let friendList = [];
+//     friends.map((friend) => {
+//         const { _id, name, pic } = friend;
+//         friendList.push({ _id, name, pic });
+//       });
+      
+//       res.status(200).json(friendList)
+// //     } catch (err) {
+// //       res.status(500).json(err);
+// //     }
+// //     console.log('friendList: ' + friendsList);
+      
+// //   });
+//     })
 
-router.get("/friends/:userId", async (req, res) => {
+router.get("/friends/:id", async (req, res) => {
     try {
-      const user = await User.findById(req.params.userId);
-      const friends = await Promise.all(
+        // const user = User.find({_id:req.params.id});
+        const user = await User.findById(req.params.id);
+        const friends = await Promise.all(
         user.following.map((friendId) => {
           return User.findById(friendId);
         })
-      );
+      );  
+      
       let friendList = [];
       friends.map((friend) => {
-        const { _id, username, pic } = friend;
-        friendList.push({ _id, username, pic });
+        const { _id, name, pic } = friend;
+        friendList.push({ _id, name, pic });
       });
       res.status(200).json(friendList)
     } catch (err) {
       res.status(500).json(err);
     }
+    // console.log('friendList: ' + friendList);
+      
   });
+// router.get("/friends/:userId", async (req, res) => {
+//     try {
+//       const user = await User.findById(req.params.userId);
+//       const friends = await Promise.all(
+//         user.following.map((friendId) => {
+//           return User.findById(friendId);
+//         })
+//       );
+//       let friendList = [];
+//       friends.map((friend) => {
+//         const { _id, username, pic } = friend;
+//         friendList.push({ _id, username, pic });
+//       });
+//       res.status(200).json(friendList)
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
 
 module.exports = router

@@ -5,7 +5,7 @@ const Online = ({state}) => {
     return (
       <li className="rightbarFriend">
         <div className="rightbarProfileImgContainer">
-          <img className="rightbarProfileImg" src="" alt="" />
+          <img className="rightbarProfileImg" src={state.pic} alt="" />
           {/* {PF+user.profilePicture} */}
           <span className="rightbarOnline"></span>
         </div>

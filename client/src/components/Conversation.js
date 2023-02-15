@@ -6,7 +6,7 @@ const Conversation = ({ conversation, currentUser })=>{
     // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   
     useEffect(() => {
-      const friendId = conversation.members.find((m) => m !== currentUser._id);
+      const friendId = conversation.members.find((m) => m !== currentUser._id);//console.log(friendId);
       const getUser = async () => {
         try {
           const res = await axios("/user?userId=" + friendId);
