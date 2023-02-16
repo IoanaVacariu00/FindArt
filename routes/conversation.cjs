@@ -29,7 +29,7 @@ router.post("/messeneger", async (req, res) => {
     }
   });
   
-  // get conv includes two userId
+  // get conv that includes two userIds
   
   router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
     try {

@@ -17,7 +17,7 @@ const Messenger = ()=>{
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   //const { user } = useContext(UserContext); //AuthContext
-  const {state, dispatch} = useContext(UserContext); console.log(state.name);
+  const { state } = useContext(UserContext); 
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -57,7 +57,18 @@ const Messenger = ()=>{
     };
     getConversations();
   }, [state._id]);
-    // console.log(conversations);
+
+  useEffect(()=>{
+    fetch("/conversations/" + state._id,{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+        }
+    }).then(res=>res.json())
+    .then(result=>{
+        setConversations(result.posts)
+    })
+ },[])
+
   useEffect(() => {
     const getMessages = async () => {
       try {

@@ -8,7 +8,7 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
 
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get("/users/friends/" + currentId);
+      const res = await axios.get("/friends/" + currentId);
       setFriends(res.data);
     };
 
