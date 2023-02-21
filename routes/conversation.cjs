@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Conversation = mongoose.model('Conversation')
 
 //new conv
-router.post("/messeneger", async (req, res) => {
+router.post("/", async (req, res) => {
     const newConversation = new Conversation({
       members: [req.body.senderId, req.body.receiverId],
     });
@@ -18,7 +18,7 @@ router.post("/messeneger", async (req, res) => {
   
   //get conv of a user
   
-  router.get("/:id ", async (req, res) => {
+  router.get("/conversations/:id ", async (req, res) => {
     try {
       const conversation = await Conversation.find({
         members: { $in: [req.params.id] },

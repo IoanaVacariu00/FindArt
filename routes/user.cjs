@@ -39,7 +39,7 @@ router.put('/follow',requireLogin,(req,res)=>{
       },{new:true}).select("-password").then(result=>{
           res.json(result)
       }).catch(err=>{
-          return res.status(422).json({error:err})
+          return res.status(422).json({error:err}) 
       })
 
     }
@@ -91,12 +91,32 @@ router.post('/search-users',(req,res)=>{
 })
 
 //get friends 
-   
+  
+router.get("/friends/:userId", async (req, res) => {
+    try {
+      const user = await User.findById(req.params.userId);
+      const friends = await Promise.all(
+        user.followings.map((friendId) => {
+          return User.findById(friendId);
+        })
+      );
+      let friendList = [];
+      friends.map((friend) => {
+        const { _id, username, profilePicture } = friend;
+        friendList.push({ _id, username, profilePicture });
+      });
+      res.status(200).json(friendList)
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+  
+
 // router.get("/friends/:id", requireLogin, (req, res) => {
 //     const user = User.find({_id:req.params.id})
 //     const friends = 
 //         user.following.map((friendId) => {
-//           return User.find(friendId);
+//           return User.findById(friendId);
 //         });
     
 //     let friendList = [];
@@ -114,24 +134,23 @@ router.post('/search-users',(req,res)=>{
 // //   });
 //     })
 
-router.get("/friends/:id", requireLogin,(req, res) => {
-    User.findOne({_id:req.params.id})
-    .select("-password")
-    .then(user=>{
-        const friends = user.following.map((friendId) => {
-            return User.findById(friendId);
-        })     
+// router.get("/friends/:id", requireLogin,(req, res) => {
+//     User.find({_id:req.params.id})
+//     .then(user=>{
+//         const friends = user.following.map((friendId) => {
+//             return User.findById(friendId);
+//         })     
               
-        let friendList = [];      
-        friends.map((friend) => {        
-            const { _id, username, pic } = friend;        
-            friendList.push({ _id, username, pic });      
-        }); 
-        res.status(200).json(friendList);
-    }).catch(err=>{
-        return res.status(404).json({error:"User not found"})
-    }) 
-  });
+//         let friendList = [];      
+//         friends.map((friend) => {        
+//             const { _id, username, pic } = friend;        
+//             friendList.push({ _id, username, pic });      
+//         }); 
+//         res.status(200).json(friendList);
+//     }).catch(err=>{
+//         return res.status(404).json({error:"User not found"})
+//     }) 
+//   });
 // router.get("/friends/:userId", async (req, res) => {
 //     try {
 //       const user = await User.findById(req.params.userId);

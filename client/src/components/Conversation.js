@@ -24,11 +24,13 @@ const Conversation = ({conversation, currentUser } )=> {
 
     useEffect(()=>{
       const friendId = conversation.members.find((m) => m !== currentUser._id);
-      fetch(`/user?id=/${friendId}`,{
-          headers:{
-              "Authorization":"Bearer " + localStorage.getItem("jwt")
-          }
-      }).then(res=>res.json())
+      fetch(`/user?id=/${friendId}`
+      // ,{
+      //     headers:{
+      //         "Authorization":"Bearer " + localStorage.getItem("jwt")
+      //     }
+      // }
+      ).then(res=>res.json())
       .then(result=>{
           setMember(result)
       })

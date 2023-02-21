@@ -58,16 +58,16 @@ const Messenger = ()=>{
     getConversations();
   }, [state._id]);
 
-  useEffect(()=>{
-    fetch("/conversations/" + state._id,{
-        headers:{
-            "Authorization":"Bearer "+localStorage.getItem("jwt")
-        }
-    }).then(res=>res.json())
-    .then(result=>{
-        setConversations(result.posts)
-    })
- },[])
+//   useEffect(()=>{
+//     fetch("/conversations/" + state._id,{
+//         headers:{
+//             "Authorization":"Bearer "+localStorage.getItem("jwt")
+//         }
+//     }).then(res=>res.json())
+//     .then(result=>{
+//         setConversations(result.posts)
+//     })
+//  },[])
 
   useEffect(() => {
     const getMessages = async () => {
@@ -89,7 +89,7 @@ const Messenger = ()=>{
       text: newMessage,
       conversationId: currentChat._id,
     };
-  // console.log('message: ', message)
+
     const receiverId = currentChat.members.find(
       (member) => member !== state._id
     );
@@ -158,11 +158,11 @@ const Messenger = ()=>{
         </div>
         <div className="chatOnline" style={{"border": "1px solid grey"}}>
           <div className="chatOnlineWrapper">
-            <ChatOnline
+            {/* <ChatOnline
               onlineUsers={onlineUsers}
               currentId={state._id}
               setCurrentChat={setCurrentChat}
-            />
+            /> */}
           </div>
         </div>
       </div>

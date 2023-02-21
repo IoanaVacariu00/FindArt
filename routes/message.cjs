@@ -6,7 +6,7 @@ const Message = mongoose.model('Message'); //require("../models/message.cjs");
 
 //add
 
-router.post("/messenger", async (req, res) => {
+router.post("/", async (req, res) => {
   const newMessage = new Message(req.body);
 
   try {
@@ -19,7 +19,7 @@ router.post("/messenger", async (req, res) => {
 
 //get
 
-router.get("/:conversationId", async (req, res) => {
+router.get("/messages/:conversationId", async (req, res) => {
   try {
     const messages = await Message.find({
       conversationId: req.params.conversationId,
