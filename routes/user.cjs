@@ -22,7 +22,6 @@ router.get('/user/:id',requireLogin,(req,res)=>{
         return res.status(404).json({error:"User not found"})
     })
 })
-    
 
 router.put('/follow',requireLogin,(req,res)=>{
     User.findByIdAndUpdate(req.body.followId,{
@@ -102,8 +101,8 @@ router.get("/friends/:userId", async (req, res) => {
       );
       let friendList = [];
       friends.map((friend) => {
-        const { _id, username, profilePicture } = friend;
-        friendList.push({ _id, username, profilePicture });
+        const { _id, name, pic } = friend;
+        friendList.push({ _id, name, pic });
       });
       res.status(200).json(friendList)
     } catch (err) {

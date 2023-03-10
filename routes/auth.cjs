@@ -1,5 +1,3 @@
-
-
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
@@ -13,7 +11,6 @@ const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 const {SENDGRID_API,EMAIL} = require('../config/keys.cjs')
 //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
-
 
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth:{

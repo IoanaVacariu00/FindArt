@@ -24,14 +24,16 @@ const Conversation = ({conversation, currentUser } )=> {
 
     useEffect(()=>{
       const friendId = conversation.members.find((m) => m !== currentUser._id);
+      //crapa aici
       fetch(`/user?id=/${friendId}`
       // ,{
-      //     headers:{
-      //         "Authorization":"Bearer " + localStorage.getItem("jwt")
-      //     }
-      // }
-      ).then(res=>res.json())
-      .then(result=>{
+        //     headers:{
+          //         "Authorization":"Bearer " + localStorage.getItem("jwt")
+          //     }
+          // }
+          ).then(res=>res.json())
+          .then(result=>{
+        console.log(result)
           setMember(result)
       })
    },[currentUser, conversation])
@@ -40,10 +42,11 @@ const Conversation = ({conversation, currentUser } )=> {
     <div className="conversation">
       <img
         className="conversationImg"
-        src={member.pic}
+        src=""//{member.pic}
         alt=""
       />
-      <span className="conversationName">{member.name}</span>
+      {/* <span className="conversationName">{member.name}</span> */}
+      <span className="conversationName">IUoana</span>
     </div>
     );
 };

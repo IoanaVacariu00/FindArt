@@ -15,18 +15,18 @@ router.post("/", async (req, res) => {
       res.status(500).json(err);
     }
   });
-  
+
   //get conv of a user
   
-  router.get("/conversations/:id ", async (req, res) => {
+  router.get("/:id", async (req, res) => {
     try {
       const conversation = await Conversation.find({
         members: { $in: [req.params.id] },
       });
       res.status(200).json(conversation);
     } catch (err) {
-      res.status(500).json(err);
-    }
+        res.status(500).json(err);
+      }
   });
   
   // get conv that includes two userIds

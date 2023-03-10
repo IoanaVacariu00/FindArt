@@ -6,7 +6,7 @@ const Message = mongoose.model('Message'); //require("../models/message.cjs");
 
 //add
 
-router.post("/", async (req, res) => {
+router.post("/messages", async (req, res) => {
   const newMessage = new Message(req.body);
 
   try {
