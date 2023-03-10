@@ -2,13 +2,12 @@ import Conversation from "../Conversation.js";
 import Message from "../Message";
 import ChatOnline from '../ChatOnline';
 import React, { useContext, useEffect, useRef, useState } from "react";
-//import { AuthContext } from "../../context/AuthContext";
+//import { AuthContext } from "../../context/AuthContext";  
 import { UserContext } from '../../App'
 import axios from "axios";
 import { io } from "socket.io-client";
 
 const Messenger = ()=>{
-   
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -158,11 +157,11 @@ const Messenger = ()=>{
         </div>
         <div className="chatOnline" style={{"border": "1px solid grey"}}>
           <div className="chatOnlineWrapper">
-            {/* <ChatOnline
+            <ChatOnline
               onlineUsers={onlineUsers}
               currentId={state._id}
               setCurrentChat={setCurrentChat}
-            /> */}
+            />
           </div>
         </div>
       </div>

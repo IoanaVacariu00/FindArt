@@ -53,10 +53,8 @@ const CreatePost = ()=>{
            console.log(err)
        })
 
-    
    }
  
-
    return(
        <div className="card input-filed"
        style={{

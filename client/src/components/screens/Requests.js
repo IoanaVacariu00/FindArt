@@ -113,8 +113,9 @@ const Requests = ()=>{
        <div className="home">
            {
                data.map(item=>{
-                   return(
-                       <div className="card home-card" key={item._id}>
+            
+                return(
+                       <div className="card home-card" key={item._id} style={{padding:"10px"}}>
                             <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link> {item.user._id == state._id 
                             && <i className="material-icons" style={{
                                 float:"right"
@@ -138,7 +139,6 @@ const Requests = ()=>{
                             onClick={()=>{likePost(item._id)}}
                             >thumb_up</i>
                             } */}
-                            
                            
                                 {/* <h6>{item.likes.length} likes</h6> */}
                                 <h6>{item.maintitle}</h6>

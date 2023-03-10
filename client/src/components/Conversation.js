@@ -25,7 +25,7 @@ const Conversation = ({conversation, currentUser } )=> {
     useEffect(()=>{
       const friendId = conversation.members.find((m) => m !== currentUser._id);
       //crapa aici
-      fetch(`/user?id=/${friendId}`
+      fetch(`/${friendId}`
       // ,{
         //     headers:{
           //         "Authorization":"Bearer " + localStorage.getItem("jwt")
