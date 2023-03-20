@@ -4,9 +4,9 @@ import { UserContext } from "../App";
 import {useParams} from 'react-router-dom'
 const Conversation = ({conversation, currentUser } )=> {
     const [member, setMember] = useState(null); 
-    const {state, dispatch} = useContext(UserContext)
-    // const {userid} = useParams()    
-    // const [user, setUser] = useContext(UserContext);
+    // const {state, dispatch} = useContext(UserContext)
+    const {userid} = useParams()    
+    const {user, setUser} = useContext(UserContext);
     // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   
     // useEffect(() => {
@@ -21,33 +21,45 @@ const Conversation = ({conversation, currentUser } )=> {
     //   };
     //   getUser();
     // }, [currentUser, conversation]); 
-
+  //   useEffect(()=>{
+  //     fetch(`/user/${userid}`,{
+  //         headers:{
+  //             "Authorization":"Bearer " + localStorage.getItem("jwt")
+  //         }
+  //     }).then(res=>res.json())
+  //     .then(result=>{
+  //         setMember(result)
+  //     })
+  //  },[])
     useEffect(()=>{
       const friendId = conversation.members.find((m) => m !== currentUser._id);
       //crapa aici
-      fetch(`/${friendId}`
-      // ,{
-        //     headers:{
-          //         "Authorization":"Bearer " + localStorage.getItem("jwt")
-          //     }
-          // }
+      fetch(`/user/${friendId}`,{
+        headers:{
+            "Authorization":"Bearer " + localStorage.getItem("jwt")
+        }
+    }
           ).then(res=>res.json())
           .then(result=>{
-        console.log(result)
+      
           setMember(result)
       })
-   },[currentUser, conversation])
+   },[conversation, currentUser])
 
     return (
+    <>
+     {member ?
     <div className="conversation">
       <img
         className="conversationImg"
-        src=""//{member.pic}
+        src={member.user.pic}
         alt=""
       />
       {/* <span className="conversationName">{member.name}</span> */}
-      <span className="conversationName">IUoana</span>
-    </div>
+      <span className="conversationName">{member.user.name}</span>
+    </div> 
+    : <h2>loading...!</h2>}
+    </>
     );
 };
 

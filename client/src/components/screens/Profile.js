@@ -11,9 +11,8 @@ const Profile  = ()=>{
                "Authorization":"Bearer "+localStorage.getItem("jwt")
            }
        }).then(res=>res.json())
-       .then(result=>{
-           console.log("result:" + result)
-           setPics(result.mypost)
+       .then(result=>{         
+           setPics(result.mypost)               
        })
     },[])
     useEffect(()=>{

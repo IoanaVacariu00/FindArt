@@ -16,7 +16,7 @@ import NewPassword from './components/screens/Newpassword'
 import Requests from './components/screens/Requests';
 import CreateRequest from './components/screens/CreateRequest';
 import Messenger from './components/screens/Messenger';
-
+import MessengerApi from './components/screens/MessengerApi';  
 export const UserContext = createContext()
 
 const Routing = ()=>{
@@ -68,8 +68,11 @@ const Routing = ()=>{
       </Route>
       <Route path="/messenger">
         <Messenger/>
-      </Route>
-    </Switch>
+      </Route>        
+      <Route path="/messengerapi">
+        <MessengerApi/>
+      </Route>  
+     </Switch>
   )
 }
 
