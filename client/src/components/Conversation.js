@@ -55,7 +55,7 @@ const Conversation = ({conversation, currentUser } )=> {
         src={member.user.pic}
         alt=""
       />
-      {/* <span className="conversationName">{member.name}</span> */}
+   
       <span className="conversationName">{member.user.name}</span>
     </div> 
     : <h2>loading...!</h2>}

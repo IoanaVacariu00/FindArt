@@ -38,12 +38,18 @@ router.get('/user/:id',requireLogin,(req,res)=>{
 //         return res.status(404).json({error:"User not found"})
 //     })
 // }) 
+// router.get("/friendslist/:id") ,(req,res)=>{
+//     let friendList = [];
+//     User.find({_id:req.params.id})
+//     .select("_id name")
+//     .then
+// } 
 
-router.get("/friends/:userId", async (req, res) => {
+router.get("/friends/:id", async (req, res) => {
     try {
-      const user = await User.findById(req.user._id);  
+      const user = await User.findOne({_id:req.params.id}); 
       const friends = await Promise.all(
-        user.followers.map((friendId) => {
+        user.following.map((friendId) => {
           return User.findById(friendId);
         })
       );
@@ -57,7 +63,6 @@ router.get("/friends/:userId", async (req, res) => {
       res.status(500).json(err);
     }
   });
-  
 
 router.put('/follow',requireLogin,(req,res)=>{
     User.findByIdAndUpdate(req.body.followId,{

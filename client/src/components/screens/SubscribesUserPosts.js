@@ -11,8 +11,7 @@ const Home  = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-        //    console.log(result)
-           setData(result.posts)
+          setData(result.posts)
        })
     },[])
 
@@ -80,7 +79,7 @@ const Home  = ()=>{
               })
           }).then(res=>res.json())
           .then(result=>{
-            //   console.log(result)
+    
               const newData = data.map(item=>{
                 if(item._id==result._id){
                     return result
@@ -138,8 +137,6 @@ const Home  = ()=>{
                             onClick={()=>{likePost(item._id)}}
                             >thumb_up</i>
                             }
-                            
-                           
                                 <h6>{item.likes.length} likes</h6>
                                 <h6>{item.title}</h6>
                                 <p>{item.body}</p>
@@ -156,17 +153,13 @@ const Home  = ()=>{
                                 }}>
                                   <input type="text" placeholder="add a comment" />  
                                 </form>
-                                
                             </div>
                         </div> 
                    )
                })
            }
-          
-          
        </div>
    )
 }
-
 
 export default Home

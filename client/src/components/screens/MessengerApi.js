@@ -1,11 +1,10 @@
 import React,{ useEffect, useState, useRef, useContext } from 'react';      
 import Talk from 'talkjs';   
 import { UserContext } from '../../App';
-const MessengerApi = () => {   
+const MessengerApi = ({friend}) => {   
   
-    const {state,dispatch} = useContext(UserContext); 
-    const chatboxEl = useRef();
-
+    const {state} = useContext(UserContext); 
+    const chatboxEl = useRef();  
        // wait for TalkJS to load
     const [talkLoaded, markTalkLoaded] = useState(false);
   
@@ -22,10 +21,10 @@ const MessengerApi = () => {
         });
   
         const otherUser = new Talk.User({
-          id: '63da59c7008bff35b0903987',
-          name: 'irina',
-          email: 'elena_vacariu@gmail.com',
-          photoUrl: '/images/image.jpg',         
+          id: friend._id,//'63da59c7008bff35b0903987',
+          name: friend.name,//'irina',
+          email: friend.email,//'elena_vacariu@gmail.com',
+          photoUrl: friend.pic,//'/images/image.jpg',         
           role: 'default',
         });
   

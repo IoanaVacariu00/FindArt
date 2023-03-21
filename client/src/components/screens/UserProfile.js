@@ -71,7 +71,6 @@ const Profile = () =>{
                  }
              })
              setShowFollow(true)
-             
         })
     }
    return (
@@ -108,16 +107,10 @@ const Profile = () =>{
                         Follow
                     </button>
                     : 
-                    <button
-                    style={{
-                        margin:"10px"
-                    }}
-                    className = "main_button"
-                    // className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                    onClick={()=>unfollowUser()}
-                    >
-                        UnFollow
-                    </button>
+                    <button style={{margin:"10px"}} className = "main_button"
+                          // className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                        onClick={()=>unfollowUser()}
+                    >UnFollow</button>   
                     }
                </div>
            </div>
@@ -130,8 +123,6 @@ const Profile = () =>{
                        )
                    })
                }
-
-           
            </div>
        </div>
        : <h2>loading...!</h2>}
