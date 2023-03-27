@@ -3,7 +3,8 @@ import Talk from 'talkjs';
 import { UserContext } from '../../App';
 const MessengerApi = ({friend}) => {   
   
-    const {state} = useContext(UserContext); 
+    const {state} = useContext(UserContext);     
+
     const chatboxEl = useRef();  
        // wait for TalkJS to load
     const [talkLoaded, markTalkLoaded] = useState(false);
@@ -21,10 +22,10 @@ const MessengerApi = ({friend}) => {
         });
   
         const otherUser = new Talk.User({
-          id: friend._id,//'63da59c7008bff35b0903987',
-          name: friend.name,//'irina',
-          email: friend.email,//'elena_vacariu@gmail.com',
-          photoUrl: friend.pic,//'/images/image.jpg',         
+          id: friend._id,
+          name: friend.name,
+          email: friend.email,
+          photoUrl: friend.pic,
           role: 'default',
         });
   

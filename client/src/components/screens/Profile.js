@@ -1,7 +1,7 @@
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 
-const Profile  = ()=>{
+const Profile = ()=>{
     const [mypics,setPics] = useState([])
     const {state,dispatch} = useContext(UserContext); 
     const [image,setImage] = useState("")

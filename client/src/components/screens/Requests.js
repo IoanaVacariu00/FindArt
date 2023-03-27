@@ -11,8 +11,7 @@ const Requests = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-           console.log(result);
-           setData(result.requests)
+            setData(result.requests)
        })
     },[])
 

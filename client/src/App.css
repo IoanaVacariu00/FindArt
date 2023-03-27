@@ -18,13 +18,16 @@
   color: var(--main-color);
   background-color: white;
 } */
-                     
+ /* .chatBox .chatBoxWrapper .NoticeBar #text {
+  color: red;
+}               */
 #chat_box {  
   background-color: whitesmoke;  
   height: 600px;
 }
 
 a{
+
   color: black !important;
 }
 
