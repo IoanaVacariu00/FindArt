@@ -16,22 +16,25 @@ const NavBar = ()=>{
            return [
             <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
             <li key="2"><Link to="/profile">My Profile</Link></li>,   
-            <li key="3"><Link to="/createrequest">Make a Request</Link></li>, 
-            <li key="4"><Link to="/requests">Requests</Link></li>,
+            <li className='drop'><a href="#">Requests</a>,
+              <ul className='dropdown'>
+                <li key="3"><Link to="/createrequest">Make a Request</Link></li>, 
+                <li key="4"><Link to="/requests">Requests</Link></li>,
+             </ul>,
+            </li>,
             <li key="5"><Link to="/create">Create Post</Link></li>, 
             <li key="6"><Link to="/myfollowingpost">My Feed</Link></li>,
-            // <li key="7"><Link to="/messengerapi">Messages2</Link></li>,
             <li key="11"><Link to="/messenger">Messages</Link></li>,
             <li key="8">
-             <button className="btn #c62828 red darken-3"
-            onClick={()=>{
-              localStorage.clear()
-              dispatch({type:"CLEAR"})
-              history.push('/signin')
-            }}
-            >
-                Logout
-            </button>
+              <button className="btn #c62828 red darken-3"
+                onClick={()=>{
+                  localStorage.clear()
+                  dispatch({type:"CLEAR"})
+                  history.push('/signin')
+                }}
+              >
+              Logout
+              </button>
             </li>                    
            ]
        }else{
@@ -60,7 +63,7 @@ const NavBar = ()=>{
      }
     return(
         <nav>
-        <div className="nav-wrapper white">
+        <div className="nav-wrapper white" >
           <Link to={state?"/":"/signin"} className="brand-logo left">FindArt</Link>
           <ul id="nav-mobile" className="right">
              {renderList()}
