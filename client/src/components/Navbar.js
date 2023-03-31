@@ -16,7 +16,7 @@ const NavBar = ()=>{
            return [
             <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
             <li key="2"><Link to="/profile">My Profile</Link></li>,   
-            <li className='drop'><a href="#">Requests</a>,
+            <li className='drop' key="21"><a href="#">Requests</a>,
               <ul className='dropdown'>
                 <li key="3"><Link to="/createrequest">Make a Request</Link></li>, 
                 <li key="4"><Link to="/requests">Requests</Link></li>,
@@ -24,7 +24,7 @@ const NavBar = ()=>{
             </li>,
             <li key="5"><Link to="/create">Create Post</Link></li>, 
             <li key="6"><Link to="/myfollowingpost">My Feed</Link></li>,
-            <li key="11"><Link to="/messenger">Messages</Link></li>,
+            <li key="17"><Link to="/messenger">Messages</Link></li>,
             <li key="8">
               <button className="btn #c62828 red darken-3"
                 onClick={()=>{

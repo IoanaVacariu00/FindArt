@@ -1,11 +1,6 @@
-// import Conversation from "../Conversation.js";
-// import Message from "../Message";
-// import ChatOnline from '../ChatOnline';
 import React, { useContext, useEffect, useRef, useState } from "react";
-//import { AuthContext } from "../../context/AuthContext";  
 import { UserContext } from '../../App'
 import axios from "axios";
-// import { io } from "socket.io-client";
 import MessengerApi from "./MessengerApi.js";
 import ConversationApi from "../ConversationApi.js";
 
@@ -153,7 +148,7 @@ useEffect(() => {
               <> 
            {/* {  //aici modifica
               friends.map((c) => (  //key={c._id}*/}
-                <div >
+                <div>
                   <MessengerApi friend={currentChat}/>
                 </div>
               {/* )) */}
@@ -184,15 +179,15 @@ useEffect(() => {
             )}
           </div>
         </div>
-        <div className="chatOnline" style={{"border": "1px solid grey"}}>
-          <div className="chatOnlineWrapper">
+        {/* <div className="chatOnline" style={{"border": "1px solid grey"}}>
+          <div className="chatOnlineWrapper"> */}
             {/* <ChatOnline
               onlineUsers={onlineUsers}
               currentId={state._id}
               setCurrentChat={setCurrentChat}
             /> */}
-          </div>
-        </div>
+          {/* </div>
+        </div> */}
       </div>
     </>
   );

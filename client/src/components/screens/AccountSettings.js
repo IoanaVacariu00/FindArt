@@ -5,7 +5,7 @@ const Settings  = ()=>{
     const {state,dispatch} = useContext(UserContext);
     return (
     <> 
-        <div className="categories">My categories: </div>
+        
     </>
      );
 }   
