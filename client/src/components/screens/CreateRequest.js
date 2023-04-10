@@ -1,13 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import M from 'materialize-css'
 import {useHistory} from 'react-router-dom' 
-// import Select  from 'react-select'   
-// import Box from "@mui/material/Box";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select from "@mui/material/Select";
-import Form from 'react-bootstrap/Form';
+//  import Select  from 'react-select'   
+import Box from "@mui/material/Box";
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from '@mui/material/Chip';
+
 import { Categories } from '../../data'
 
 const CreateRequest = ()=>{
@@ -22,11 +24,21 @@ const CreateRequest = ()=>{
     const [days, setDays] = useState("");
     const [price, setPrice] = useState("");
     const [url,setUrl] = useState("") 
-
-    // const handleChange = category => {
-    //     console.log(category);
+    const [open, setOpen] = React.useState(false);
+    const handleChange = (event)  => {
+        const {
+            target: { value }
+          } = event;
+        setCategory(value); //typeof value === "string" ? value.split(",") :
+        setOpen(false)
+      };
+      const handleClose = () => {
+        setOpen(false);
+      };
     
-    //   };
+      const handleOpen = () => {
+        setOpen(true);
+      };
 
    useEffect(()=>{
     if(url){
@@ -81,7 +93,29 @@ const CreateRequest = ()=>{
     //    .catch(err=>{
     //        console.log(err)
     //    })
+
    }
+// if(0){
+//     return (
+//         <>
+//         <InputLabel id="medium-select-label">Med</InputLabel>
+//             <Select
+//             labelId="medium-select-label"
+//             id="medium-select"
+//             value={medium}
+//             label="Medium"
+//             style={{width:"100%"}}
+//             onChange={(e)=>setMedium(e.target.value)}
+//             >
+//             {Categories.map(option => (
+//                 <MenuItem value={option.val} key={option.val}>
+//                     {option.label}
+//                 </MenuItem>
+//                 ))}
+//             </Select> 
+//             </>
+//     )
+// }
 
    return(
        <div className="card input-filed"
@@ -122,7 +156,7 @@ const CreateRequest = ()=>{
             </select></div> */}
             {/* <label className='form-label'>Categories</label> */}
             {/* <Select
-                // defaultValue={category}
+                defaultValue={[Categories[0], Categories[1]]}
                 placeholder="Category"
                 isMulti
                 name="categories"
@@ -131,28 +165,42 @@ const CreateRequest = ()=>{
                 classNamePrefix="select"  
                 onChange={handleChange}
             />  */}
-      
+        
+            <InputLabel id="category-select-label">Category</InputLabel>
+            <Select
+            labelId="category-select-label"
+            id="category-select"
+            value={category}
+            label="Category"
+            multiple
+            style={{width: "100%"}}
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (selected.join(", ")
+                // <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                //   {selected.map((value) => (
+                //     <Chip key={value} label={value} />
+                //     //onRemove={() => {}}
+                //   ))}
+                // </Box>
+
+              )}
+            >
+            {Categories.map(option => (
+                <MenuItem value={option} key={option}  >
+                    {option}
+                </MenuItem>
+                ))}
+            </Select> 
             <input
              type="text"
              placeholder="medium"
              value={medium}
-            onChange={(e)=>setMedium(e.target.value)}
+             onChange={(e)=>setMedium(e.target.value)}
              />
-
-            {/* <InputLabel id="medium">Medium</InputLabel>
-            <Select
-            labelId="medium"
-            id="medium-select"
-            value={medium}
-            label="Medium"
-            onChange={(e)=>setMedium(e.target.value)}
-            >
-            {Categories.map(option => (
-                <MenuItem value={option.val}>
-                    {option.label}
-                </MenuItem>
-                ))}
-            </Select> */}
 
              <input
              type="text"

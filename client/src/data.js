@@ -1,4 +1,4 @@
-export const Categories = [
+export const Categories2 = [
     { val: 'Abstract Expressionism', label: 'Abstract Expressionism' },
     { val: 'Art Deco', label: 'Art Deco' },
     { val: 'Art Nouveau', label: 'Art Nouveau' },
@@ -40,7 +40,60 @@ export const Categories = [
 
 
 
-
+     export const Categories = [
+       'Abstract Expressionism', 
+        'Art Deco', 
+        'Art Nouveau', 
+        'Avant-garde', 
+         'Baroque', 
+         'Bauhaus', 
+       'Classicism', 
+        'CoBrA', 
+      'Color Field Painting', 
+     'Conceptual Art', 
+         'Constructivism', 
+         'Cubism', 
+     'Dada / Dadaism', 
+        'Digital Art', 
+       'Expressionism', 
+       'Fauvism', 
+        'Futurism', 
+       'Harlem Renaissance', 
+        'Impressionism', 
+         'Installation Art', 
+         'Land Art', 
+        'Minimalism', 
+        'Neo-Impressionism', 
+        'Neoclassicism', 
+         'Neon Art', 
+        'Op Art', 
+       'Performance Art', 
+      'Pop Art', 
+      'Post-Impressionism', 
+       'Precisionism', 
+      'Rococo', 
+         'Street Art',
+        'Surrealism', 
+       'Suprematism', 
+         'Symbolism', 
+       'Zero Group', 
+         
+    ]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
