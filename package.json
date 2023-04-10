@@ -23,6 +23,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.19",
     "path": "^0.12.7",
+    "react-select": "^5.7.2",
     "talkjs": "^0.15.6"
   }
 }

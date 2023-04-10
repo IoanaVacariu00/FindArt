@@ -11,10 +11,10 @@
     notes:{
         type:String
     },
-    category:{
+    category:[{
         type:String,
        // required:true,
-    },
+    }],
     medium:{
         type:String,
         //required:true,

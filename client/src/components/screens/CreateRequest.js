@@ -1,25 +1,38 @@
-
 import React,{useState,useEffect} from 'react'
 import M from 'materialize-css'
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom' 
+// import Select  from 'react-select'   
+// import Box from "@mui/material/Box";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
+import Form from 'react-bootstrap/Form';
+import { Categories } from '../../data'
+
 const CreateRequest = ()=>{
     const history = useHistory()
     const [maintitle, setMaintitle] = useState(""); 
     const [notes, setNotes] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState([]);
     const [medium, setMedium] = useState("");
     const [surface, setSurface] = useState("");
     const [dimension, setDimension] = useState("");
     const [searchtag, setSearchtag] = useState([]);
     const [days, setDays] = useState("");
     const [price, setPrice] = useState("");
-    const [url,setUrl] = useState("")
+    const [url,setUrl] = useState("") 
+
+    // const handleChange = category => {
+    //     console.log(category);
+    
+    //   };
 
    useEffect(()=>{
     if(url){
         requestDetails()
     }
-},[url])
+    },[url])
    const requestDetails = ()=>{
        
        fetch("/createrequest",{
@@ -69,15 +82,15 @@ const CreateRequest = ()=>{
     //        console.log(err)
     //    })
    }
- 
+
    return(
        <div className="card input-filed"
-       style={{
+        style={{
            margin:"30px auto",
            maxWidth:"500px",
            padding:"20px",
            textAlign:"center"
-       }}
+        }}
        >
            <input 
             type="text"
@@ -85,44 +98,81 @@ const CreateRequest = ()=>{
             value={maintitle}
             onChange={(e)=>setMaintitle(e.target.value)}
             />
-            {/* todo: type->nu text, ci ce e la fiecare */}
+        
            <input
             type="text"
              placeholder="description"
              value={notes}
-            onChange={(e)=>setNotes(e.target.value)}
+             onChange={(e)=>setNotes(e.target.value)}
              />
-            <input
+            {/* <input
              type="text"
              placeholder="category"
              value={category}
             onChange={(e)=>setCategory(e.target.value)}
-             />
+             /> */}  
+             {/* <div style={{"border":"groove"}}   >
+            <label htmlFor="category">Categories</label> 
+            <select placeholder='select' value={category} onChange={handleChange} name="category" multiple>
+                {Categories.map(option => (
+                    <option key={option.val} value={option.val}>
+                        {option.label}
+                    </option>
+                ))}
+            </select></div> */}
+            {/* <label className='form-label'>Categories</label> */}
+            {/* <Select
+                // defaultValue={category}
+                placeholder="Category"
+                isMulti
+                name="categories"
+                options={Categories}
+                className="basic-multi-select"
+                classNamePrefix="select"  
+                onChange={handleChange}
+            />  */}
+      
             <input
              type="text"
              placeholder="medium"
              value={medium}
             onChange={(e)=>setMedium(e.target.value)}
              />
+
+            {/* <InputLabel id="medium">Medium</InputLabel>
+            <Select
+            labelId="medium"
+            id="medium-select"
+            value={medium}
+            label="Medium"
+            onChange={(e)=>setMedium(e.target.value)}
+            >
+            {Categories.map(option => (
+                <MenuItem value={option.val}>
+                    {option.label}
+                </MenuItem>
+                ))}
+            </Select> */}
+
              <input
              type="text"
              placeholder="surface"
              value={surface}
             onChange={(e)=>setSurface(e.target.value)}
              />
-                         <input
+            <input
              type="text"
              placeholder="dimension"
              value={dimension}
             onChange={(e)=>setDimension(e.target.value)}
              />
-                         <input
+            <input
              type="text"
              placeholder="searchtag"
              value={searchtag}
             onChange={(e)=>setSearchtag(e.target.value)}
              />
-                         <input
+            <input
              type="text"
              placeholder="days"
              value={days}
@@ -144,10 +194,8 @@ const CreateRequest = ()=>{
             </div> */}
             </div>
             <button 
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"
-  
+            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
             onClick={()=>requestDetails()}
-            
             >
                 Submit request
             </button>
@@ -155,7 +203,6 @@ const CreateRequest = ()=>{
        </div>
    )
 }
-
 
 export default CreateRequest
 
