@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
 
-import { Categories } from '../../data'
+import { Categories, Mediums, Surfaces } from '../../data'
 
 const CreateRequest = ()=>{
     const history = useHistory()
@@ -25,20 +25,20 @@ const CreateRequest = ()=>{
     const [price, setPrice] = useState("");
     const [url,setUrl] = useState("") 
     const [open, setOpen] = React.useState(false);
-    const handleChange = (event)  => {
-        const {
-            target: { value }
-          } = event;
+    const handleChange = (event) => {
+        const {target: { value }} = event;
         setCategory(value); //typeof value === "string" ? value.split(",") :
-        setOpen(false)
-      };
-      const handleClose = () => {
+        setOpen(false)  
+    };  
+    console.log(category);
+
+    const handleClose = () => {
         setOpen(false);
-      };
-    
-      const handleOpen = () => {
+    };
+
+    const handleOpen = () => {
         setOpen(true);
-      };
+    };
 
    useEffect(()=>{
     if(url){
@@ -95,27 +95,6 @@ const CreateRequest = ()=>{
     //    })
 
    }
-// if(0){
-//     return (
-//         <>
-//         <InputLabel id="medium-select-label">Med</InputLabel>
-//             <Select
-//             labelId="medium-select-label"
-//             id="medium-select"
-//             value={medium}
-//             label="Medium"
-//             style={{width:"100%"}}
-//             onChange={(e)=>setMedium(e.target.value)}
-//             >
-//             {Categories.map(option => (
-//                 <MenuItem value={option.val} key={option.val}>
-//                     {option.label}
-//                 </MenuItem>
-//                 ))}
-//             </Select> 
-//             </>
-//     )
-// }
 
    return(
        <div className="card input-filed"
@@ -166,7 +145,7 @@ const CreateRequest = ()=>{
                 onChange={handleChange}
             />  */}
         
-            <InputLabel id="category-select-label">Category</InputLabel>
+            <InputLabel id="category-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
             <Select
             labelId="category-select-label"
             id="category-select"
@@ -179,13 +158,13 @@ const CreateRequest = ()=>{
             onOpen={handleOpen}
             onChange={handleChange}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (selected.join(", ")
-                // <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                //   {selected.map((value) => (
-                //     <Chip key={value} label={value} />
-                //     //onRemove={() => {}}
-                //   ))}
-                // </Box>
+            renderValue={(selected) => (
+                //selected.join(", ")
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
 
               )}
             >
@@ -195,19 +174,37 @@ const CreateRequest = ()=>{
                 </MenuItem>
                 ))}
             </Select> 
-            <input
-             type="text"
-             placeholder="medium"
-             value={medium}
-             onChange={(e)=>setMedium(e.target.value)}
-             />
 
-             <input
-             type="text"
-             placeholder="surface"
-             value={surface}
-            onChange={(e)=>setSurface(e.target.value)}
-             />
+            <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
+                <Select            
+                    style={{width: "100%"}}
+                    labelId="medium-simple-select-label"
+                    id="medium-simple-select"
+                    value={medium}
+                    label="Medium"
+                    onChange={(e) => {setMedium(e.target.value); console.log(medium);}}
+                >
+                    {Mediums.map(option => (
+                        <MenuItem value={option} key={option}>
+                            {option}
+                        </MenuItem>
+                        ))}
+                </Select>
+                <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
+                <Select            
+                    style={{width: "100%"}}
+                    labelId="surface-simple-select-label"
+                    id="surface-simple-select"
+                    value={surface}
+                    label="Surface"
+                    onChange={(e) => {setSurface(e.target.value); console.log(surface);}}
+                >
+                    {Surfaces.map(option => (
+                        <MenuItem value={option} key={option}>
+                            {option}
+                        </MenuItem>
+                        ))}
+                </Select>
             <input
              type="text"
              placeholder="dimension"
@@ -226,7 +223,8 @@ const CreateRequest = ()=>{
              value={days}
             onChange={(e)=>setDays(e.target.value)}
              />
-                         <input
+                               
+            <input
              type="text"
              placeholder="price"
              value={price}
@@ -247,8 +245,7 @@ const CreateRequest = ()=>{
             >
                 Submit request
             </button>
-
-       </div>
+            </div>
    )
 }
 
