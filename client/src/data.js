@@ -47,7 +47,9 @@
       'Canvas','Paper','Wood Panel', 'any surface' 
      ]     
     
-    
+    export const Tags = [         
+      'canvas','paper','woodpanel', 'blackandwhite' 
+     ]     
     
     
     

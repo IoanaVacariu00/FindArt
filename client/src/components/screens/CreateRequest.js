@@ -10,13 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
 
-import { Categories, Mediums, Surfaces } from '../../data'
+import { Categories, Mediums, Surfaces, Tags } from '../../data'
 
 const CreateRequest = ()=>{
     const history = useHistory()
     const [maintitle, setMaintitle] = useState(""); 
     const [notes, setNotes] = useState("");
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState("");
     const [medium, setMedium] = useState("");
     const [surface, setSurface] = useState("");
     const [dimension, setDimension] = useState("");
@@ -27,10 +27,10 @@ const CreateRequest = ()=>{
     const [open, setOpen] = React.useState(false);
     const handleChange = (event) => {
         const {target: { value }} = event;
-        setCategory(value); //typeof value === "string" ? value.split(",") :
+        setSearchtag(value); //typeof value === "string" ? value.split(",") :
         setOpen(false)  
     };  
-    console.log(category);
+    console.log(searchtag);
 
     const handleClose = () => {
         setOpen(false);
@@ -118,33 +118,8 @@ const CreateRequest = ()=>{
              value={notes}
              onChange={(e)=>setNotes(e.target.value)}
              />
-            {/* <input
-             type="text"
-             placeholder="category"
-             value={category}
-            onChange={(e)=>setCategory(e.target.value)}
-             /> */}  
-             {/* <div style={{"border":"groove"}}   >
-            <label htmlFor="category">Categories</label> 
-            <select placeholder='select' value={category} onChange={handleChange} name="category" multiple>
-                {Categories.map(option => (
-                    <option key={option.val} value={option.val}>
-                        {option.label}
-                    </option>
-                ))}
-            </select></div> */}
-            {/* <label className='form-label'>Categories</label> */}
-            {/* <Select
-                defaultValue={[Categories[0], Categories[1]]}
-                placeholder="Category"
-                isMulti
-                name="categories"
-                options={Categories}
-                className="basic-multi-select"
-                classNamePrefix="select"  
-                onChange={handleChange}
-            />  */}
-        
+
+        {/* <div>
             <InputLabel id="category-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
             <Select
             labelId="category-select-label"
@@ -174,7 +149,23 @@ const CreateRequest = ()=>{
                 </MenuItem>
                 ))}
             </Select> 
-
+            </div> */}
+           <div>
+            <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
+                <Select            
+                    style={{width: "100%"}}
+                    labelId="category-simple-select-label"
+                    id="category-simple-select"
+                    value={category}
+                    label="Category"
+                    onChange={(e) => {setCategory(e.target.value); console.log(category);}}
+                >
+                    {Categories.map(option => (
+                        <MenuItem value={option} key={option}>
+                            {option}
+                        </MenuItem>
+                        ))}
+                </Select></div> <div>
             <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
                 <Select            
                     style={{width: "100%"}}
@@ -189,7 +180,7 @@ const CreateRequest = ()=>{
                             {option}
                         </MenuItem>
                         ))}
-                </Select>
+                </Select></div><div>
                 <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
                 <Select            
                     style={{width: "100%"}}
@@ -204,19 +195,50 @@ const CreateRequest = ()=>{
                             {option}
                         </MenuItem>
                         ))}
-                </Select>
+                </Select></div>
             <input
              type="text"
              placeholder="dimension"
              value={dimension}
             onChange={(e)=>setDimension(e.target.value)}
              />
-            <input
+            {/* <input
              type="text"
              placeholder="searchtag"
              value={searchtag}
             onChange={(e)=>setSearchtag(e.target.value)}
-             />
+             /> */} 
+                    <div>
+            <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Search Tags</InputLabel>
+            <Select
+            labelId="tag-select-label"
+            id="tag-select"
+            value={searchtag}
+            label="Search Tags"
+            multiple
+            style={{width: "100%"}}
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+          
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+
+              )}
+            >
+            {Tags.map(option => (
+                <MenuItem value={option} key={option}  >
+                    {option}
+                </MenuItem>
+                ))}
+            </Select> 
+            </div>
             <input
              type="text"
              placeholder="days"
