@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect} from 'react' 
+import Radio from '@mui/material/Radio';
 import {Link,useHistory} from 'react-router-dom'
 import M from 'materialize-css'
 const SignIn  = ()=>{
@@ -7,8 +8,14 @@ const SignIn  = ()=>{
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("") 
-    //const [customer, setCustomer] = useState(false) /// 
-    const [url,setUrl] = useState(undefined) //""?
+    const [accountType, setAccountType] = useState("")  
+    const [url,setUrl] = useState(undefined) 
+
+
+    const account_handleChange = (event) => {
+        setAccountType(event.target.value); 
+    };     console.log(accountType);
+   
     useEffect(()=>{
         if(url){
             uploadFields()
@@ -46,7 +53,7 @@ const SignIn  = ()=>{
                 name,
                 password,
                 email,
-                //customer, ///
+                accountType, 
                 pic:url
                 
             })
@@ -93,31 +100,67 @@ const SignIn  = ()=>{
             placeholder="password"
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
-            /> {/* /// */} 
-            {/* <div className="auth-card input-field">
-            <input
-            type="checkbox"
-                id="customer-checkbox"
-            value={true}
-            onChange={(e)=>setCustomer(e.target.value)}
+            /> 
+         {/* <div className="auth-card input-field">
+         <span className="checkmark"></span>
+         <input
+                type="radio"
+                id="Customer"
+                name="accountTYpe"
+                value={"Customer"}
+                // checked={accountType === 'Customer'}
+                onChange={(e)=>setAccountType(e.target.value)}
             />  
-            <label for="customer-checkbox">Join as Customer</label><br></br> 
-            </div>         */} 
-            {/* for="customer-checkbox" */}
-            {/* <div className="auth-card input-field">  
-            <label  class="container ">join as Customer
-                <input type="checkbox" 
-                // checked="checked"   
-                id="customer-checkbox"
-                value={false}
-                onChange={(e)=>setCustomer(e.target.value)}/>
-                <span class="checkmark"></span>
-            </label>   </div> */}
+        <label htmlFor="Customer">Customer</label>
+        </div>     
+        <div className="auth-card input-field">
+          <span className="checkmark"></span>  
+          <input
+                type="radio"
+                id="Artist"
+                name="accountTYpe"
+                value={"Artist"}
+                // checked={accountType === 'Artist'}
+                onChange={(e)=>setAccountType(e.target.value)}
+            />  
+          <label htmlFor="Artist">Artist</label>
+        </div>    */}
+{/* 
+           <div>
+                <Radio
+                    checked={accountType === 'Customer'}
+                    onChange={account_handleChange}
+                    value="Customer"
+                    name="radio-buttons"
+                    inputProps={{ 'aria-label': 'Customer' }}
+                />
+                <Radio
+                    checked={accountType === 'Artist'}
+                    onChange={account_handleChange}
+                    value="Artist"
+                    name="radio-buttons"
+                    inputProps={{ 'aria-label': 'Artist' }}
+                />
+            </div> */}
+            
+            <div><span style={{color:"#9e9e9e"}}>Account type:</span>
+                <label style={{margin:"10px"}}>
+                <input className="with-gap" name="accountType" 
+                  value="Customer" type="radio" checked={accountType === 'Customer'}
+                  onChange={account_handleChange}/>
+                <span>Customer</span>
+                </label>
+    
+                <label style={{margin:"10px"}}>
+                <input className="with-gap" name="accountType" 
+                  value="Artist" type="radio"
+                  onChange={account_handleChange} checked={accountType === 'Artist'}/>
+                <span>Artist</span>
+                </label>
+            </div>
+
             <div className="file-field input-field">
-            <div
-           
-            className="btn #64b5f6 blue darken-1 main_button"
-            >
+            <div className="btn #64b5f6 blue darken-1 main_button">
                 <span>Upload pic</span>
                 <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
             </div> 
@@ -127,14 +170,13 @@ const SignIn  = ()=>{
             </div>
             </div>
             <button 
-         
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button" 
-            onClick={()=>PostData()}
+                className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button" 
+                onClick={()=>PostData()}
             >
                 SignUP
             </button>
             <h5>
-                <Link to="/signin">Already have an account ?</Link>
+                <Link to="/signin">Already have an account?</Link>
             </h5>
         </div>
       </div>

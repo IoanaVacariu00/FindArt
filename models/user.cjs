@@ -13,10 +13,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     }, 
-    // customer:{
-    //     type:Boolean,
-    //     default:false
-    // },///
+    accountType:{
+        type:String,
+        required:true
+    },
     resetToken:String,
     expireToken:Date,
     pic:{

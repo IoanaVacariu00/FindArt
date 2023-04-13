@@ -1,15 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import M from 'materialize-css'
 import {useHistory} from 'react-router-dom' 
-//  import Select  from 'react-select'   
 import Box from "@mui/material/Box";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
-
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 
 const CreateRequest = ()=>{
@@ -24,10 +21,10 @@ const CreateRequest = ()=>{
     const [days, setDays] = useState("");
     const [price, setPrice] = useState("");
     const [url,setUrl] = useState("") 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);//typeof value === "string" ? value.split(",") :
     const handleChange = (event) => {
         const {target: { value }} = event;
-        setSearchtag(value); //typeof value === "string" ? value.split(",") :
+        setSearchtag(value); 
         setOpen(false)  
     };  
     console.log(searchtag);

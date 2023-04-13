@@ -22,7 +22,6 @@
     surface:{
         type:String
     },
-
     dimension:{
         type:String
     },

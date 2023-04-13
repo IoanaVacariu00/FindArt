@@ -20,7 +20,8 @@ a{
 
 .brand-logo {
   font-family: 'Grand Hotel', cursive;
-}
+} 
+
 
 .mycard{
   margin-top: 30px;
@@ -43,7 +44,7 @@ a{
   border-bottom: 1px solid var(--main-color) !important;
   box-shadow: 0 1px 0 0 var(--main-color)!important;
 }   
-.input-field input[type=checkbox]:focus {
+.input-field input[type=radio]:focus {
   border-bottom: 1px solid var(--main-color)!important;
   box-shadow: 0 1px 0 0 var(--main-color) !important;
 } 
