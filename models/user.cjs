@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
     }, 
     accountType:{
         type:String,
-        required:true
     },
     resetToken:String,
     expireToken:Date,

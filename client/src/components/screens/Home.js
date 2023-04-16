@@ -3,7 +3,7 @@ import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'
 const Home  = ()=>{
     const [data,setData] = useState([])
-    const {state, dispatch} = useContext(UserContext);  //console.log(state.name);
+    const {state, dispatch} = useContext(UserContext);
     useEffect(()=>{
        fetch('/allposts',{
            headers:{
@@ -11,7 +11,6 @@ const Home  = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-        //    console.log(result)
            setData(result.posts)
        })
     },[])
@@ -53,7 +52,6 @@ const Home  = ()=>{
               })
           }).then(res=>res.json())
           .then(result=>{
-            //   console.log(result)
             const newData = data.map(item=>{
                 if(item._id==result._id){
                     return result
@@ -80,7 +78,6 @@ const Home  = ()=>{
               })
           }).then(res=>res.json())
           .then(result=>{
-            //   console.log(result)
               const newData = data.map(item=>{
                 if(item._id==result._id){
                     return result

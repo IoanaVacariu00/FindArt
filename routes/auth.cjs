@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 }))
 
 router.post('/signup',(req,res)=>{
-  const {name,email,password,pic} = req.body ///customer
+  const {name,email,password,accountType,pic} = req.body 
   if(!email || !password || !name){
      return res.status(422).json({error:"please add all the fields"})
   }
@@ -34,9 +34,8 @@ router.post('/signup',(req,res)=>{
                 email,
                 password:hashedpassword,
                 name,  
-                //customer,///
+                accountType,
                 pic
-                
             })
     
             user.save()
@@ -60,9 +59,8 @@ router.post('/signup',(req,res)=>{
   })
 })
 
-
 router.post('/signin',(req,res)=>{
-    const {email,password} = req.body//customer
+    const {email,password} = req.body
     if(!email || !password){
        return res.status(422).json({error:"please add email or password"})
     }
@@ -76,8 +74,8 @@ router.post('/signin',(req,res)=>{
             if(doMatch){
                 // res.json({message:"successfully signed in"})
                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-               const {_id,name,email,followers,following,pic} = savedUser//,customer
-               res.json({token,user:{_id,name,email,followers,following,pic}})
+               const {_id,name,email,followers,following,accountType,pic} = savedUser
+               res.json({token,user:{_id,name,email,followers,following,accountType,pic}})
             }
             else{
                 return res.status(422).json({error:"Invalid Email or password"})
@@ -88,7 +86,6 @@ router.post('/signin',(req,res)=>{
         })
     })
 })
-
 
 router.post('/reset-password',(req,res)=>{
      crypto.randomBytes(32,(err,buffer)=>{
@@ -120,7 +117,6 @@ router.post('/reset-password',(req,res)=>{
      })
 })
 
-
 router.post('/new-password',(req,res)=>{
     const newPassword = req.body.password
     const sentToken = req.body.token
@@ -141,6 +137,5 @@ router.post('/new-password',(req,res)=>{
         console.log(err)
     })
 })
-
 
 module.exports = router

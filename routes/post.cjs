@@ -36,7 +36,7 @@ router.post('/createpost',requireLogin,(req,res)=>{
     if(!title || !body || !pic){
       return  res.status(422).json({error:"Please add all the fields"})
     }
-    req.user.password = undefined//?
+    req.user.password = undefined
     const post = new Post({
         title,
         body,
@@ -88,7 +88,6 @@ router.put('/unlike',requireLogin,(req,res)=>{
         }
     })
 })
-
 
 router.put('/comment',requireLogin,(req,res)=>{
     const comment = {

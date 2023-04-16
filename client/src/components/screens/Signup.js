@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react' 
-import Radio from '@mui/material/Radio';
-import {Link,useHistory} from 'react-router-dom'
-import M from 'materialize-css'
+import {Link, useHistory} from 'react-router-dom'
+import M from 'materialize-css'    
+
 const SignIn  = ()=>{
     const history = useHistory()
     const [name,setName] = useState("")
@@ -14,7 +14,8 @@ const SignIn  = ()=>{
 
     const account_handleChange = (event) => {
         setAccountType(event.target.value); 
-    };     console.log(accountType);
+    };     
+    console.log(accountType);
    
     useEffect(()=>{
         if(url){
@@ -76,7 +77,6 @@ const SignIn  = ()=>{
         }else{
             uploadFields()
         }
-       
     }
 
    return (
@@ -101,61 +101,20 @@ const SignIn  = ()=>{
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
             /> 
-         {/* <div className="auth-card input-field">
-         <span className="checkmark"></span>
-         <input
-                type="radio"
-                id="Customer"
-                name="accountTYpe"
-                value={"Customer"}
-                // checked={accountType === 'Customer'}
-                onChange={(e)=>setAccountType(e.target.value)}
-            />  
-        <label htmlFor="Customer">Customer</label>
-        </div>     
-        <div className="auth-card input-field">
-          <span className="checkmark"></span>  
-          <input
-                type="radio"
-                id="Artist"
-                name="accountTYpe"
-                value={"Artist"}
-                // checked={accountType === 'Artist'}
-                onChange={(e)=>setAccountType(e.target.value)}
-            />  
-          <label htmlFor="Artist">Artist</label>
-        </div>    */}
-{/* 
-           <div>
-                <Radio
-                    checked={accountType === 'Customer'}
-                    onChange={account_handleChange}
-                    value="Customer"
-                    name="radio-buttons"
-                    inputProps={{ 'aria-label': 'Customer' }}
-                />
-                <Radio
-                    checked={accountType === 'Artist'}
-                    onChange={account_handleChange}
-                    value="Artist"
-                    name="radio-buttons"
-                    inputProps={{ 'aria-label': 'Artist' }}
-                />
-            </div> */}
-            
-            <div><span style={{color:"#9e9e9e"}}>Account type:</span>
+            <div>
+                <span style={{color:"#9e9e9e"}}>Account type:</span>
                 <label style={{margin:"10px"}}>
-                <input className="with-gap" name="accountType" 
-                  value="Customer" type="radio" checked={accountType === 'Customer'}
-                  onChange={account_handleChange}/>
-                <span>Customer</span>
+                    <input className="with-gap" name="accountType" 
+                    value="Customer" type="radio" checked={accountType === 'Customer'}
+                    onChange={account_handleChange}/>
+                    <span>Customer</span>
                 </label>
     
                 <label style={{margin:"10px"}}>
-                <input className="with-gap" name="accountType" 
-                  value="Artist" type="radio"
-                  onChange={account_handleChange} checked={accountType === 'Artist'}/>
-                <span>Artist</span>
+                    <input className="with-gap" name="accountType" 
+                    value="Artist" type="radio"
+                    onChange={account_handleChange} checked={accountType === 'Artist'}/>
+                    <span>Artist</span>
                 </label>
             </div>
 
@@ -173,7 +132,7 @@ const SignIn  = ()=>{
                 className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button" 
                 onClick={()=>PostData()}
             >
-                SignUP
+                SignUp
             </button>
             <h5>
                 <Link to="/signin">Already have an account?</Link>

@@ -35,7 +35,7 @@ router.post('/createrequest',requireLogin,(req,res)=>{
     if(!maintitle || !notes ){
       return  res.status(422).json({error:"Please add all the required fields"})
     }
-    req.user.password = undefined//?
+    req.user.password = undefined
     const request = new Gig({
        
          maintitle,

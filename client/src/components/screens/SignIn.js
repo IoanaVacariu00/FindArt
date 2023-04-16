@@ -65,16 +65,14 @@ const SignIn  = ()=>{
                 Login
             </button>
             <h5>
-                <Link to="/signup">Don't have an account ?</Link>
+                <Link to="/signup">Don't have an account?</Link>
             </h5>
             <h6>
-                <Link to="/reset">Forgot password ?</Link>
+                <Link to="/reset">Forgot password?</Link>
             </h6>
-    
-        </div>
+            </div>
       </div>
    )
 }
-
 
 export default SignIn
