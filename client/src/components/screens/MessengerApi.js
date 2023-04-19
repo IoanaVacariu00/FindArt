@@ -6,7 +6,6 @@ const MessengerApi = ({friend}) => {
     const {state} = useContext(UserContext);     
 
     const chatboxEl = useRef();  
-       // wait for TalkJS to load
     const [talkLoaded, markTalkLoaded] = useState(false);
   
     useEffect(() => {
@@ -47,7 +46,7 @@ const MessengerApi = ({friend}) => {
       }
     }, [talkLoaded]);
   
-    return <div id="chat_box" ref={chatboxEl} />;
+    return <div className='chat_box' ref={chatboxEl} />;
 } 
 
 export default MessengerApi  

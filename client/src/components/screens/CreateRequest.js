@@ -7,6 +7,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
+import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 
 const CreateRequest = ()=>{
@@ -19,16 +21,32 @@ const CreateRequest = ()=>{
     const [dimension, setDimension] = useState("");
     const [searchtag, setSearchtag] = useState([]);
     const [days, setDays] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState([30, 70]);
     const [url,setUrl] = useState("") 
-    const [open, setOpen] = useState(false);//typeof value === "string" ? value.split(",") :
+    const [open, setOpen] = useState(false);
     const handleChange = (event) => {
         const {target: { value }} = event;
         setSearchtag(value); 
         setOpen(false)  
     };  
-    console.log(searchtag);
 
+    function valuetext(value) {
+        return `${value}$`;
+    }
+      
+    const minDistance = 10;
+    const handleChange1 = (event, newValue, activeThumb) => {
+        if (!Array.isArray(newValue)) {
+          return;
+        }
+    
+        if (activeThumb === 0) {
+          setPrice([Math.min(newValue[0], price[1] - minDistance),price[1]]);
+        } else {
+          setPrice([price[0], Math.max(newValue[1], price[0] + minDistance)]);
+        }
+      };
+    
     const handleClose = () => {
         setOpen(false);
     };
@@ -101,83 +119,60 @@ const CreateRequest = ()=>{
            padding:"20px",
            textAlign:"center"
         }}
-       >
-           <input 
-            type="text"
-            placeholder="title"
-            value={maintitle}
-            onChange={(e)=>setMaintitle(e.target.value)}
-            />
-        
-           <input
-            type="text"
-             placeholder="description"
-             value={notes}
-             onChange={(e)=>setNotes(e.target.value)}
-             />
-
-        {/* <div>
-            <InputLabel id="category-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
-            <Select
-            labelId="category-select-label"
-            id="category-select"
-            value={category}
-            label="Category"
-            multiple
-            style={{width: "100%"}}
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            onChange={handleChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (
-                //selected.join(", ")
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-
-              )}
-            >
-            {Categories.map(option => (
-                <MenuItem value={option} key={option}  >
-                    {option}
-                </MenuItem>
-                ))}
-            </Select> 
-            </div> */}
-           <div>
+       > 
+       <h4>Write a Request!</h4>
+       <InputLabel id="title-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Title</InputLabel>
+        <input 
+        type="text"
+        placeholder=""
+        value={maintitle}
+        onChange={(e)=>setMaintitle(e.target.value)}
+        />
+         <div>
+        <InputLabel id="desc-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Description</InputLabel>
+        <input
+        type="text"
+        placeholder=""
+        value={notes}
+        onChange={(e)=>setNotes(e.target.value)}
+        />
+        </div>
+            <div>
             <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
-                <Select            
-                    style={{width: "100%"}}
-                    labelId="category-simple-select-label"
-                    id="category-simple-select"
-                    value={category}
-                    label="Category"
-                    onChange={(e) => {setCategory(e.target.value); console.log(category);}}
-                >
-                    {Categories.map(option => (
-                        <MenuItem value={option} key={option}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select></div> <div>
-            <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
+            <Select            
+                style={{width: "100%"}}
+                labelId="category-simple-select-label"
+                id="category-simple-select"
+                value={category}
+                label="Category"
+                onChange={(e) => {setCategory(e.target.value); console.log(category);}}
+            >
+                {Categories.map(option => (
+                    <MenuItem value={option} key={option}>
+                        {option}
+                    </MenuItem>
+                    ))}
+            </Select>
+            </div> 
+
+            <div>
+                <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
                 <Select            
                     style={{width: "100%"}}
                     labelId="medium-simple-select-label"
                     id="medium-simple-select"
                     value={medium}
                     label="Medium"
-                    onChange={(e) => {setMedium(e.target.value); console.log(medium);}}
+                    onChange={(e) => {setMedium(e.target.value);}}
                 >
                     {Mediums.map(option => (
                         <MenuItem value={option} key={option}>
                             {option}
                         </MenuItem>
                         ))}
-                </Select></div><div>
+                </Select>
+            </div>
+            <div>
                 <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
                 <Select            
                     style={{width: "100%"}}
@@ -185,70 +180,59 @@ const CreateRequest = ()=>{
                     id="surface-simple-select"
                     value={surface}
                     label="Surface"
-                    onChange={(e) => {setSurface(e.target.value); console.log(surface);}}
+                    onChange={(e) => {setSurface(e.target.value);}}
                 >
                     {Surfaces.map(option => (
                         <MenuItem value={option} key={option}>
                             {option}
                         </MenuItem>
                         ))}
-                </Select></div>
-            <input
-             type="text"
-             placeholder="dimension"
-             value={dimension}
-            onChange={(e)=>setDimension(e.target.value)}
-             />
-            {/* <input
-             type="text"
-             placeholder="searchtag"
-             value={searchtag}
-            onChange={(e)=>setSearchtag(e.target.value)}
-             /> */} 
-                    <div>
-            <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Search Tags</InputLabel>
-            <Select
-            labelId="tag-select-label"
-            id="tag-select"
-            value={searchtag}
-            label="Search Tags"
-            multiple
-            style={{width: "100%"}}
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            onChange={handleChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (
-          
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-
-              )}
-            >
-            {Tags.map(option => (
-                <MenuItem value={option} key={option}  >
-                    {option}
-                </MenuItem>
-                ))}
-            </Select> 
+                </Select>
             </div>
-            <input
-             type="text"
-             placeholder="days"
-             value={days}
-            onChange={(e)=>setDays(e.target.value)}
-             />
-                               
-            <input
-             type="text"
-             placeholder="price"
-             value={price}
-            onChange={(e)=>setPrice(e.target.value)}
-             />
+  
+            <div>
+                <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Search Tags</InputLabel>
+                <Select
+                labelId="tag-select-label"
+                id="tag-select"
+                value={searchtag}
+                label="Search Tags"
+                multiple
+                style={{width: "100%"}}
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                onChange={handleChange}
+                input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                renderValue={(selected) => (
+            
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                    ))}
+                    </Box>  
+                )}
+                >
+                {Tags.map(option => (
+                    <MenuItem value={option} key={option}  >
+                        {option}
+                    </MenuItem>
+                    ))}
+                </Select> 
+            </div>
+
+            <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
+            <Box style={{ width: "50%", margin:"10px auto" }}>
+                <Slider
+                    getAriaLabel={() => 'Minimum distance'}
+                    value={price}
+                    onChange={handleChange1}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    disableSwap
+                />
+            </Box>
+
            <div className="file-field input-field">
             {/* <div className="btn #64b5f6 blue darken-1">
                 <span>Upload Image</span>

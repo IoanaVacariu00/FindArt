@@ -7,7 +7,7 @@ const NavBar = ()=>{
     const searchModal = useRef(null)
     const [search, setSearch] = useState('')
     const [userDetails, setUserDetails] = useState([])
-    const {state, dispatch} = useContext(UserContext)
+    const {state, dispatch} = useContext(UserContext);
     const history = useHistory()
 
     useEffect(()=>{

@@ -8,7 +8,7 @@
 nav { 
  padding: 10px; background-color: white;
 }
-#chat_box {  
+.chat_box {  
   background-color: whitesmoke;  
   height: 600px;
 }
@@ -33,11 +33,11 @@ a{
   margin: 10px auto;
 }
 
-.input-field input[type=text]:focus {
+/* .input-field input[type=text]:focus {
 
   border-bottom: 1px solid var(--main-color) !important;
   box-shadow: 0 1px 0 0 var(--main-color) !important;
-}
+} */
 
 /* rgb(8, 93, 252) !important; */
 .input-field input[type=password]:focus {
@@ -48,11 +48,11 @@ a{
   border-bottom: 1px solid var(--main-color)!important;
   box-shadow: 0 1px 0 0 var(--main-color) !important;
 } 
-.input-field label:focus {
+/* .input-field label:focus {
   border-bottom: 1px solid var(--main-color)!important;
   box-shadow: 0 1px 0 0 var(--main-color)  !important;
 
-}
+} */
 
 .gallery{
   display: flex;
