@@ -1,8 +1,11 @@
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 const Profile = () =>{
     const [userProfile,setProfile] = useState(null)
+
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
@@ -73,6 +76,7 @@ const Profile = () =>{
              setShowFollow(true)
         })
     }
+
    return (
        <>
        {userProfile ?
@@ -85,33 +89,31 @@ const Profile = () =>{
            }}>
                <div>
                    <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-                   src={userProfile.user.pic}
+                    src={userProfile.user.pic}
                    />
                </div>
                <div>
                    <h4>{userProfile.user.name}</h4>
-                   {/* <h5>{userProfile.user.email}</h5> */}
+                   <h6>{userProfile.user.email}</h6>
                    <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                        <h6>{userProfile.posts.length} posts</h6>
                        <h6>{userProfile.user.followers.length} followers</h6>
                        <h6>{userProfile.user.following.length} following</h6>
                    </div>
                    {showfollow?
-                   <button style={{
-                       margin:"10px"
-                   }} 
-                   className = "main_button"
-                //    className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                   <button style={{margin:"10px"}} 
+                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
                     onClick={()=>followUser()}
-                    >
-                        Follow
-                    </button>
+                    >Follow</button>
                     : 
-                    <button style={{margin:"10px"}} className = "main_button"
-                          // className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                        onClick={()=>unfollowUser()}
+                    <button style={{margin:"10px"}} 
+                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                    onClick={()=>unfollowUser()}
                     >UnFollow</button>   
                     }
+                    <button className="btn waves-effect waves-light #64b5f6 blue darken-1"> 
+                        <Link to="/messenger" other={userProfile.user._id}>Message</Link>
+                    </button>
                </div>
            </div>
      

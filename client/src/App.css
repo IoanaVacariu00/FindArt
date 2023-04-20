@@ -12,7 +12,7 @@ nav {
   background-color: whitesmoke;  
   height: 600px;
 }
-
+button a {color: white !important;}
 a{
 
   color: black !important;

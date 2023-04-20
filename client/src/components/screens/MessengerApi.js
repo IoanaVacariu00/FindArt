@@ -3,15 +3,13 @@ import Talk from 'talkjs';
 import { UserContext } from '../../App';
 const MessengerApi = ({friend}) => {   
   
-    const {state} = useContext(UserContext);     
-
+    const {state} = useContext(UserContext);               
     const chatboxEl = useRef();  
     const [talkLoaded, markTalkLoaded] = useState(false);
   
     useEffect(() => {
       Talk.ready.then(() => markTalkLoaded(true));
-  
-      if (talkLoaded) {
+      if (talkLoaded) { console.log("loaded");
         const currentUser = new Talk.User({
           id: state._id,
           name: state.name,
@@ -32,21 +30,31 @@ const MessengerApi = ({friend}) => {
           appId: 'tyqvYB21',
           me: currentUser,
         });
-  
+      //   if (!window.talkSession) {
+      //     window.talkSession = new Talk.Session({
+      //         appId: "tyqvYB21",
+      //         me: currentUser
+      //     });
+      // }
         const conversationId = Talk.oneOnOneId(currentUser, otherUser);
         const conversation = session.getOrCreateConversation(conversationId);
+        // const conversation = window.talkSession.getOrCreateConversation(conversationId);
         conversation.setParticipant(currentUser);
         conversation.setParticipant(otherUser);
   
         const chatbox = session.createChatbox();
-        chatbox.select(conversation);
-        chatbox.mount(chatboxEl.current);
+        // const chatbox = window.talkSession.createChatbox();
+        const inbox = session.createInbox();
+        inbox.select(conversation);
+        inbox.mount(document.getElementById('talkjs-container'));
+        // chatbox.select(conversation);
+        // chatbox.mount(chatboxEl.current);
   
         return () => session.destroy();
       }
     }, [talkLoaded]);
-  
-    return <div className='chat_box' ref={chatboxEl} />;
+  // ref={chatboxEl}
+    return <div className='chat_box' id="talkjs-container" />;
 } 
 
 export default MessengerApi  
