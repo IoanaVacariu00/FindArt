@@ -7,7 +7,8 @@ import { UserContext } from '../../App'
 // import ConversationApi from "../ConversationApi.js";
 import Talk from 'talkjs';  
 
-const Messenger = ({other})=>{ 
+const Messenger = ()=>{   
+  console.log('messenger');
   const { state } = useContext(UserContext); 
 
   // const [currentChat, setCurrentChat] = useState();
@@ -65,19 +66,19 @@ useEffect(() => {
     // const chatbox = session.createChatbox();
     // const chatbox = window.talkSession.createChatbox();
     const inbox = session.createInbox();
-    if(other!='') {
-      const friend = User.find(user => user.id === other);
-      const otherUser = new Talk.User({
-        id: friend._id,
-        name: friend.name,
-        email: friend.email,
-        photoUrl: friend.pic,
-        role: 'default',
-    });
-    const conversationId = Talk.oneOnOneId(currentUser, otherUser);
-    const conversation = session.getOrCreateConversation(conversationId);
-    inbox.select(conversation);
-    }
+    // if(other!='') {
+    //   const friend = User.find(user => user.id === other);
+    //   const otherUser = new Talk.User({
+    //     id: friend._id,
+    //     name: friend.name,
+    //     email: friend.email,
+    //     photoUrl: friend.pic,
+    //     role: 'default',
+    // });
+    // const conversationId = Talk.oneOnOneId(currentUser, otherUser);
+    // const conversation = session.getOrCreateConversation(conversationId);
+    // inbox.select(conversation);
+    // }
       
     inbox.mount(document.getElementById('talkjs-container'));
     // chatbox.select(conversation);

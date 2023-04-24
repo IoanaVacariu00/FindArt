@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 const Profile = () =>{
     const [userProfile,setProfile] = useState(null)
-
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
@@ -19,7 +18,7 @@ const Profile = () =>{
            setProfile(result)
        })
     },[])
-
+ 
     const followUser = ()=>{
         fetch('/follow',{
             method:"put",
@@ -111,8 +110,8 @@ const Profile = () =>{
                     onClick={()=>unfollowUser()}
                     >UnFollow</button>   
                     }
-                    <button className="btn waves-effect waves-light #64b5f6 blue darken-1"> 
-                        <Link to="/messenger" other={userProfile.user._id}>Message</Link>
+                    <button className="btn waves-effect waves-light #64b5f6 blue darken-1" >
+                        <Link to={'/messenger/'+userProfile.user._id} key={userProfile.user._id}>Message</Link>
                     </button>
                </div>
            </div>

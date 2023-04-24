@@ -22,16 +22,13 @@ router.get('/user/:id',requireLogin,(req,res)=>{
     })
 })   
 
-router.get('/message/user/:id',requireLogin,(req,res)=>{
-    User.findOne({_id:req.params.id}),
-
-    (err,result)=>{
-        if(err){
-           return res.status(422).json({error:"User not found"})
-        }
-        res.json(result)
-         }
- 
+router.get('/finduser/:id',requireLogin,(req,res)=>{   
+    User.findOne({_id:req.params.id}) 
+    .select("-password")
+    .then(user=>{res.json({user})})
+    .catch(err=>{
+        return res.status(404).json({error:"User not found"})
+    })
 })   
  
 router.get("/friends/:id", async (req, res) => {

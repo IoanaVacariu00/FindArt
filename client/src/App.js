@@ -68,10 +68,10 @@ const Routing = ()=>{
       <Route path="/createrequest">
         <CreateRequest />
       </Route>
-      <Route path="/messenger">
+      <Route exact path="/messenger">
         <Messenger/>
       </Route>        
-      <Route path="/messengerapi">
+      <Route path="/messenger/:userid">
         <MessengerApi/>
       </Route>  
       <Route path="/settings">
