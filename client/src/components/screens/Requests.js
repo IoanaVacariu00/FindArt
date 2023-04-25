@@ -109,10 +109,10 @@ const Requests = ()=>{
         })
     }
    return (
+    <>
+    {data? 
        <div className="home">
-           {
-               data.map(item=>{
-            
+           {data.map(item=>{
                 return(
                        <div className="card home-card" key={item._id} style={{padding:"10px"}}>
                             <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link> {item.user._id == state._id 
@@ -167,12 +167,16 @@ const Requests = ()=>{
                             {/* </div> */}
                         </div> 
                    )
-               })
-           }
-          
-          
+                        
+                }
+                            
+                )
+           
+            }
        </div>
-   )
+        : <h6>No requests yet!</h6>}
+       </>
+       )
 }
 
 export default Requests

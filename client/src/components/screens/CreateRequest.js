@@ -21,7 +21,7 @@ const CreateRequest = ()=>{
     const [dimension, setDimension] = useState("");
     const [searchtag, setSearchtag] = useState([]);
     const [days, setDays] = useState("");
-    const [price, setPrice] = useState([30, 70]);
+    const [price, setPrice] = useState("");
     const [url,setUrl] = useState("") 
     const [open, setOpen] = useState(false);
     const handleChange = (event) => {
@@ -221,7 +221,7 @@ const CreateRequest = ()=>{
                 </Select> 
             </div>
 
-            <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
+            {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
             <Box style={{ width: "50%", margin:"10px auto" }}>
                 <Slider
                     getAriaLabel={() => 'Minimum distance'}
@@ -231,7 +231,7 @@ const CreateRequest = ()=>{
                     getAriaValueText={valuetext}
                     disableSwap
                 />
-            </Box>
+            </Box> */}
 
            <div className="file-field input-field">
             {/* <div className="btn #64b5f6 blue darken-1">

@@ -2,12 +2,11 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const requireLogin  = require('../middleware/requireLogin.cjs')
-const Gig =  mongoose.model("Gig")
+const Gig = mongoose.model("Gig")
 
 router.get('/allrequests',requireLogin,(req,res)=>{
     Gig.find()
-    .populate("user","_id name")//c
-    //.populate("comments.postedBy","_id name")//c
+    .populate("user","_id name")
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
@@ -33,11 +32,10 @@ router.get('/allrequests',requireLogin,(req,res)=>{
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
     if(!maintitle || !notes ){
-      return  res.status(422).json({error:"Please add all the required fields"})
+      return res.status(422).json({error:"Please add all the required fields"})
     }
     req.user.password = undefined
     const request = new Gig({
-       
          maintitle,
          notes, 
          category, 

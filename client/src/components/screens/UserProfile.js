@@ -91,35 +91,37 @@ const Profile = () =>{
                     src={userProfile.user.pic}
                    />
                </div>
+               
                <div>
                    <h4>{userProfile.user.name}</h4>
-                   <h6>{userProfile.user.email}</h6>
-                   {userProfile.user.accountType == "Artist"  &&
-                   <>
-                    <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
-                            <h6>{userProfile.posts.length} posts</h6>
-                            <h6>{userProfile.user.followers.length} followers</h6>
-                            <h6>{userProfile.user.following.length} following</h6>
-                    </div> 
-                  
-                   {showfollow?
-                   <button style={{margin:"10px"}} 
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                    onClick={()=>followUser()}
-                    >Follow</button>
-                    : 
-                    <button style={{margin:"10px"}} 
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                    onClick={()=>unfollowUser()}
-                    >UnFollow</button>   
-                    }
+                   <h6>contact: {userProfile.user.email}</h6>
+                   
+                   { userProfile.user.accountType == "Artist"  &&
+                    <>
+                        <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
+                                <h6>{userProfile.posts.length} posts</h6>
+                                <h6>{userProfile.user.followers.length} followers</h6>
+                                <h6>{userProfile.user.following.length} following</h6>
+                        </div> 
+                    
+                        {showfollow?
+                            <button style={{margin:"10px"}} 
+                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            onClick={()=>followUser()}
+                            >Follow</button>
+                            : 
+                            <button style={{margin:"10px"}} 
+                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            onClick={()=>unfollowUser()}
+                            >UnFollow</button>   
+                        }
                     </>
                     }
-
+                    { userProfile.user.accountType == "Customer"  && <br /> }
                     <button className="btn waves-effect waves-light #64b5f6 blue darken-1" >
                         <Link to={'/messenger/'+userProfile.user._id} key={userProfile.user._id}>Message</Link>
-                        {/* <Link to='/messenger' other={userProfile.user} key={userProfile.user._id}>Message</Link> */}
                     </button>
+               
                </div>
            </div>
            {userProfile.user.accountType == "Artist"  &&
@@ -135,7 +137,7 @@ const Profile = () =>{
                 </div>
             }
        </div>
-       : <h2>loading...!</h2>}
+       : <h4>loading...!</h4>}
        </>
    )
 }
