@@ -2,37 +2,72 @@ import React,{ useEffect, useState, useContext } from 'react';
 import Talk from 'talkjs';   
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
+import axios from 'axios';
 const MessengerApi = () => {   
     const [friend,setFriend] = useState(null);
     const {state} = useContext(UserContext); 
     const {userid} = useParams();   
     const [talkLoaded, markTalkLoaded] = useState(false);
-    console.log(talkLoaded);
-    useEffect(()=>{
-      console.log("1");
-      // Talk.ready.then(() => markTalkLoaded(true));
-      // if (talkLoaded) {
-      fetch(`/finduser/${userid}`,
+
+    function getFriend () {
+      return fetch (`/finduser/${userid}`,
       {
-          headers:{
-              "Authorization":"Bearer " + localStorage.getItem("jwt")
-          }
+        headers:{
+          "Authorization":"Bearer " + localStorage.getItem("jwt")
+        }
       }
       ).then(res=>res.json())
-       .then(result=>{
-        setFriend(result); 
-    })
-  // }talkLoaded
+    }
 
-   },[])
+    function loadTalkjs () {
+     Talk.ready.then(() => markTalkLoaded(true));
+     return markTalkLoaded;
+    }
+    
+    function getBoth () {
+      return Promise.all([getFriend(), loadTalkjs()])
+    }
+    // useEffect(() => {
+      
+    //   const getUser = async () => {
+    //     try {
+    //       const res = await axios(`/finduser/${userid}`,
+    //       {
+    //         headers:{
+    //           "Authorization":"Bearer " + localStorage.getItem("jwt")
+    //         }
+    //       }
+    //       )
+    //       setFriend(res.data);
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   };
+    //   getUser();
+    // }, []); 
+    // console.log(friend);
 
-   console.log( friend);
-   useEffect(() => { console.log("2 ");
-    // if(friend){
-    // console.log("friend");
-    Talk.ready.then(() => markTalkLoaded(true));
-      if (talkLoaded && friend) {
-     
+    // useEffect(()=>{
+      // fetch(`/finduser/${userid}`,
+      // {
+      //   headers:{
+      //     "Authorization":"Bearer " + localStorage.getItem("jwt")
+      //   }
+      // }
+      // ).then(res=>res.json())
+    //   .then(result=>{
+    //     setFriend(result); 
+    //   })
+      
+    // },[])
+
+  //  useEffect(() => { 
+
+    // Talk.ready.then(() => markTalkLoaded(true));
+      // if (talkLoaded) {
+        
+      useEffect(() => {
+       getBoth ().then(([friend, talkLoaded]) => {
 
         const currentUser = new Talk.User({
           id: state._id,
@@ -42,11 +77,11 @@ const MessengerApi = () => {
           role: 'default',
         });
 
-
         const session = new Talk.Session({
           appId: 'tyqvYB21',
           me: currentUser,
         });
+        const inbox = session.createInbox();
 
         const otherUser = new Talk.User({
           id: friend.user._id,
@@ -55,30 +90,28 @@ const MessengerApi = () => {
           photoUrl: friend.user.pic,
           role: 'default',
         });
-
         const conversationId = Talk.oneOnOneId(currentUser, otherUser);
         const conversation = session.getOrCreateConversation(conversationId);
-      
+     
         conversation.setParticipant(currentUser);
         conversation.setParticipant(otherUser);
-
-        const inbox = session.createInbox();
         inbox.select(conversation);
+        
         inbox.mount(document.getElementById('talkjs-container'));
 
         return () => session.destroy(); 
       
-      
-      
-    }
-    
-  }, [talkLoaded]);
+    })
+  },[]);
+ 
+  // }, [talkLoaded]);
 
-    return (
+    return (  
       <div className='chat_box' id="talkjs-container">
-        {friend? friend.user.name : "nu exista"}
+        Loading...
+        {/* {friend? friend.user.name : "Loading..."} */}
       </div>
-      )
+     )
 
 } 
 

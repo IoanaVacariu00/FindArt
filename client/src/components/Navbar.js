@@ -26,7 +26,7 @@ const NavBar = ()=>{
             <li key="7"><Link to="/messenger">Messages</Link></li>,
             <li key="8">
               <button className="btn #c62828 red darken-3"
-                onClick={()=>{
+                onClick={()=>{ 
                   localStorage.clear()
                   dispatch({type:"CLEAR"})
                   history.push('/signin')
