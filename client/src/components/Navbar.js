@@ -71,7 +71,7 @@ const NavBar = ()=>{
 
      const fetchUsers = (query)=>{
         setSearch(query)
-        fetch('/search-users',{
+        fetch('/searchusers',{
           method:"post",
           headers:{
             "Content-Type":"application/json"
@@ -103,11 +103,11 @@ const NavBar = ()=>{
               />
               <ul className="collection">
                 {userDetails.map(item=>{
-                  return <Link to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
+                  return <Link key={item.name} to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
                   onClick={()=>{
                     M.Modal.getInstance(searchModal.current).close()
                     setSearch('')
-                  }}><li className="collection-item">{item.email}</li></Link> 
+                  }}><li className="collection-item">{item.name}</li></Link> 
                 })}
                 
               </ul>

@@ -145,7 +145,7 @@ const CreateRequest = ()=>{
                 id="category-simple-select"
                 value={category}
                 label="Category"
-                onChange={(e) => {setCategory(e.target.value); console.log(category);}}
+                onChange={(e) => {setCategory(e.target.value)}}
             >
                 {Categories.map(option => (
                     <MenuItem value={option} key={option}>
@@ -205,19 +205,18 @@ const CreateRequest = ()=>{
                 onChange={handleChange}
                 input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
                 renderValue={(selected) => (
-            
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                    {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                    ))}
+                        {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                        ))}
                     </Box>  
                 )}
                 >
-                {Tags.map(option => (
-                    <MenuItem value={option} key={option}  >
-                        {option}
-                    </MenuItem>
-                    ))}
+                    {Tags.map(option => (
+                        <MenuItem value={option} key={option}  >
+                            {option}
+                        </MenuItem>
+                        ))}
                 </Select> 
             </div>
 
