@@ -10,24 +10,32 @@ router.get('/allrequests',requireLogin,(req,res)=>{
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
-    }).catch(err=>{
+    })               
+    .catch(err=>{
         console.log(err)
     })
 })
-
-// router.get('/getsubpost',requireLogin,(req,res)=>{
-
-//     Post.find({user:{$in:req.user.following}})
+// router.get('/myrequest',requireLogin,(req,res)=>{
+//     Gig.find({user:req.user._id})
 //     .populate("user","_id name")
-//     .populate("comments.postedBy","_id name")
-//     .sort('-createdAt')
-//     .then(posts=>{
-//         res.json({posts})
+//     .then(myrequest=>{
+//         res.json({myrequest})
 //     })
 //     .catch(err=>{
 //         console.log(err)
 //     })
 // })
+router.get('/myrequests',requireLogin,(req,res)=>{
+    Gig.find({user:req.user._id})
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+})
 
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
@@ -45,7 +53,8 @@ router.post('/createrequest',requireLogin,(req,res)=>{
         searchtag,
         price,
         days,
-        user:req.user
+        user:req.user,
+        acceptedBy
     })
     request.save().then(result=>{
         res.json({request:result})
@@ -54,33 +63,37 @@ router.post('/createrequest',requireLogin,(req,res)=>{
         console.log(err)
     })
 })
-
-router.get('/myrequest',requireLogin,(req,res)=>{
-    Gig.find({user:req.user._id})
-    .populate("user","_id name")
-    .then(myrequest=>{
-        res.json({myrequest})
-    })
-    .catch(err=>{
-        console.log(err)
+router.delete('/deleterequest/:requestId',requireLogin,(req,res)=>{
+    Gig.findOne({_id:req.params.requestId})
+    .populate("user","_id")
+    .exec((err,request)=>{
+        if(err || !request){
+            return res.status(422).json({error:err})
+        }
+        if(request.user._id.toString() === req.user._id.toString()){
+              request.remove()
+              .then(result=>{
+                  res.json(result)
+              }).catch(err=>{
+                  console.log(err)
+              })
+        }
     })
 })
-//asta de jos poate va fi pt acceptarea unui request
-// router.put('/like',requireLogin,(req,res)=>{
-//     Post.findByIdAndUpdate(req.body.postId,{
-//         $push:{likes:req.user._id}
-//     },{
-//         new:true
-//     }).exec((err,result)=>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
+// router.get('/getsubpost',requireLogin,(req,res)=>{
+
+//     Post.find({user:{$in:req.user.following}})
+//     .populate("user","_id name")
+//     .populate("comments.postedBy","_id name")
+//     .sort('-createdAt')
+//     .then(posts=>{
+//         res.json({posts})
+//     })
+//     .catch(err=>{
+//         console.log(err)
 //     })
 // })
-
-// router.put('/unlike',requireLogin,(req,res)=>{
+  // router.put('/unlike',requireLogin,(req,res)=>{
 //     Post.findByIdAndUpdate(req.body.postId,{
 //         $pull:{likes:req.user._id}
 //     },{
@@ -115,22 +128,18 @@ router.get('/myrequest',requireLogin,(req,res)=>{
 //     })
 // })
 
-router.delete('/deleterequest/:requestId',requireLogin,(req,res)=>{
-    Gig.findOne({_id:req.params.requestId})
-    .populate("user","_id")
-    .exec((err,request)=>{
-        if(err || !request){
-            return res.status(422).json({error:err})
-        }
-        if(request.user._id.toString() === req.user._id.toString()){
-              request.remove()
-              .then(result=>{
-                  res.json(result)
-              }).catch(err=>{
-                  console.log(err)
-              })
-        }
-    })
-})
+// router.put('/accept/:requestId',requireLogin,(req,res)=>{
+//     Gig.findOne({_id:req.params.requestId})
+//     .populate("accepteddBy","_id")
+//     .exec((err,result)=>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }
+//         else{
+//             res.json(result)
+//         }
+//     })
+// })
+
 
 module.exports = router

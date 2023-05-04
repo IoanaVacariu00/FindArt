@@ -104,12 +104,12 @@ const MessengerApi = () => {
     })
   },[]);
  
-  // }, [talkLoaded]);
+
 
     return (  
       <div className='chat_box' id="talkjs-container">
         Loading...
-        {/* {friend? friend.user.name : "Loading..."} */}
+       
       </div>
      )
 

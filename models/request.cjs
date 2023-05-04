@@ -43,10 +43,13 @@
         type:mongoose.Schema.Types.ObjectId,
         //required:true,
         ref:'User'
-    }
+    },
+    acceptedBy:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }]
 },{timestamps:true})
-// const Gig=mongoose.model('Gig', gigSchema)
-// export default Gig
+
 mongoose.model("Gig",gigSchema) 
-//module.exports = router
+
 

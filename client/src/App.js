@@ -17,7 +17,8 @@ import Requests from './components/screens/Requests';
 import CreateRequest from './components/screens/CreateRequest';
 import Messenger from './components/screens/Messenger';
 import MessengerApi from './components/screens/MessengerApi';   
-import Settings from './components/screens/AccountSettings';
+import Settings from './components/screens/AccountSettings';   
+import Myrequests from './components/screens/Myrequests'; 
 
 export const UserContext = createContext()
 
@@ -65,6 +66,9 @@ const Routing = ()=>{
       <Route path="/requests">
         <Requests />
       </Route> 
+      <Route path="/my_requests">
+        <Myrequests/>
+      </Route>
       <Route path="/createrequest">
         <CreateRequest />
       </Route>
@@ -76,7 +80,8 @@ const Routing = ()=>{
       </Route>  
       <Route path="/settings">
         <Settings/>
-      </Route> 
+      </Route>  
+
      </Switch>
   )
 }

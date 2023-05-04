@@ -18,7 +18,7 @@ const CreatePost = ()=>{
     const [url,setUrl] = useState("")
     const [tags, setTags] = useState([])
     const [open, setOpen] = useState(false) 
-    const [tagOptions, setTagOptions] = useState([])
+ 
     useEffect(()=>{
        if(url){
         fetch("/createpost",{
@@ -104,7 +104,7 @@ const CreatePost = ()=>{
             onChange={(e)=>setBody(e.target.value)}
             />
             <div>
-            {/* <CreatableSelect isMulti options={tag} />; */}
+     
                 <InputLabel id="tags-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
                 <Select
                 labelId="tags-select-label"

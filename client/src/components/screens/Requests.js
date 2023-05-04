@@ -1,9 +1,12 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'    
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 const Requests = ()=>{
     const [data,setData] = useState([])
-    const {state,dispatch} = useContext(UserContext)
+    const {state} = useContext(UserContext)
+   
     useEffect(()=>{
        fetch('/allrequests',{
            headers:{
@@ -108,22 +111,54 @@ const Requests = ()=>{
             setData(newData)
         })
     }
+
+    // const acceptRequest = (requestid)=>{
+    //     fetch(`/accept/${requestid}`,{
+    //         method:"put",
+    //         headers:{
+    //             Authorization:"Bearer "+localStorage.getItem("jwt")
+    //         }
+    //     }).then(res=>res.json())
+    //     .catch(err=>{      
+    //         console.log(err)
+    //     })
+    //     // .then(result=>{
+    //     //     console.log(result)
+    //     //     const newData = data.filter(item=>{
+    //     //         return item._id
+    //     //     })
+    //     //     setData(newData)
+    //     // })
+    // }
    return (
     <>
     {data? 
        <div className="home">
            {data.map(item=>{
                 return(
-                       <div className="card home-card" key={item._id} style={{padding:"10px"}}>
+                       <div className="card home-card" key={item._id} style={{padding:"20px"}}>
                             <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link>
                              {item.user._id == state._id 
-                            && <i className="material-icons" style={{
-                                float:"right"
-                            }} 
-                            onClick={()=>deleteRequest(item._id)}
-                            >delete</i>
+                            
+                            && <i className="material-icons" style={{float:"right"}} 
+                                  onClick={()=>deleteRequest(item._id)}
+                               >delete</i>
+                            }
+                            
+                            {item.user._id != state._id &&
+                                                         
+                            <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
+                            // onClick={()=>{acceptRequest(item._id); console.log(item.accepedBy)}}
+                            >
+                                <AddIcon />
+                            </Fab> 
+                       
+                            }
+                            
+                            </h5> 
+                            {/* sx={{ '& > :not(style)': { m: 1 } }} */}
 
-                            }</h5> 
+
                             {/* <div className="card-image">
                                 <img src={item.photo}/>
                             </div> */}
@@ -166,6 +201,7 @@ const Requests = ()=>{
                                 </form> */}
                                 
                             {/* </div> */}
+
                         </div> 
                    )
                         
