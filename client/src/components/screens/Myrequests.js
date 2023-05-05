@@ -7,7 +7,7 @@ const Myrequests = ()=>{
     const {state} = useContext(UserContext)
    console.log('myrequests')
     useEffect(()=>{
-        fetch("/myrequests",{
+        fetch("/allrequests",{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -15,7 +15,7 @@ const Myrequests = ()=>{
         .then(result=>{
              setData(result.requests)
         })
-        console.log(data);
+  
      },[])
 
      const deleteRequest = (requestid)=>{
@@ -38,15 +38,20 @@ const Myrequests = ()=>{
          {data? 
        <div className="home">
            {data.map(item=>{
+             
                 return(
+                    
+                       <>
+{item.user._id == state._id &&
                        <div className="card home-card" key={item._id} style={{padding:"20px"}}>
+                     
                             <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link>
-                             {item.user._id == state._id 
+                        
                             
-                            && <i className="material-icons" style={{float:"right"}} 
+                          <i className="material-icons" style={{float:"right"}} 
                                   onClick={()=>deleteRequest(item._id)}
                                >delete</i>
-                            }
+                          
 
                             </h5> 
 
@@ -59,8 +64,11 @@ const Myrequests = ()=>{
                             <p>{item.searchtag}</p>
                             <p>{item.price}</p>
                             <p>{item.days}</p>
-
+ 
                         </div> 
+                       }
+                  </>
+                   
                    )
                         
                 }

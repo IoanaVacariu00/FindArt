@@ -54,7 +54,7 @@ router.post('/createrequest',requireLogin,(req,res)=>{
         price,
         days,
         user:req.user,
-        acceptedBy
+        // acceptedBy
     })
     request.save().then(result=>{
         res.json({request:result})
