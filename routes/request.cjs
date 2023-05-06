@@ -15,27 +15,6 @@ router.get('/allrequests',requireLogin,(req,res)=>{
         console.log(err)
     })
 })
-// router.get('/myrequest',requireLogin,(req,res)=>{
-//     Gig.find({user:req.user._id})
-//     .populate("user","_id name")
-//     .then(myrequest=>{
-//         res.json({myrequest})
-//     })
-//     .catch(err=>{
-//         console.log(err)
-//     })
-// })
-router.get('/myrequests',requireLogin,(req,res)=>{
-    Gig.find({user:req.user._id})
-    .populate("user","_id name")
-    .sort('-createdAt')
-    .then((requests)=>{
-        res.json({requests})
-    })               
-    .catch(err=>{
-        console.log(err)
-    })
-})
 
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
@@ -80,6 +59,20 @@ router.delete('/deleterequest/:requestId',requireLogin,(req,res)=>{
         }
     })
 })
+
+router.put('/acceptrequest',requireLogin,(req,res)=>{
+    Gig.findByIdAndUpdate(req.body.requestId,{
+        $push:{acceptedBy:req.user._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+})  
 // router.get('/getsubpost',requireLogin,(req,res)=>{
 
 //     Post.find({user:{$in:req.user.following}})

@@ -34,7 +34,7 @@ router.get('/getsubpost',requireLogin,(req,res)=>{
 router.post('/createpost',requireLogin,(req,res)=>{
     const {title,body,pic,tags} = req.body 
     if(!title || !body || !pic){
-      return  res.status(422).json({error:"Please add all the fields"})
+      return res.status(422).json({error:"Please add all the fields"})
     }
     req.user.password = undefined
     const post = new Post({
@@ -75,7 +75,8 @@ router.put('/like',requireLogin,(req,res)=>{
             res.json(result)
         }
     })
-})
+})  
+
 router.put('/unlike',requireLogin,(req,res)=>{
     Post.findByIdAndUpdate(req.body.postId,{
         $pull:{likes:req.user._id}

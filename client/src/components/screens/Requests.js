@@ -112,24 +112,31 @@ const Requests = ()=>{
         })
     }
 
-    // const acceptRequest = (requestid)=>{
-    //     fetch(`/accept/${requestid}`,{
-    //         method:"put",
-    //         headers:{
-    //             Authorization:"Bearer "+localStorage.getItem("jwt")
-    //         }
-    //     }).then(res=>res.json())
-    //     .catch(err=>{      
-    //         console.log(err)
-    //     })
-    //     // .then(result=>{
-    //     //     console.log(result)
-    //     //     const newData = data.filter(item=>{
-    //     //         return item._id
-    //     //     })
-    //     //     setData(newData)
-    //     // })
-    // }
+    const acceptRequest = (id)=>{
+        fetch('/acceptrequest',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                requestId:id
+            })
+        }).then(res=>res.json())
+        .then(result=>{
+          const newData = data.map(item=>{
+              if(item._id===result._id){
+                  return result
+              }else{
+                  return item
+              }
+          })
+          setData(newData)
+        }).catch(err=>{
+            console.log(err)
+        })
+  }
+
    return (
     <>
     {data? 
@@ -138,17 +145,11 @@ const Requests = ()=>{
                 return(
                        <div className="card home-card" key={item._id} style={{padding:"20px"}}>
                             <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link>
-                             {item.user._id == state._id 
-                            
-                            && <i className="material-icons" style={{float:"right"}} 
-                                  onClick={()=>deleteRequest(item._id)}
-                               >delete</i>
-                            }
                             
                             {item.user._id != state._id &&
                                                          
                             <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
-                            // onClick={()=>{acceptRequest(item._id); console.log(item.accepedBy)}}
+                            onClick={()=>{acceptRequest(item._id); console.log(item.accepedBy)}}
                             >
                                 <AddIcon />
                             </Fab> 
