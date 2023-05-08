@@ -33,7 +33,6 @@ router.post('/createrequest',requireLogin,(req,res)=>{
         price,
         days,
         user:req.user,
-        // acceptedBy
     })
     request.save().then(result=>{
         res.json({request:result})
@@ -61,11 +60,13 @@ router.delete('/deleterequest/:requestId',requireLogin,(req,res)=>{
 })
 
 router.put('/acceptrequest',requireLogin,(req,res)=>{
-    Gig.findByIdAndUpdate(req.body.requestId,{
+   
+    Gig.findByIdAndUpdate(req.body.requestId,{ 
         $push:{acceptedBy:req.user._id}
     },{
         new:true
     }).exec((err,result)=>{
+       
         if(err){
             return res.status(422).json({error:err})
         }else{
@@ -73,6 +74,37 @@ router.put('/acceptrequest',requireLogin,(req,res)=>{
         }
     })
 })  
+
+router.put('/declinerequest',requireLogin,(req,res)=>{
+   
+    Gig.findByIdAndUpdate(req.body.requestId,{ 
+        $pull:{acceptedBy:req.user._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+       
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+})  
+
+//  router.put('/unlike',requireLogin,(req,res)=>{
+//     Post.findByIdAndUpdate(req.body.postId,{
+//         $pull:{likes:req.user._id}
+//     },{
+//         new:true
+//     }).exec((err,result)=>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }else{
+//             res.json(result)
+//         }
+//     })
+// })
+
 // router.get('/getsubpost',requireLogin,(req,res)=>{
 
 //     Post.find({user:{$in:req.user.following}})
@@ -84,19 +116,6 @@ router.put('/acceptrequest',requireLogin,(req,res)=>{
 //     })
 //     .catch(err=>{
 //         console.log(err)
-//     })
-// })
-  // router.put('/unlike',requireLogin,(req,res)=>{
-//     Post.findByIdAndUpdate(req.body.postId,{
-//         $pull:{likes:req.user._id}
-//     },{
-//         new:true
-//     }).exec((err,result)=>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
 //     })
 // })
 
