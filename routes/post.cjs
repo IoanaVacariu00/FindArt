@@ -25,7 +25,7 @@ router.get('/getsubpost',requireLogin,(req,res)=>{
     .sort('-createdAt')
     .then(posts=>{
         res.json({posts})
-    })
+    }) 
     .catch(err=>{
         console.log(err)
     })

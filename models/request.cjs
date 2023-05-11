@@ -50,6 +50,6 @@
     }]
 },{timestamps:true})
 
-mongoose.model("Gig",gigSchema) 
+mongoose.model("Gig", gigSchema) 
 
 

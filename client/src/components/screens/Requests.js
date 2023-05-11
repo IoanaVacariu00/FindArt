@@ -141,8 +141,7 @@ const Requests = ()=>{
     }
 
    return (
-    <>
-    {data? 
+  
        <div className="home">
            {data.map(item=>{
             
@@ -150,20 +149,21 @@ const Requests = ()=>{
                     <div className="card home-card" key={item._id} style={{padding:"20px"}}>
                         <h5 style={{padding:"5px"}}>
                             <Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>
-                                {item.user.name}
+                                {item.user.name ? item.user.name : 'not found'} 
                             </Link>
                         </h5> 
-                        {item.user._id != state._id &&   
-                    
-                            <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
-                            >  
-                            {item.acceptedBy.includes(state.id) ?
-                            <CheckCircleIcon onClick={()=>{declineRequest(item._id) }}/>
-                            :
-                            <AddIcon onClick={()=>{acceptRequest(item._id) }}/>
-                            }    
-                            </Fab> 
-                        }
+                        {item.acceptedBy.includes(state.id) ? 
+                        <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
+                        >  
+                            <CheckCircleIcon onClick = {() => declineRequest(item._id)} />
+                        </Fab> 
+                    :   
+                    <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
+                        >  
+                            <AddIcon  onClick = {() => acceptRequest(item._id)} />
+                    </Fab>
+                    }    
+                           
                         <h6>{item.maintitle}</h6>
                         <p>{item.notes}</p>
                         <p>{item.category}</p>
@@ -174,21 +174,11 @@ const Requests = ()=>{
                         <p>{item.price}</p>
                         <p>{item.days}</p>
                     </div> 
-                   )    
-                
-                }
-                
+                       
                 )}
+            )}
        </div>
-        : 
-        <h6>No requests yet!</h6>
-        }
-       
-       </>
-        
        )
- 
     }  
-
 
 export default Requests

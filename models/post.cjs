@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
         required:true
     },
     body:{
-        type:String,
+        type:String, 
         required:true
     },
     photo:{
