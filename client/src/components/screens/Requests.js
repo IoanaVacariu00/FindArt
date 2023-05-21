@@ -2,7 +2,8 @@ import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'    
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add'; 
+import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const Requests = ()=>{
@@ -148,22 +149,20 @@ const Requests = ()=>{
             return(
                     <div className="card home-card" key={item._id} style={{padding:"20px"}}>
                         <h5 style={{padding:"5px"}}>
-                            <Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>
+                            <Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile" }>
                                 {item.user.name ? item.user.name : 'not found'} 
                             </Link>
                         </h5> 
-                        {item.acceptedBy.includes(state.id) ? 
-                        <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
-                        >  
-                            <CheckCircleIcon onClick = {() => declineRequest(item._id)} />
-                        </Fab> 
-                    :   
-                    <Fab color="primary" size="small" aria-label="add" style={{float:"right"}} 
-                        >  
-                            <AddIcon  onClick = {() => acceptRequest(item._id)} />
-                    </Fab>
-                    }    
-                           
+                        {item.acceptedBy.includes(state._id)
+                            ? 
+                             <i className="material-icons"
+                                    onClick={()=>{declineRequest(item._id)}}
+                              >check_circle</i>
+                            : 
+                            <i className="material-icons"
+                            onClick={()=>{acceptRequest(item._id)}}
+                            >add_circle</i>
+                            }
                         <h6>{item.maintitle}</h6>
                         <p>{item.notes}</p>
                         <p>{item.category}</p>

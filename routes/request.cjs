@@ -4,9 +4,9 @@ const mongoose = require('mongoose')
 const requireLogin  = require('../middleware/requireLogin.cjs')
 const Gig = mongoose.model("Gig")
 
-router.get('/allrequests',requireLogin,(req,res)=>{
-    Gig.find()
-    .populate("user","_id name")
+router.get('/myacceptedrequests',requireLogin,(req,res)=>{
+    Gig.find({user:{$in:req.user.acceptedBy}})
+    .populate("User","_id name")
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
@@ -16,6 +16,18 @@ router.get('/allrequests',requireLogin,(req,res)=>{
     })
 })
 
+router.get('/allrequests',requireLogin,(req,res)=>{
+    Gig.find()
+    .populate("User","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+})
+  
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
     if(!maintitle || !notes ){

@@ -6,14 +6,14 @@ const Home  = ()=>{
     const [data,setData] = useState([])
     const {state, dispatch} = useContext(UserContext);
     useEffect(()=>{
-       fetch('/allposts',{
-           headers:{
-               "Authorization":"Bearer "+localStorage.getItem("jwt")
-           }
-       }).then(res=>res.json())
-       .then(result=>{
-           setData(result.posts)
-       })
+        fetch('/allposts',{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            setData(result.posts)
+        })
     },[])
 
     const likePost = (id)=>{
