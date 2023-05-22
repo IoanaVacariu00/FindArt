@@ -3,18 +3,38 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const requireLogin  = require('../middleware/requireLogin.cjs')
 const Gig = mongoose.model("Gig")
-
-router.get('/myacceptedrequests',requireLogin,(req,res)=>{
-    Gig.find({user:{$in:req.user.acceptedBy}})
-    .populate("User","_id name")
-    .sort('-createdAt')
-    .then((requests)=>{
-        res.json({requests})
-    })               
-    .catch(err=>{
-        console.log(err)
-    })
-})
+const User = mongoose.model("User")
+// router.get('/myacceptedrequests/:id',requireLogin,(req,res)=>{
+//     const thisUser = User.findOne({_id:req.params.id})    
+//     Gig.find({acceptedBy:[thisUser]})
+//     .populate("User","_id name")
+//     .sort('-createdAt')
+//     .then((requests)=>{
+//         res.json({requests})
+//     })               
+//     .catch(err=>{
+//         console.log(err)
+//     })
+// }) 
+ //todo->myrequests (artists)
+// router.get("/myacceptedrequests/:id", async (req, res) => {
+//     try {
+//       const user = await User.findOne({_id:req.params.id}); 
+//       const artists = await Promise.all(
+//         user.following.map((friendId) => {
+//           return User.findById(friendId);
+//         })
+//       );
+//       let friendList = [];
+//       friends.map((friend) => {
+//         const { _id, name, pic, email } = friend;
+//         friendList.push({ _id, name, pic, email });
+//       });
+//       res.status(200).json(friendList)
+//     } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
 
 router.get('/allrequests',requireLogin,(req,res)=>{
     Gig.find()
@@ -27,7 +47,17 @@ router.get('/allrequests',requireLogin,(req,res)=>{
         console.log(err)
     })
 })
-  
+router.get('/requestsbyme',requireLogin,(req,res)=>{
+    Gig.find({user:req.user._id})
+    .populate("User","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+}) 
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
     if(!maintitle || !notes ){

@@ -19,7 +19,7 @@ import Messenger from './components/screens/Messenger';
 import MessengerApi from './components/screens/MessengerApi';   
 import Settings from './components/screens/AccountSettings';   
 import Myrequests from './components/screens/Myrequests'; 
-
+import Accepted from './components/screens/Accepted';
 export const UserContext = createContext()
 
 const Routing = ()=>{
@@ -81,7 +81,9 @@ const Routing = ()=>{
       <Route path="/settings">
         <Settings/>
       </Route>  
-
+      <Route>
+        <Accepted path="/accepted"/>        
+      </Route>
      </Switch>
   )
 }
