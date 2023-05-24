@@ -1,132 +1,53 @@
-// import React,{useState,useEffect,useContext} from 'react'
-// import {UserContext} from '../../App'  
+import React,{useState,useEffect,useContext} from 'react'
+import {UserContext} from '../../App'  
+import { useParams } from 'react-router-dom';
+import {Link} from 'react-router-dom'    
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add'; 
+import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-// import {Link} from 'react-router-dom'    
-// import Fab from '@mui/material/Fab';
-// import AddIcon from '@mui/icons-material/Add'; 
-// import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
-// import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
-// const Accepted = ()=>{ 
-//     const {state} = useContext(UserContext)
-//     const [data,setData] = useState([])      
-    
-//     const myreq = (userid ) => {
-//         fetch(`/myacceptedrequests/{$userid}`,{
-//            kmethod:"get",
-//            headers:{
-//                "Authorization":"Bearer "+localStorage.getItem("jwt")
-//            }
-//        }).then(res=>res.json())
-//        .then(result=>{
-//             setData(result.requests)
-//        })
-//     }
-       
-   
-//     // console.log(data)
-//     const deleteRequest = (requestid)=>{
-//         fetch(`/deleterequest/${requestid}`,{
-//             method:"delete",
-//             headers:{
-//                 Authorization:"Bearer "+localStorage.getItem("jwt")
-//             }
-//         }).then(res=>res.json())
-//         .then(result=>{
-//             console.log(result)
-//             const newData = data.filter(item=>{
-//                 return item._id !== result._id
-//             })
-//             setData(newData)
-//         })
-//     }
-
-//     const acceptRequest = (id)=>{
-//         fetch('/acceptrequest',{
-//             method:"put",
-//             headers:{
-//                 "Content-Type":"application/json",
-//                 "Authorization":"Bearer "+localStorage.getItem("jwt")
-//             },
-//             body:JSON.stringify({
-//                 requestId:id
-//             })
-//         }).then(res=>res.json())
-//         .then(result=>{ console.log(result)
-//           const newData = data.map(item=>{
-//               if(item._id===result._id){
-//                   return result
-//               }else{
-//                   return item
-//               }
-//           })
-//           setData(newData)
-//         }).catch(err=>{
-//             console.log(err)
-//         })
-//   }
-//     const declineRequest = (id)=>{
-//           fetch('/declinerequest',{
-//               method:"put",
-//               headers:{
-//                   "Content-Type":"application/json",
-//                   "Authorization":"Bearer "+localStorage.getItem("jwt")
-//               },
-//               body:JSON.stringify({
-//                   requestId:id
-//               })
-//           }).then(res=>res.json())
-//           .then(result=>{
-        
-//             const newData = data.map(item=>{
-//                 if(item._id==result._id){
-//                     return result
-//                 }else{
-//                     return item
-//                 }
-//             })
-//             setData(newData)
-//           }).catch(err=>{
-//             console.log(err)
-//         })
-//     }
-//    return (
+const Accepted = ()=>{ 
+    const {state} = useContext(UserContext)
+    const [data,setData] = useState([])         
+    const {requestid} = useParams();
+    console.log('id of req:'+requestid);
+    useEffect(()=>{
+        fetch(`/potential_sellers/${requestid}`,{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            setData(result.artists)
+        })
   
-//     <div className="home">
-//         {data.map(item=>{
-         
-//          return(
-//                  <div className="card home-card" key={item._id} style={{padding:"20px"}}>
-//                      <h5 style={{padding:"5px"}}>
-//                          <Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile" }>
-//                              {item.user.name ? item.user.name : 'not found'} 
-//                          </Link>
-//                      </h5> 
-//                      {item.acceptedBy.includes(state._id)
-//                          ? 
-//                           <i className="material-icons"
-//                                  onClick={()=>{declineRequest(item._id)}}
-//                            >check_circle</i>
-//                          : 
-//                          <i className="material-icons"
-//                          onClick={()=>{acceptRequest(item._id)}}
-//                          >add_circle</i>
-//                          }
-//                      <h6>{item.maintitle}</h6>
-//                      <p>{item.notes}</p>
-//                      <p>{item.category}</p>
-//                      <p>{item.medium}</p>
-//                      <p>{item.surface}</p>
-//                      <p>{item.dimension}</p>
-//                      <p>{item.searchtag}</p>
-//                      <p>{item.price}</p>
-//                      <p>{item.days}</p>
-//                  </div> 
-                    
-//              )}
-//          )}
-//     </div>
-//     )
+     },[])
+     console.log("potential sellers:" + data);
+
+   return (
+    <>
+    {data? 
+        <div className="home">
+            {data.map(artist=>{
+                return(
+                        <div className="card home-card" style={{padding:"20px"}}>
+                            <h5 style={{padding:"5px"}}>
+                                <Link to={artist._id !== state._id?"/profile/"+artist._id :"/profile" } key={'artist'+artist._id}>
+                                    {artist.name ? artist.name : 'not found'} 
+                                </Link>
+                            </h5> 
+            
+                        </div> 
+                        
+                    )
+            })}
+        </div>
+        : 
+        <p>No artists applied yet!</p>
+    }
+    </>
+    )
  
-// } 
-// export default Accepted
+} 
+export default Accepted

@@ -1,13 +1,17 @@
 import React,{useState,useEffect,useContext} from 'react'
-
 import {UserContext} from '../../App'  
-import {Link} from 'react-router-dom'   
+import {Link} from 'react-router-dom'  
+import InputLabel from "@mui/material/InputLabel";
+import TextField from '@mui/material/TextField';
+import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell, TableContainer, Paper, Button, Chip } from '@mui/material';
+
+
 const Myrequests = ()=>{ 
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
-    console.log('myrequests')
+   
     useEffect(()=>{
-        fetch("/allrequests",{
+        fetch("/requestsbyme",{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -17,7 +21,7 @@ const Myrequests = ()=>{
         })
   
      },[])
-
+     console.log(data);
      const deleteRequest = (requestid)=>{
         fetch(`/deleterequest/${requestid}`,{
             method:"delete",
@@ -36,29 +40,88 @@ const Myrequests = ()=>{
     return(
         <>
             {data? 
-                <div className="home">
+                <div >
                     {data.map(item=>{
                         return(
-                            <>
-                                {item.user._id == state._id &&
-                                    <div className="card home-card" key={item._id} style={{padding:"20px"}}>
-                                        <h5 style={{padding:"5px"}}><Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile"  }>{item.user.name}</Link>
+                            <div key={item._id}>
+                                
+                                    <div className="card input-field" 
+                                            style={{
+                                                margin:"30px auto",
+                                                maxWidth:"500px",
+                                                padding:"20px",
+                                                textAlign:"center"
+                                             }}
+                                    >
+                                        <h5 style={{padding:"5px"}}><Link to={"/profile" }>{state.name}</Link>
                                         <i className="material-icons" style={{float:"right"}} 
                                             onClick={()=>deleteRequest(item._id)}
                                         >delete</i>
-                                        </h5> 
-                                        <h6>{item.maintitle}</h6>
-                                        <p>{item.notes}</p>
-                                        <p>{item.category}</p>
-                                        <p>{item.medium}</p>
-                                        <p>{item.surface}</p>
-                                        <p>{item.dimension}</p>
-                                        <p>{item.searchtag}</p>
-                                        <p>{item.price}</p>
-                                        <p>{item.days}</p>
+                                        </h5>   
+                                        <Divider/>
+                                        <TableContainer component={Paper}>
+                                            <Table style={{overflowX:"hidden"}} aria-label="simple table">
+                                            
+                                                <TableRow
+                                                    key={item.maintitle}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Title
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.maintitle}</TableCell>
+                                                </TableRow>
+
+                                                <TableRow
+                                                    key={item.notes}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Description
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.notes}</TableCell>
+                                                </TableRow>
+
+                                                <TableRow
+                                                    key={item.category}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Category
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.category}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.medium}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Medium
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.medium}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.searchtag}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Tags
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        {item.searchtag.map(tag=>  
+                                                            <Chip label={tag} style={{margin:"3px"}}/>
+                                                        )}
+                                                    </TableCell>
+                                                </TableRow>
+                                            </Table>
+                                            <Button variant="contained" style={{margin:"10px auto",  position:'relative'}}>
+                                                <Link to={"/accepted/"+item._id} requestid={item._id}>See potential sellers</Link>
+                                            </Button>
+                                        </TableContainer>
+
                                     </div> 
-                                }
-                            </>
+                              
+                            </div>
                         ) // return secundar
                             
                     })}    {/* //data map item */}

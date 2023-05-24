@@ -10,7 +10,6 @@ const ChatOnline= ({ onlineUsers, currentId, setCurrentChat })=>{
     const getFriends = async () => {
       const res = await axios.get("/friends/" + currentId);
       setFriends(res.data);
-
     };
 
     getFriends(); 

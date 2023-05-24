@@ -31,7 +31,7 @@ const Routing = ()=>{
       dispatch({type:"USER",payload:user})
     }else{
       if(!history.location.pathname.startsWith('/reset'))
-           history.push('/signin')
+        history.push('/signin')
     }
   },[])
   return(
@@ -82,7 +82,7 @@ const Routing = ()=>{
         <Settings/>
       </Route>  
       <Route>
-        <Accepted path="/accepted"/>        
+        <Accepted path="/accepted/:requestid"/>        
       </Route>
      </Switch>
   )
