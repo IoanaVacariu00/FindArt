@@ -5,7 +5,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add'; 
 import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
+import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell, TableContainer, Paper, Button, Chip, TableBody } from '@mui/material';
 const Requests = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
@@ -76,8 +76,10 @@ const Requests = ()=>{
         
             const newData = data.map(item=>{
                 if(item._id==result._id){
+                    console.log('result: '+result)
                     return result
                 }else{
+                  
                     return item
                 }
             })
@@ -88,41 +90,112 @@ const Requests = ()=>{
     }
 
    return (
-  
-       <div className="home">
+    <>
+    {data? 
+        <div >
            {data.map(item=>{
             
             return(
-                    <div className="card home-card" key={item._id} style={{padding:"20px"}}>
+                    <div className="card input-field" key={item._id}   
+                     style={{  
+                        margin:"30px auto",
+                        maxWidth:"500px",
+                        padding:"20px",
+                        textAlign:"center"
+                     }}>
                         <h5 style={{padding:"5px"}}>
-                            <Link to={item.user._id !== state._id?"/profile/"+item.user._id :"/profile" }>
-                                {item.user.name ? item.user.name : 'not found'} 
+                            <Link to={"/profile/"+item.user._id}>
+                            <p style={{float:"left"}}>{item.user.name ? item.user.name : 'not found'} </p>
                             </Link>
-                        </h5> 
+                      
                         {item.acceptedBy.includes(state._id)
                             ? 
-                             <i className="material-icons"
+                             <i className="material-icons"  style={{float:"right"}}
                                     onClick={()=>{declineRequest(item._id)}}
                               >check_circle</i>
                             : 
-                            <i className="material-icons"
+                            <i className="material-icons"  style={{float:"right"}}
                             onClick={()=>{acceptRequest(item._id)}}
                             >add_circle</i>
-                            }
-                        <h6>{item.maintitle}</h6>
-                        <p>{item.notes}</p>
-                        <p>{item.category}</p>
-                        <p>{item.medium}</p>
-                        <p>{item.surface}</p>
-                        <p>{item.dimension}</p>
-                        <p>{item.searchtag}</p>
-                        <p>{item.price}</p>
-                        <p>{item.days}</p>
+                            }   </h5>
+                                <TableContainer component={Paper}>
+                                            <Table style={{overflowX:"hidden"}} aria-label="simple table">
+                                            <TableBody>
+                                                <TableRow
+                                                    key={item.maintitle}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Title
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.maintitle}</TableCell>
+                                                </TableRow>
+
+                                                <TableRow
+                                                    key={item.notes}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Description
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.notes}</TableCell>
+                                                </TableRow>
+
+                                                <TableRow
+                                                    key={item.category}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Category
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.category}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.medium}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Medium
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.medium}</TableCell>
+                                                </TableRow>  
+                                                <TableRow
+                                                    key={item.surface}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Surface
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.surface}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.searchtag}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Tags
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        {item.searchtag.map(tag=>  
+                                                            <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
+                                                        )}
+                                                    </TableCell>
+                                                </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                 
+                                        </TableContainer>
                     </div> 
                        
                 )}
-            )}
-       </div>
+            )} 
+            </div>
+                : 
+                <h6>No requests yet!</h6>
+            }      
+            
+        </>
+       
        )
     }  
 
