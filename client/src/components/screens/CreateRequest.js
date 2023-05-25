@@ -87,7 +87,7 @@ const CreateRequest = ()=>{
        }
        else{
            M.toast({html:"Request created successfully",classes:"#43a047 green darken-1"})
-           history.push('/requests')
+           history.push('/my_requests')
        }
     }).catch(err=>{
         console.log(err)
@@ -128,10 +128,12 @@ const CreateRequest = ()=>{
         value={maintitle}
         onChange={(e)=>setMaintitle(e.target.value)}
         />
-         <div>
+         <div >
         <InputLabel id="desc-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Description</InputLabel>
-        <input
-        type="text"
+        <TextField  
+        fullWidth 
+        multiline    
+        maxRows={6}
         placeholder=""
         value={notes}
         onChange={(e)=>setNotes(e.target.value)}

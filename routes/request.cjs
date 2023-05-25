@@ -38,7 +38,7 @@ const User = mongoose.model("User")
 
 router.get('/allrequests',requireLogin,(req,res)=>{
     Gig.find()
-    .populate("User","_id name")
+    .populate("user","_id name ")//pic?
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
@@ -49,7 +49,7 @@ router.get('/allrequests',requireLogin,(req,res)=>{
 })
 router.get('/requestsbyme',requireLogin,(req,res)=>{
     Gig.find({user:req.user._id})
-    .populate("User","_id name")
+    .populate("user","_id name")
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
