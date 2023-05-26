@@ -153,9 +153,9 @@ const NavBar = ()=>{
       //   </div>
       //   </Toolbar>
       // </AppBar>
-      <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
+      // <Container maxWidth="xl">
+        <Toolbar disableGuters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -186,7 +186,7 @@ const NavBar = ()=>{
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            {state && <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -204,7 +204,7 @@ const NavBar = ()=>{
                 display: { xs: "block", md: "none" }
               }}
             >
-               {state && <>
+               
                 <MenuItem key="Discover" onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><Link to="/myfollowingpost"> Discover</Link></Typography>
                 </MenuItem>
@@ -215,8 +215,8 @@ const NavBar = ()=>{
                   <Typography textAlign="center">  
                     <Link to='/messenger'>Inbox</Link>
                   </Typography>
-                </MenuItem> </>}
-            </Menu>
+                </MenuItem> 
+            </Menu>}
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
@@ -237,8 +237,9 @@ const NavBar = ()=>{
           >
             FindArt
           </Typography>
+          {state && 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          {state && <>
+         
               <Button 
                 key="Discover" onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -256,11 +257,11 @@ const NavBar = ()=>{
                 sx={{ my: 2, color: "white", display: "block" }}
               ><Link to="/messenger">Inbox</Link>
                 
-              </Button>   </> }      
+              </Button>       
           </Box>
-
+          }   
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="">
+            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 { state &&
                   <img style={{width:"50px", height:"50px", borderRadius:'50%'}} alt={state?.name} src={state.pic} />
@@ -268,7 +269,7 @@ const NavBar = ()=>{
                 
               </IconButton>
             </Tooltip>
-            <Menu
+             {state && <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -284,7 +285,7 @@ const NavBar = ()=>{
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >   
-               {state && <>
+              
                 <MenuItem key="Profile" onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" >
                     <Link to="/profile">Profile</Link>
@@ -294,7 +295,7 @@ const NavBar = ()=>{
                   <Typography textAlign="center" >
                     <Link to="/settings" onClick={handleCloseUserMenu}> Settings</Link>
                   </Typography>
-                </MenuItem> </>}
+                </MenuItem>
                 <MenuItem key='Logout' onClick={handleCloseUserMenu}
                 >
                   <Typography textAlign="center"  
@@ -308,11 +309,11 @@ const NavBar = ()=>{
                   </Typography>
                 </MenuItem> 
 
-            </Menu>
+            </Menu>}
           </Box>
         </Toolbar>
-      </Container>
-    </AppBar>
+      // </Container>
+    // </AppBar>
   );
     
 }

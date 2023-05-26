@@ -1,7 +1,7 @@
 import React,{useEffect,createContext,useReducer,useContext} from 'react';
 import NavBar from './components/Navbar'   
 import "./App.css"
-
+import { StyledEngineProvider } from '@mui/material/styles';
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
 import Home from './components/screens/Home'
 import Signin from './components/screens/SignIn'
@@ -20,6 +20,8 @@ import MessengerApi from './components/screens/MessengerApi';
 import Settings from './components/screens/AccountSettings';   
 import Myrequests from './components/screens/Myrequests'; 
 import Accepted from './components/screens/Accepted';
+import { AppBar } from '@mui/material';
+import Container from "@mui/material/Container";
 export const UserContext = createContext()
 
 const Routing = ()=>{
@@ -92,11 +94,15 @@ function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <UserContext.Provider value={{state,dispatch}}>
-    <BrowserRouter>
-      <NavBar />  
-      <Routing />
-    </BrowserRouter>
-    </UserContext.Provider>
+      <BrowserRouter>
+        <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
+          <Container maxWidth="xl">
+            <NavBar /> 
+          </Container> 
+        </AppBar>
+        <Routing />
+      </BrowserRouter>
+    </UserContext.Provider> 
   );
 }
 

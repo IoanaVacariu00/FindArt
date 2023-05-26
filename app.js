@@ -24,8 +24,7 @@ mongoose.connection.on('error',(err)=>{
 require('./models/user.cjs')
 require('./models/post.cjs')  
 require('./models/request.cjs')
-require('./models/conversation.cjs')
-require('./models/message.cjs')
+
 
 app.use(express.json())
 
@@ -33,8 +32,7 @@ app.use(require('./routes/auth.cjs'))
 app.use(require('./routes/post.cjs'))
 app.use(require('./routes/user.cjs'))  
 app.use(require('./routes/request.cjs'))    
-app.use(require('./routes/conversation.cjs'))
-app.use(require('./routes/message.cjs'))  
+
 
 if(process.env.NODE_ENV=="production"){
     app.use(express.static('client/build'))

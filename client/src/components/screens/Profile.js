@@ -1,6 +1,12 @@
-import Avatar from '@mui/material/Avatar';
+
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
+import { AppBar } from '@mui/material';
+import { styled } from "@mui/system";
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab'; 
+import Toolbar from '@mui/material/Toolbar';
+import {Link} from 'react-router-dom'  
 
 const Profile = ()=>{
     const [mypics,setPics] = useState([])
@@ -54,14 +60,19 @@ const Profile = ()=>{
     const updatePhoto = (file)=>{
         setImage(file)
     }
+    const StyledFab = styled(Fab)({
+        position: 'absolute',
+        zIndex: 1,
+        top: -30,
+        left: 10,
+        right: -10,  
+        margin: '10px',
+      });
    return (
        <div style={{maxWidth:"550px",margin:"0px auto"}}>
             <div style={{margin:"18px 0px",  borderBottom:"1px solid grey"}}>
                <div style={{display:"flex", justifyContent:"space-around"}}>
-                    <div>
-                        <img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state?.pic}/>
-                    </div>
-                    
+                    <div><img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state?.pic}/></div>
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6>contact: {state?state.email:"loading"}</h6>  
@@ -73,11 +84,10 @@ const Profile = ()=>{
                              followers
                              </h6>
                             <h6>{state?state.following.length:"0"} 
-                            following
+                                following
                             </h6>
                             </div>
                         }
-
                     </div>
                 </div>
                 <div className="file-field input-field" style={{margin:"10px"}}>
@@ -98,7 +108,20 @@ const Profile = ()=>{
                     })
                 }
             </div>
+       
+       {state?.accountType=='Artist' &&
+            <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
+            <Toolbar >
+                <Link to="/create" >
+                    <StyledFab color="primary" aria-label="add"> 
+                        <AddIcon />  
+                    </StyledFab>  
+                </Link>
+            </Toolbar>
+        </AppBar> 
+       }
        </div>
+      
    )
 }
   
