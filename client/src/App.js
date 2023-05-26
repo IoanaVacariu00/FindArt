@@ -81,8 +81,8 @@ const Routing = ()=>{
       <Route path="/settings">
         <Settings/>
       </Route>  
-      <Route>
-        <Accepted path="/accepted/:requestid"/>        
+      <Route path="/accepted/:requestid">
+        <Accepted />        
       </Route>
      </Switch>
   )

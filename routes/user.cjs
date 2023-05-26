@@ -114,19 +114,5 @@ router.post('/searchusers',(req,res)=>{
     })
 })
 
-router.get("/potential_sellers/:requestid", requireLogin,(req,res)=>{  
-    Gig.findOne({_id:req.params.requestid})  
-    .then(request => { 
-        User.find({_id:{$in:request.acceptedBy}})  
-      
-        .exec((err,artists)=>{
-            if(err){
-                return res.status(422).json({error:err})
-            }
-            res.json({request,artists})
-         })
-     }).catch(err=>{
-        return res.status(404).json({error:"Not found"})
-    })
-})
+
 module.exports = router

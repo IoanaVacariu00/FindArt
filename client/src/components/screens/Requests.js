@@ -198,14 +198,7 @@ const Requests = ()=>{
                                                         Description
                                                     </TableCell>
                                                     <TableCell align="left" >  
-                                                    {/* <TextField    
-                                                        fullWidth
-                                                        style={{boxSizing: "content-box"}}
-                                                        disabled
-                                                        multiline    
-                                                        maxRows={6}
-                                                        value={item.notes}
-                                                        /> */}  
+                   
                                                     <StyledTextarea      
                                                     value={item.notes}
                                                     readOnly       

@@ -58,6 +58,23 @@ router.get('/requestsbyme',requireLogin,(req,res)=>{
         console.log(err)
     })
 }) 
+
+router.get("/potential_sellers/:requestid", requireLogin,(req,res)=>{  
+    Gig.findOne({_id:req.params.requestid})  
+    .then(request => { 
+        User.find({_id:{$in:request.acceptedBy}})  
+        .select('-password')
+        .exec((err,artists)=>{
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            res.json({request, artists})
+         })
+     }).catch(err=>{
+        return res.status(404).json({error:"Not found"})
+    })
+})
+
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
     if(!maintitle || !notes ){

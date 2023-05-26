@@ -1,3 +1,4 @@
+import Avatar from '@mui/material/Avatar';
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 
@@ -60,6 +61,7 @@ const Profile = ()=>{
                     <div>
                         <img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state?.pic}/>
                     </div>
+                    {/* <Avatar alt={state?.name} src={state?.pic} style={{width:"160px"}}/> */}
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6>contact: {state?state.email:"loading"}</h6>  

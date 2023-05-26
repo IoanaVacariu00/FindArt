@@ -120,7 +120,7 @@ const CreateRequest = ()=>{
            textAlign:"center"
         }}
        > 
-       <h4>Write a Request!</h4>
+       <h4>Create a Request!</h4>
        <InputLabel id="title-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Title</InputLabel>
         <input 
         type="text"

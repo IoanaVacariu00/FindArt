@@ -20,13 +20,11 @@ const NavBar = ()=>{
           return [
             <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
             <li key="2"><Link to="/profile">My Profile</Link></li>,   
-            <li key="3"><Link to="/createrequest">Make a Request</Link></li>, 
             <li key="33"><Link to="/my_requests">My Requests</Link></li>, 
-    
             <li key="6"><Link to="/myfollowingpost">My Feed</Link></li>,
             <li key="7"><Link to="/messenger">Messages</Link></li>,
             <li key="8">
-              <button className="btn #c62828 red darken-3"
+              <button className="btn #c62828 red darken-3" style={{margin:"10px"}}
                 onClick={()=>{ 
                   localStorage.clear()
                   dispatch({type:"CLEAR"})
@@ -44,12 +42,12 @@ const NavBar = ()=>{
             <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
             <li key="2"><Link to="/profile">My Profile</Link></li>,   
             <li key="4"><Link to="/requests">Requests</Link></li>,
-        
             <li key="5"><Link to="/create">Create Post</Link></li>, 
             <li key="6"><Link to="/myfollowingpost">My Feed</Link></li>,
             <li key="7"><Link to="/messenger">Messages</Link></li>,
             <li key="8">
-              <button className="btn #c62828 red darken-3"
+              <button className="btn #c62828 red darken-3"  
+              style={{margin:"10px"}}
                 onClick={()=>{
                   localStorage.clear()
                   dispatch({type:"CLEAR"})
@@ -95,6 +93,7 @@ const NavBar = ()=>{
             {renderList()}
           </ul>
         </div>
+        
         <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
             <div className="modal-content">
               <input

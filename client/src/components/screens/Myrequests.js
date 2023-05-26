@@ -3,9 +3,12 @@ import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'  
 import InputLabel from "@mui/material/InputLabel";
 import TextField from '@mui/material/TextField';
-import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip } from '@mui/material';
+import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } from "@mui/system";
-
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab'; 
+import Toolbar from '@mui/material/Toolbar';
+import DeleteIcon from '@mui/icons-material/Delete'; 
 const Myrequests = ()=>{ 
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
@@ -92,8 +95,16 @@ const Myrequests = ()=>{
         }
       `
       );
+      const StyledFab = styled(Fab)({
+        position: 'absolute',
+        zIndex: 1,
+        top: -30,
+        left: 10,
+        right: -10,  
+        margin: '10px',
+      });
     return(
-        <>
+        <>  
             {data? 
                 <div >
                     {data.map(item=>{
@@ -108,14 +119,14 @@ const Myrequests = ()=>{
                                                 textAlign:"center"
                                              }}
                                     >
-                                        <h5 style={{padding:"5px"}}><Link to={"/profile" }>  
-                                        <p style={{float:"left"}}>{state.name}</p>
-                                        </Link>
-                                        <i className="material-icons" style={{float:"right"}} 
-                                            onClick={()=>deleteRequest(item._id)}
-                                        >delete</i>
-                                        </h5>   
+                                        <div >
+                                            <Link to={"/profile" }>  
+                                                <h5 style={{float:"left", margin:"15px"}}>{state.name}</h5>
+                                            </Link>    
+                                            <DeleteIcon style={{float:"right",cursor:"pointer"}} onClick={()=>deleteRequest(item._id)}/> 
+                                        </div>
                                         
+                
                                         <TableContainer component={Paper}>
                                             <Table style={{overflow:"hidden"}} aria-label="simple table">
                                             <TableBody>
@@ -187,8 +198,8 @@ const Myrequests = ()=>{
                                                 </TableRow>
                                                 </TableBody>
                                             </Table>
-                                            <Button variant="contained" style={{margin:"10px auto",  position:'relative'}}>
-                                                <Link to={"/accepted/"+item._id} requestid={item._id}>See potential sellers</Link>
+                                            <Button variant="contained" style={{margin:"20px auto",padding:"10px" , position:'relative'}}>
+                                                <Link to={"/accepted/"+item._id} >See potential sellers</Link>
                                             </Button>
                                         </TableContainer>
 
@@ -197,12 +208,20 @@ const Myrequests = ()=>{
                         ) 
                             
                     })}   
-                
+
                 </div>
                 : 
                 <div>No requests yet!</div>
             }      
-            
+            <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
+                    <Toolbar >
+                        <Link to="/createrequest" >
+                            <StyledFab color="primary" aria-label="add"> 
+                                 <AddIcon />  
+                            </StyledFab>  
+                        </Link>
+                    </Toolbar>
+            </AppBar>
         </>
     ) 
 } 

@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 
-
+TableRow, Divider { 
+  cursor: auto
+}
 
 .dropdown {
 	display: none;
@@ -12,7 +14,7 @@ nav {
  padding: 10px; background-color: white;
 }
 .chat_box {  
-  /* background-color: whitesmoke;   */
+
   height: 600px;
 }
 button a {color: white !important;}
@@ -36,13 +38,6 @@ a{
   margin: 10px auto;
 }
 
-/* .input-field input[type=text]:focus {
-
-  border-bottom: 1px solid var(--main-color) !important;
-  box-shadow: 0 1px 0 0 var(--main-color) !important;
-} */
-
-/* rgb(8, 93, 252) !important; */
 .input-field input[type=password]:focus {
   border-bottom: 1px solid var(--main-color) !important;
   box-shadow: 0 1px 0 0 var(--main-color)!important;
@@ -51,11 +46,6 @@ a{
   border-bottom: 1px solid var(--main-color)!important;
   box-shadow: 0 1px 0 0 var(--main-color) !important;
 } 
-/* .input-field label:focus {
-  border-bottom: 1px solid var(--main-color)!important;
-  box-shadow: 0 1px 0 0 var(--main-color)  !important;
-
-} */
 
 .gallery{
   display: flex;
@@ -92,7 +82,6 @@ a{
   cursor: pointer;
 }
 
-/* Customize the label (the container) */
 .container { 
   display: block;
   position: relative;
