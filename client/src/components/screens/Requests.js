@@ -164,7 +164,7 @@ const Requests = ()=>{
                      }}>
                         <h5 style={{padding:"5px"}}>
                             <Link to={"/profile/"+item.user._id}>
-                            <p style={{float:"left"}}>{item.user.name ? item.user.name : 'not found'} </p>
+                            <p style={{float:"left"}}>{item?.user.name} </p>
                             </Link>
                       
                         {item.acceptedBy.includes(state._id)

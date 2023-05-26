@@ -3,7 +3,9 @@
 TableRow, Divider { 
   cursor: auto
 }
-
+Link {
+  width: 100%;
+}
 .dropdown {
 	display: none;
 	position: absolute;

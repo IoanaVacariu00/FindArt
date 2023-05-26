@@ -61,16 +61,20 @@ const Profile = ()=>{
                     <div>
                         <img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state?.pic}/>
                     </div>
-                    {/* <Avatar alt={state?.name} src={state?.pic} style={{width:"160px"}}/> */}
+                    
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6>contact: {state?state.email:"loading"}</h6>  
                         {
-                            state.accountType ==  'Artist'  &&
+                            state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                             <h6>{mypics.length} posts</h6>
-                            <h6>{state?state.followers.length:"0"} followers</h6>
-                            <h6>{state?state.following.length:"0"} following</h6>
+                            <h6>{state?state.followers.length:"0"}
+                             followers
+                             </h6>
+                            <h6>{state?state.following.length:"0"} 
+                            following
+                            </h6>
                             </div>
                         }
 
