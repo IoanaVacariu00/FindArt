@@ -154,8 +154,8 @@ const NavBar = ()=>{
       //   </Toolbar>
       // </AppBar>
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
-      // <Container maxWidth="xl">
-        <Toolbar disableGuters>
+      // <Container maxWidth="xl">disableguters
+        <Toolbar >
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"

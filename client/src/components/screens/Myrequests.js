@@ -24,7 +24,7 @@ const Myrequests = ()=>{
         })
   
      },[])
-     console.log(data);
+    
      const deleteRequest = (requestid)=>{
         fetch(`/deleterequest/${requestid}`,{
             method:"delete",

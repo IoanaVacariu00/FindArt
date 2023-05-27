@@ -140,8 +140,7 @@ router.put('/declinerequest',requireLogin,(req,res)=>{
         $pull:{acceptedBy:req.user._id}
     },{
         new:true
-    }).exec((err,result)=>{
-       
+    }).exec((err,result)=>{         
         if(err){
             return res.status(422).json({error:err})
         }else{
@@ -150,6 +149,57 @@ router.put('/declinerequest',requireLogin,(req,res)=>{
     })
 })  
 
+
+router.put('/assignRequest/:requestid',requireLogin,(req,res)=>{
+    Gig.findByIdAndUpdate(req.params.requestid,
+    { 
+        $set:{assignedTo:req.body.artistid}
+    },{
+        new:true
+    })
+    // .populate('assignedTo', '_id name')
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+})  
+
+// router.put('/assignRequest',requireLogin,(req,res)=>{
+//     const artistid = req.body.artistId;
+//     const requestid = req.body.requestId
+//     Gig.findByIdAndUpdate(requestid,{ 
+//         $set:{assignedTo:artistid}
+//     },{
+//         new:true
+//     })
+//     .populate('assignedTo', '_id name')
+//     .exec((err,result)=>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }else{
+//             res.json(result)
+//         }
+//     })
+// })  
+
+// router.put('/assignRequest/:artistid',requireLogin,(req,res)=>{
+//     Gig.findByIdAndUpdate(req.body.requestId,{ 
+//         $set:{assignedTo:req.body.artistid}
+//     },{
+//         new:true
+//     })
+//     .populate('assignedTo', '_id name')
+//     .exec((err,result)=>{
+//         if(err){
+//             return res.status(422).json({error:err})
+//         }else{
+//             res.json(result)
+//         }
+//     })
+// })  
 //  router.put('/unlike',requireLogin,(req,res)=>{
 //     Post.findByIdAndUpdate(req.body.postId,{
 //         $pull:{likes:req.user._id}

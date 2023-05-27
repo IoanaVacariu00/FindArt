@@ -23,22 +23,6 @@ const Requests = ()=>{
        })
     },[])
 
-    const deleteRequest = (requestid)=>{
-        fetch(`/deleterequest/${requestid}`,{
-            method:"delete",
-            headers:{
-                Authorization:"Bearer "+localStorage.getItem("jwt")
-            }
-        }).then(res=>res.json())
-        .then(result=>{
-            console.log(result)
-            const newData = data.filter(item=>{
-                return item._id !== result._id
-            })
-            setData(newData)
-        })
-    }
-
     const acceptRequest = (id)=>{
         fetch('/acceptrequest',{
             method:"put",
@@ -53,11 +37,9 @@ const Requests = ()=>{
         .then(result=>{ 
           const newData = data.map(item=>{
               if(item._id===result._id){ 
-                console.log(result)
-                  return result
+                return result
               }else{
-                console.log(item)
-                  return item
+                return item
               }
           })
           setData(newData)
@@ -80,7 +62,7 @@ const Requests = ()=>{
         
             const newData = data.map(item=>{
                 if(item._id==result._id){
-                    console.log('result: '+result)
+                   
                     return result
                 }else{
                   
@@ -178,79 +160,80 @@ const Requests = ()=>{
                             >add_circle</i>
                             }   </h5>
                                 <TableContainer component={Paper}>
-                                            <Table style={{overflowX:"hidden"}} aria-label="simple table">
-                                            <TableBody>
-                                                <TableRow
-                                                    key={item.maintitle}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Title
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.maintitle}</TableCell>
-                                                </TableRow>
+                                    <Table style={{overflowX:"hidden"}} aria-label="simple table">
+                                    <TableBody>
+                                        <TableRow
+                                            key={item.maintitle}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Title
+                                            </TableCell>
+                                            <TableCell align="left">{item.maintitle}</TableCell>
+                                        </TableRow>
 
-                                                <TableRow
-                                                    key={item.notes}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Description
-                                                    </TableCell>
-                                                    <TableCell align="left" >  
-                   
-                                                    <StyledTextarea      
-                                                    value={item.notes}
-                                                    readOnly       
-                                                     
-                                                    />
-                                                    </TableCell>
-                                                </TableRow>
+                                        <TableRow
+                                            key={item.notes}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Description
+                                            </TableCell>
+                                            <TableCell align="left" >  
+            
+                                            <StyledTextarea      
+                                            value={item.notes}
+                                            readOnly       
+                                                
+                                            />
+                                            </TableCell>
+                                        </TableRow>
 
-                                                <TableRow
-                                                    key={item.category}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Category
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.category}</TableCell>
-                                                </TableRow>
-                                                <TableRow
-                                                    key={item.medium}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Medium
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.medium}</TableCell>
-                                                </TableRow>  
-                                                <TableRow
-                                                    key={item.surface}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Surface
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.surface}</TableCell>
-                                                </TableRow>
-                                                <TableRow
-                                                    key={item.searchtag}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Tags
-                                                    </TableCell>
-                                                    <TableCell align="left">
-                                                        {item.searchtag.map(tag=>  
-                                                            <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
-                                                        )}
-                                                    </TableCell>
-                                                </TableRow>
-                                                </TableBody>
-                                            </Table>
+                                        <TableRow
+                                            key={item.category}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Category
+                                            </TableCell>
+                                            <TableCell align="left">{item.category}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            key={item.medium}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Medium
+                                            </TableCell>
+                                            <TableCell align="left">{item.medium}</TableCell>
+                                        </TableRow>  
+                                        <TableRow
+                                            key={item.surface}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Surface
+                                            </TableCell>
+                                            <TableCell align="left">{item.surface}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            key={item.searchtag}
+                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                Tags
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {item.searchtag.map(tag=>  
+                                                    <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                        </TableBody>
+                                    </Table>
                                  
-                                        </TableContainer>
+                                        
+                                </TableContainer>
                     </div> 
                        
                 )}

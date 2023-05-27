@@ -99,8 +99,9 @@ function App() {
           <Container maxWidth="xl">
             <NavBar /> 
           </Container> 
-        </AppBar>
-        <Routing />
+        </AppBar>  
+      <Routing />
+        
       </BrowserRouter>
     </UserContext.Provider> 
   );

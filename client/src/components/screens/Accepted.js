@@ -7,16 +7,17 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-
+import { Button } from '@mui/material';
 const Accepted = ()=>{ 
     const {state} = useContext(UserContext)
-    const [artists, setArtists] = useState([])       
+    const [artists, setArtists] = useState([])   
+    const [assignedTo, setAssignedTo] = useState();    
     const {requestid} = useParams();
-    console.log('id of req:'+requestid);
+
     useEffect(()=>{
         fetch(`/potential_sellers/${requestid}`,{
             headers:{
-         
+               
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             },
             
@@ -26,12 +27,57 @@ const Accepted = ()=>{
         })
   
      },[])
-     console.log("potential sellers:" + artists);
-
+    
+    //  const assignrequest = (artistId, requestId)=>{
+    //     fetch("/assignRequest",{
+    //         method:"put",
+    //         headers:{  
+    //             "Content-Type":"application/json",
+    //             "Authorization":"Bearer "+localStorage.getItem("jwt")
+    //         }  
+    //         ,
+    //         body:JSON.stringify({
+    //             artistId,
+    //             requestId
+    //         })
+    //     }).then(res=>res.json())
+    //     .then(result=>{
+    //         setAssignedTo(result.artistId)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }   
+    const assignrequest = (artistid)=>{
+        fetch(`/assignRequest/${requestid}`,{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                'Authorization':"Bearer "+localStorage.getItem("jwt")
+            }
+            ,
+              body:JSON.stringify({
+                  artistid: artistid
+              })
+        }).then(res=>res.json())
+        .then(result=>{
+            const newData = artists.map(item=>{
+                if(item._id==result._id){
+                    return result
+                }  
+                else{
+                    return item
+                }
+            })
+            setArtists(newData)    
+            console.log(result);
+          }).catch(err=>{
+              console.log(err)
+          })
+    }    
    return (
     <>
     {artists? 
-        <div className="home">
+        <div className="home" >
             
         <div className="card input-field" 
         style={{  
@@ -44,16 +90,22 @@ const Accepted = ()=>{
         <List>
             {artists.map(artist=>{
                 return(
-                    <ListItem disablePadding>
-                    <Link to={"/profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
-                        <ListItemButton>
-                        <ListItemIcon>
-                        <Avatar alt={artist?.name} src={artist?.pic}  style={{width:"60px",height:"60px"}}/>
-                         
-                        </ListItemIcon>
-                            <h6 style={{margin:"0 20px"}}>{artist?.name}  </h6> 
-                        </ListItemButton>
+                    <ListItem disablePadding  key={'artist2'+artist._id}>
+                        <Link to={"/profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Avatar alt={artist?.name} src={artist?.pic} style={{width:"60px",height:"60px"}}/>
+                                </ListItemIcon>
+                                <h6 style={{margin:"0 20px"}}>{artist?.name}</h6> 
+                            </ListItemButton>
                         </Link>
+                        <Button variant="contained" style={{margin:"10px",padding:"10px" }}
+                            onClick = {()=>{
+                                assignrequest(artist._id)
+                            }}
+                        >
+                            Choose Artist
+                        </Button>
                     </ListItem>
 
                     )

@@ -47,7 +47,15 @@
     acceptedBy:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }]
+    }], 
+    assignedTo:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+    // assigned:{
+    //     type:Boolean,  
+    //     default: false,
+    // }
 },{timestamps:true})
 
 mongoose.model("Gig", gigSchema) 
