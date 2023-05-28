@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
-import Slider from '@mui/material/Slider';
+
 import TextField from '@mui/material/TextField';
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 

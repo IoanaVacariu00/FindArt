@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema({
     following:[{type:ObjectId,ref:"User"}],
     assignedToMe:[{type:ObjectId, ref:"Gig"}],   
     preferences:[{
-        categories:{type:String},  
-        mediums:{type:String},  
-        surfaces:{type:String}, 
+        categories:[{type:String}],  
+        mediums:[{type:String}],  
+        surfaces:[{type:String}], 
         tags:[{type:String}]
     }],
 })
