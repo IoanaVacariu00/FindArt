@@ -25,7 +25,13 @@ const userSchema = new mongoose.Schema({
 
     followers:[{type:ObjectId,ref:"User"}],
     following:[{type:ObjectId,ref:"User"}],
-    assignedToMe:[{type:ObjectId, ref:"Gig"}]
+    assignedToMe:[{type:ObjectId, ref:"Gig"}],   
+    preferences:[{
+        categories:{type:String},  
+        mediums:{type:String},  
+        surfaces:{type:String}, 
+        tags:[{type:String}]
+    }],
 })
 
 mongoose.model("User",userSchema)

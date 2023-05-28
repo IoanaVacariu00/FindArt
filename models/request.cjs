@@ -1,6 +1,4 @@
-// import mongoose from "mongoose";
 
-// const gigSchema = mongoose.Schema({  
     const mongoose = require('mongoose')
     const gigSchema = new mongoose.Schema({
     maintitle:{
