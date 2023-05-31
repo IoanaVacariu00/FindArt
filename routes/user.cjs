@@ -114,7 +114,28 @@ router.post('/searchusers',(req,res)=>{
     })
 })
 
-// router.put(/setup_account)
+router.put('/setup_account',requireLogin,(req,res)=>{
 
+    User.findByIdAndUpdate(req.body.userid,
+        // { $push:{accountType:req.body.account}},
+        { $push:{categories:req.body.categories}},  
+        // { $push:{mediums:req.body.mediums}},
+        // { $push:{surfaces:req.body.surfaces}},
+        // { $push:{tags:req.body.tags}}
+        // ,
+        {
+           new:true
+        })
+        .exec((err,result)=>{
+            if(err){
+                return res.status(422).json({error:err})
+            }else{
+                res.json(result)
+            }
+       })  
+  })
 
+// router.get('/get_preferences',requireLogin,(req,res)=>{
+//     User.findOne({id:req.body._id})
+// })
 module.exports = router

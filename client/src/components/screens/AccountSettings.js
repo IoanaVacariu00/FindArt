@@ -16,14 +16,14 @@ import FormLabel from "@mui/material/FormLabel";
 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 const Settings = ()=>{  
-    const {state,dispatch} = useContext(UserContext);
+    const {state,dispatch} = useContext(UserContext);console.log(state);
     const history = useHistory() 
     const [account, setAccount ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
     const [surfaces, setSurfaces] = useState([]);
-    const [tags, setTags] = useState([]);
-   
+    const [tags, setTags] = useState([]);  
+    const [url,setUrl] = useState("") 
     const [open, setOpen] = useState(false);
     const handleChange = (event) => {
         const {target: { value }} = event;
@@ -47,13 +47,18 @@ const Settings = ()=>{
    const requestDetails = ()=>{
        
        fetch("/setup_account",{
-        method:"post",
+        method:"put",
         headers:{
             "Content-Type":"application/json",
             "Authorization":"Bearer "+localStorage.getItem("jwt")
         },
-        body:JSON.stringify({
-            account, categories, mediums, surfaces, tags
+        body:JSON.stringify({   
+            userid:state.id,
+            accountType:account,   
+            categories:categories,
+            mediums: mediums,
+            surfaces: surfaces,
+            tags: tags
         })
     }).then(res=>res.json())
     .then(data=>{

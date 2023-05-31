@@ -22,16 +22,13 @@ const userSchema = new mongoose.Schema({
      type:String,
      default:"http://res.cloudinary.com/nocompany1234567/image/upload/v1661627745/g0hex2s9hndk2vzafax7.png"
     },
-
-    followers:[{type:ObjectId,ref:"User"}],
-    following:[{type:ObjectId,ref:"User"}],
-    assignedToMe:[{type:ObjectId, ref:"Gig"}],   
-    preferences:[{
-        categories:[{type:String}],  
-        mediums:[{type:String}],  
-        surfaces:[{type:String}], 
-        tags:[{type:String}]
-    }],
+    followers:[{type:ObjectId, ref:"User"}],
+    following:[{type:ObjectId, ref:"User"}],
+    categories:[{type:String}],  
+    mediums:[{type:String}],  
+    surfaces:[{type:String}], 
+    tags:[{type:String}]
+    
 })
 
 mongoose.model("User",userSchema)

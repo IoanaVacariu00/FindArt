@@ -19,6 +19,16 @@ export const reducer = (state,action)=>{
             ...state,
             pic:action.payload
         }
-    }
+    }            
+    // if(action.type=="UPDATEINFO"){
+    //     return {
+    //         ...state,
+    //         accounType:action.payload.account,  
+    //         categories:action.payload.categories, 
+    //         mediums:action.payload.mediums,
+    //         surfaces:action.payload.surfaces,
+    //         tags:action.payload.tags,
+    //     }
+    // }         
     return state
 } 
