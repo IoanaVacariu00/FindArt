@@ -37,7 +37,7 @@ const User = mongoose.model("User")
 //   });
 
 router.get('/allrequests',requireLogin,(req,res)=>{
-    Gig.find()
+    Gig.find({user:{$not:{$eq:req.user._id}}})
     .populate("user","_id name ")//pic?
     .sort('-createdAt')
     .then((requests)=>{
@@ -124,7 +124,9 @@ router.put('/acceptrequest',requireLogin,(req,res)=>{
         $push:{acceptedBy:req.user._id}
     },{
         new:true
-    }).exec((err,result)=>{
+    })
+    .populate("user","_id name")
+    .exec((err,result)=>{
        
         if(err){
             return res.status(422).json({error:err})

@@ -20,15 +20,15 @@ export const reducer = (state,action)=>{
             pic:action.payload
         }
     }            
-    // if(action.type=="UPDATEINFO"){
-    //     return {
-    //         ...state,
-    //         accounType:action.payload.account,  
-    //         categories:action.payload.categories, 
-    //         mediums:action.payload.mediums,
-    //         surfaces:action.payload.surfaces,
-    //         tags:action.payload.tags,
-    //     }
-    // }         
+    if(action.type=="UPDATEINFO"){
+        return {
+            ...state,
+            accounType:action.payload.accountType,  
+            // categories:action.payload.categories, 
+            // mediums:action.payload.mediums,
+            // surfaces:action.payload.surfaces,
+            // tags:action.payload.tags,
+        }
+    }         
     return state
 } 

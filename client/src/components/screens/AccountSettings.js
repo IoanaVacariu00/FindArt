@@ -16,9 +16,9 @@ import FormLabel from "@mui/material/FormLabel";
 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 const Settings = ()=>{  
-    const {state,dispatch} = useContext(UserContext);console.log(state);
+    const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
-    const [account, setAccount ] = useState('');     
+    const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
     const [surfaces, setSurfaces] = useState([]);
@@ -53,24 +53,30 @@ const Settings = ()=>{
             "Authorization":"Bearer "+localStorage.getItem("jwt")
         },
         body:JSON.stringify({   
-            userid:state.id,
-            accountType:account,   
-            categories:categories,
-            mediums: mediums,
-            surfaces: surfaces,
-            tags: tags
+//             // userid:state.id,
+            accountType:accountType,   
+//             // categories:categories,
+//             // mediums: mediums,
+//             // surfaces: surfaces,
+//             // tags: tags
         })
-    }).then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-       if(data.error){
-          M.toast({html: data.error,classes:"#c62828 red darken-3"})
-       }
-       else{
-           M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
-           history.push('/profile')
-       }
-    }).catch(err=>{
+    }).then(res=>res.json()).then(result=>{
+        console.log(result)
+        localStorage.setItem("user",JSON.stringify({...state, accountType:accountType   }))
+        dispatch({type:"UPDATEINFO",payload:result.accountType})
+        window.location.reload()
+    })
+    // .then(data=>{
+    //     console.log(data)
+    //    if(data.error){
+    //       M.toast({html: data.error,classes:"#c62828 red darken-3"})
+    //    }
+    //    else{
+    //        M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
+    //        history.push('/profile')
+    //    }
+    // })
+    .catch(err=>{
         console.log(err)
     })
      
@@ -105,10 +111,10 @@ const Settings = ()=>{
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            defaultValue='Customer'
+            defaultValue='Artist'
         >
-            <FormControlLabel value="Customer" control={<Radio />} label="Customer" onChange={(e) => {setAccount(e.target.value);console.log(account)}} />
-            <FormControlLabel value="Artist" control={<Radio />} label="Artist"  onChange={(e) => {setAccount(e.target.value);console.log(account)}} />
+            <FormControlLabel value="Customer" control={<Radio />} label="Customer" onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
+            <FormControlLabel value="Artist" control={<Radio />} label="Artist"  onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
         </RadioGroup>
         </FormControl>
         </div>
@@ -267,7 +273,7 @@ const Settings = ()=>{
             className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
             onClick={()=>requestDetails()}
             >
-                Submit request
+                Save
             </button>
             </div>
 

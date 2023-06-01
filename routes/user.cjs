@@ -102,6 +102,26 @@ router.put('/updatepic',requireLogin,(req,res)=>{
          res.json(result)
     })
 })
+
+router.put('/setup_account',requireLogin,(req,res)=>{
+
+    User.findByIdAndUpdate(req.user._id,
+
+        { $set:{accountType:req.body.accountType}},
+
+        {
+           new:true
+        }
+        ,
+        (err,result)=>{
+         if(err){
+            return res.status(422).json({error:"Error setting up account"})
+         }
+         res.json(result)
+        })
+    })
+        
+
     
 router.post('/searchusers',(req,res)=>{
     let userPattern = new RegExp("^"+req.body.query)
@@ -114,26 +134,29 @@ router.post('/searchusers',(req,res)=>{
     })
 })
 
-router.put('/setup_account',requireLogin,(req,res)=>{
+// router.put('/setup_account',requireLogin,(req,res)=>{
 
-    User.findByIdAndUpdate(req.body.userid,
-        // { $push:{accountType:req.body.account}},
-        { $push:{categories:req.body.categories}},  
-        // { $push:{mediums:req.body.mediums}},
-        // { $push:{surfaces:req.body.surfaces}},
-        // { $push:{tags:req.body.tags}}
-        // ,
-        {
-           new:true
-        })
-        .exec((err,result)=>{
-            if(err){
-                return res.status(422).json({error:err})
-            }else{
-                res.json(result)
-            }
-       })  
-  })
+//     User.findByIdAndUpdate(req.user._id,
+//         // req.body.userid,
+//         { $set:{accountType:req.body.account}},
+//         // { $push:{categories:req.body.categories}},  
+//         // { $push:{mediums:req.body.mediums}},
+//         // { $push:{surfaces:req.body.surfaces}},
+//         // { $push:{tags:req.body.tags}}
+//         // ,
+//         {
+//            new:true
+//         }
+//         ,
+//         (err,result)=>{
+//          if(err){
+//             return res.status(422).json({error:"Error uploading image"})
+//          }
+//          res.json(result)
+//         })
+//     })
+        
+
 
 // router.get('/get_preferences',requireLogin,(req,res)=>{
 //     User.findOne({id:req.body._id})
