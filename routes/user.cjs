@@ -106,13 +106,7 @@ router.put('/updatepic',requireLogin,(req,res)=>{
 router.put('/setup_account',requireLogin,(req,res)=>{
 
     User.findByIdAndUpdate(req.user._id,
-
-        { $set:{accountType:req.body.accountType}},
-
-        {
-           new:true
-        }
-        ,
+        { $set:{accountType:req.body.accountType}},{ new:true},
         (err,result)=>{
          if(err){
             return res.status(422).json({error:"Error setting up account"})
@@ -121,8 +115,6 @@ router.put('/setup_account',requireLogin,(req,res)=>{
         })
     })
         
-
-    
 router.post('/searchusers',(req,res)=>{
     let userPattern = new RegExp("^"+req.body.query)
     User.find({name:{$regex:userPattern}})
@@ -134,31 +126,18 @@ router.post('/searchusers',(req,res)=>{
     })
 })
 
-// router.put('/setup_account',requireLogin,(req,res)=>{
+router.put('/save_changes',requireLogin,(req,res)=>{
+    User.findByIdAndUpdate(req.user._id, 
+        {$set:{accountType:req.body.accountType,categories:req.body.categories, mediums: req.body.mediums, surfaces: req.body.surfaces, tags: req.body.tags}},
+        {new: true},
+        (err,result)=>{
+            if(err){
+               return res.status(422).json({error:"Error setting up account"})
+            }
+            res.json(result)
+           }
 
-//     User.findByIdAndUpdate(req.user._id,
-//         // req.body.userid,
-//         { $set:{accountType:req.body.account}},
-//         // { $push:{categories:req.body.categories}},  
-//         // { $push:{mediums:req.body.mediums}},
-//         // { $push:{surfaces:req.body.surfaces}},
-//         // { $push:{tags:req.body.tags}}
-//         // ,
-//         {
-//            new:true
-//         }
-//         ,
-//         (err,result)=>{
-//          if(err){
-//             return res.status(422).json({error:"Error uploading image"})
-//          }
-//          res.json(result)
-//         })
-//     })
-        
+    )
+})
 
-
-// router.get('/get_preferences',requireLogin,(req,res)=>{
-//     User.findOne({id:req.body._id})
-// })
 module.exports = router

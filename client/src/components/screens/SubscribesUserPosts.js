@@ -107,7 +107,7 @@ const Home  = ()=>{
         })
     }
    return (
-       <div className="home">
+    <div className="home-card" style={{marginTop:'75px'}}>
            {
                data.map(item=>{
                    return(

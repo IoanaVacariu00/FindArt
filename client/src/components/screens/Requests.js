@@ -158,7 +158,9 @@ const Requests = ()=>{
                             <i className="material-icons"  style={{float:"right"}}
                             onClick={()=>{acceptRequest(item._id)}}
                             >add_circle</i>
-                            }   </h5>
+                            }    
+                            
+                            </h5>
                                 <TableContainer component={Paper}>
                                     <Table style={{overflowX:"hidden"}} aria-label="simple table">
                                     <TableBody>

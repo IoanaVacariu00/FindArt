@@ -3,10 +3,19 @@ import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab'; 
+import Toolbar from '@mui/material/Toolbar';
+ 
+import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
+import TextareaAutosize from '@mui/base/TextareaAutosize'; 
+import { styled } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete'; 
 const Profile = () =>{
     const [userProfile,setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
+    const [requests, setRequests] = useState([])
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
     useEffect(()=>{
        fetch(`/user/${userid}`,{
@@ -18,7 +27,16 @@ const Profile = () =>{
            setProfile(result)
        })
     },[])
- 
+    useEffect(()=>{
+        fetch(`/requestsby/${userid}`,{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+             }
+        }).then(res=>res.json())
+        .then(result=>{         
+            setRequests(result.requests)               
+        })
+     },[]) 
     const followUser = ()=>{
         fetch('/follow',{
             method:"put",
@@ -75,10 +93,72 @@ const Profile = () =>{
              setShowFollow(true)
         })
     }
-
+    const blue = {
+        100: "#DAECFF",
+        200: "#b6daff",
+        400: "#3399FF",
+        500: "#007FFF",
+        600: "#0072E5",
+        900: "#003A75"
+      };
+    
+      const grey = {
+        50: "#f6f8fa",
+        100: "#eaeef2",
+        200: "#d0d7de",
+        300: "#afb8c1",
+        400: "#8c959f",
+        500: "#6e7781",
+        600: "#57606a",
+        700: "#424a53",
+        800: "#32383f",
+        900: "#24292f"
+      };
+    const StyledTextarea = styled(TextareaAutosize)(
+        ({ theme }) => `
+        width: 320px;
+        font-family: IBM Plex Sans, sans-serif;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 12px;
+        border-radius: 12px;
+        color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+        background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+        border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+        box-shadow: 0px 2px 2px ${
+          theme.palette.mode === "dark" ? grey[900] : grey[50]
+        };
+      
+        &:hover {
+          border-color: ${blue[400]};
+        }
+      
+        &:focus {
+          border-color: ${blue[400]};
+          box-shadow: 0 0 0 3px ${
+            theme.palette.mode === "dark" ? blue[500] : blue[200]
+          };
+        }
+      
+        // firefox
+        &:focus-visible {
+          outline: 0;
+        }
+      `
+      );
+    const StyledFab = styled(Fab)({
+        position: 'absolute',
+        zIndex: 1,
+        top: -30,
+        left: 10,
+        right: -10,  
+        margin: '10px',
+      });
    return (
        <>
        {userProfile ?
+        <div className="home-card" style={{marginTop:'75px'}}>
        <div style={{maxWidth:"550px",margin:"0px auto"}}>
            <div style={{
                display:"flex",
@@ -94,6 +174,7 @@ const Profile = () =>{
                
                <div>
                    <h4>{userProfile.user.name}</h4>
+                   <h6  style={{opacity:'80%'}}>{userProfile.user.accountType}</h6>
                    <h6>contact: {userProfile.user.email}</h6>
                    
                    { userProfile.user.accountType == "Artist"  &&
@@ -136,6 +217,104 @@ const Profile = () =>{
                     }
                 </div>
             }
+            
+            {
+                (userProfile.user.accountType == 'Customer' && state?.accountType == "Artist") &&
+                <div> 
+                {requests.map(item=>{
+                        return(
+                            <div key={item._id}>
+                                
+                                    <div className="card input-field" 
+                                            style={{  
+                                                margin:"30px auto",
+                                                maxWidth:"500px",
+                                                padding:"20px",
+                                                textAlign:"center"
+                                             }}
+                                    >
+                                        <TableContainer component={Paper}>
+                                            <Table style={{overflow:"hidden"}} aria-label="simple table">
+                                            <TableBody>
+                                                <TableRow
+                                                    key={item.maintitle}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Title
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.maintitle}</TableCell>
+                                                </TableRow>
+
+                                                <TableRow 
+                                                    key={item.notes}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Description
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                    <StyledTextarea      
+                                                    value={item.notes}
+                                                    readOnly       
+                                                     
+                                                    />
+                                                    </TableCell>
+                                                </TableRow>
+
+                                                <TableRow
+                                                    key={item.category}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Category
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.category}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.medium}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Medium
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.medium}</TableCell>
+                                                </TableRow>  
+                                                <TableRow
+                                                    key={item.surface}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Surface
+                                                    </TableCell>
+                                                    <TableCell align="left">{item.surface}</TableCell>
+                                                </TableRow>
+                                                <TableRow
+                                                    key={item.searchtag}
+                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                        Tags
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        {item.searchtag.map(tag=>  
+                                                            <Chip label={tag} style={{margin:"3px"}}/>
+                                                        )}
+                                                    </TableCell>
+                                                </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+
+                                    </div> 
+                              </div>
+                        
+                        )
+                    })
+                }   
+                </div>  
+              }
+       </div>
        </div>
        : <h4>loading...!</h4>}
        </>

@@ -24,10 +24,10 @@ export const reducer = (state,action)=>{
         return {
             ...state,
             accounType:action.payload.accountType,  
-            // categories:action.payload.categories, 
-            // mediums:action.payload.mediums,
-            // surfaces:action.payload.surfaces,
-            // tags:action.payload.tags,
+            categories:action.payload.categories, 
+            mediums:action.payload.mediums,
+            surfaces:action.payload.surfaces,
+            tags:action.payload.tags
         }
     }         
     return state

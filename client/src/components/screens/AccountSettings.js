@@ -8,23 +8,35 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 const Settings = ()=>{  
     const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
+
     const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
     const [surfaces, setSurfaces] = useState([]);
     const [tags, setTags] = useState([]);  
-    const [url,setUrl] = useState("") 
+
     const [open, setOpen] = useState(false);
+
+    useEffect(()=>{
+        if(state){
+            setAccountType(state.accountType?state.accountType : '' );
+            setCategories(state.categories?state.categories : []);
+            setMediums(state.mediums? state.mediums : []);
+            setSurfaces(state.surfaces? state.surfaces : []);
+            setTags(state?.tags? state.tags : []);
+            console.log(
+                accountType, categories, mediums, surfaces, tags
+            );
+        }
+
+       
+     },[])
+
     const handleChange = (event) => {
         const {target: { value }} = event;
         setTags(value); 
@@ -39,48 +51,43 @@ const Settings = ()=>{
         setOpen(true);
     };
 
-//    useEffect(()=>{
-//     if(url){
-//         requestDetails()
-//     }
-//     },[url])
    const requestDetails = ()=>{
        
-       fetch("/setup_account",{
+       fetch("/save_changes",{
         method:"put",
         headers:{
             "Content-Type":"application/json",
             "Authorization":"Bearer "+localStorage.getItem("jwt")
         },
         body:JSON.stringify({   
-//             // userid:state.id,
             accountType:accountType,   
-//             // categories:categories,
-//             // mediums: mediums,
-//             // surfaces: surfaces,
-//             // tags: tags
+            categories:categories,
+            mediums: mediums,
+            surfaces: surfaces,
+            tags: tags
         })
     }).then(res=>res.json()).then(result=>{
         console.log(result)
-        localStorage.setItem("user",JSON.stringify({...state, accountType:accountType   }))
-        dispatch({type:"UPDATEINFO",payload:result.accountType})
-        window.location.reload()
+        localStorage.setItem("user",JSON.stringify(
+            {...state, 
+            accountType:accountType,            
+            categories:categories,
+            mediums: mediums,
+            surfaces: surfaces,
+            tags: tags   }
+            ))
+        dispatch({type:"UPDATEINFO",payload:result})
+        if(result.error){
+          M.toast({html: result.error,classes:"#c62828 red darken-3"})
+        }
+        else{
+           M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
+           history.push('/profile')
+           window.location.reload()
+       }
     })
-    // .then(data=>{
-    //     console.log(data)
-    //    if(data.error){
-    //       M.toast({html: data.error,classes:"#c62828 red darken-3"})
-    //    }
-    //    else{
-    //        M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
-    //        history.push('/profile')
-    //    }
-    // })
-    .catch(err=>{
-        console.log(err)
-    })
-     
    }
+
     return (
     <>
         <div 
@@ -91,32 +98,34 @@ const Settings = ()=>{
            textAlign:"center"
         }}
        > 
-       <h4>Account Settings</h4>
-        {/* <div> */}
-            
-        {/* <label> */}
-            {/* <input type="radio" value="Customer" checked={account === 'Customer'} onChange={(e) => {setAccount(e.target.value)}} />
-            Customer
-        </label>
-        <br />
-        <label>
-            <input type="radio" value="Artist" checked={account === 'Artist'} onChange={(e) => {setAccount(e.target.value)}} />
-            Artist
-        </label>
-        </div> */}
-        <div>
-        <FormControl>
-        <FormLabel id="demo-row-radio-buttons-group-label" style={{margin:"10px",textAlign:"left"}}>Account Type</FormLabel>
-        <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            defaultValue='Artist'
-        >
-            <FormControlLabel value="Customer" control={<Radio />} label="Customer" onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
-            <FormControlLabel value="Artist" control={<Radio />} label="Artist"  onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
-        </RadioGroup>
-        </FormControl>
+         <h4 style={{padding: "15px"}}>Account Settings</h4>
+        <div style={{display:"flex"}}>
+            {/* <FormControl>
+            <FormLabel id="demo-row-radio-buttons-group-label" style={{margin:"10px",textAlign:"left"}}>Account Type</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                >
+                    <FormControlLabel value="Customer" control={<Radio />} label="Customer" onChange={(e) => {setAccountType(e.target.value)}} />
+                    <FormControlLabel value="Artist" control={<Radio />} label="Artist"  onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
+                </RadioGroup>
+            </FormControl> */}
+     
+            <InputLabel id="demo-simple-select-label" style={{width: "50%",margin:"10px",textAlign:"left"}}>Account Type</InputLabel>
+            <Select
+                style={{width: "50%",textAlign:"left"}}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={accountType}
+                label="Age"
+                onChange={(e)=>setAccountType(e.target.value)}
+            >
+                <MenuItem value="Artist">Artist</MenuItem>
+                <MenuItem value="Customer">Customer</MenuItem>
+
+            </Select>
+       
         </div>
         <div>
             <InputLabel id="categories" style={{margin:"10px",textAlign:"left"}}>Categories</InputLabel>
@@ -147,70 +156,36 @@ const Settings = ()=>{
                     ))}
             </Select> 
             </div>
-            {/* <div>
-                <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
-                <Select            
-                    style={{width: "100%"}}
-                    labelId="medium-simple-select-label"
-                    id="medium-simple-select"
-                    value={medium}
-                    label="Medium"
-                    onChange={(e) => {setMedium(e.target.value);}}
-                >
-                    {Mediums.map(option => (
-                        <MenuItem value={option} key={option}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select>
-            </div> */}
-               <div>
-                <InputLabel id="mediums" style={{margin:"10px",textAlign:"left"}}>Mediums</InputLabel>
-                <Select
-                labelId="mediums"
-                id="mediums-select"
-                value={mediums}
-                label="Mediums"
-                multiple
-                style={{width: "100%"}}
-                // open={open}
-                // onClose={handleClose}
-                // onOpen={handleOpen}
-                onChange={(e) => {setMediums(e.target.value)}}
-                input={<OutlinedInput id="select-multiple-chip-mediums" label="Chipmediums" />}
-                renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip variant="outlined" key={value} label={value} />
-                        ))}
-                    </Box>  
-                )}
-                >
-                    {Mediums.map(option => (
-                        <MenuItem value={option} key={option}  >
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select> 
-            </div>
-            {/* <div>
-                <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
-                <Select            
-                    style={{width: "100%"}}
-                    labelId="surface-simple-select-label"
-                    id="surface-simple-select"
-                    value={surface}
-                    label="Surface"
-                    onChange={(e) => {setSurface(e.target.value);}}
-                >
-                    {Surfaces.map(option => (
-                        <MenuItem value={option} key={option}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select>
-            </div> */}
-                 <div>
+        <div>
+            <InputLabel id="mediums" style={{margin:"10px",textAlign:"left"}}>Mediums</InputLabel>
+            <Select
+            labelId="mediums"
+            id="mediums-select"
+            value={mediums}
+            label="Mediums"
+            multiple
+            style={{width: "100%"}}
+            // open={open}
+            // onClose={handleClose}
+            // onOpen={handleOpen}
+            onChange={(e) => {setMediums(e.target.value)}}
+            input={<OutlinedInput id="select-multiple-chip-mediums" label="Chipmediums" />}
+            renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                        <Chip variant="outlined" key={value} label={value} />
+                    ))}
+                </Box>  
+            )}
+            >
+                {Mediums.map(option => (
+                    <MenuItem value={option} key={option}  >
+                        {option}
+                    </MenuItem>
+                    ))}
+            </Select> 
+        </div>
+        <div>
                 <InputLabel id="surfaces" style={{margin:"10px",textAlign:"left"}}>Surfaces</InputLabel>
                 <Select
                 labelId="surfaces"

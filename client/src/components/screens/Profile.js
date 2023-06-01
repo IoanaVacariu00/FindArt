@@ -152,6 +152,7 @@ const Profile = ()=>{
         margin: '10px',
       });
    return (
+    <div className="home-card" style={{marginTop:'75px'}}>
        <div style={{maxWidth:"550px",margin:"0px auto"}}>
             <div style={{margin:"18px 0px",  borderBottom:"1px solid grey"}}>
                <div style={{display:"flex", justifyContent:"space-around"}}>
@@ -159,16 +160,16 @@ const Profile = ()=>{
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6  style={{opacity:'80%'}}>{state?.accountType}</h6>
-                        {/* <h6>contact: {state?state.email:"loading"}</h6>   */}
+                        <h6>contact: {state?state.email:"loading"}</h6>  
                         {
                             state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                             <h6>{mypics.length} posts</h6>
                             <h6>{state?state.followers.length:"0"}
-                                followers
+                                 followers
                              </h6>
                             <h6>{state?state.following.length:"0"} 
-                                following
+                                 following
                             </h6>
                             </div>
                         }
@@ -218,7 +219,7 @@ const Profile = ()=>{
                                             </Link>     */}
                                             <DeleteIcon style={{float:"right",cursor:"pointer"}} onClick={()=>deleteRequest(item._id)}/> 
                                         </div>
-                                        
+    
                 
                                         <TableContainer component={Paper}>
                                             <Table style={{overflow:"hidden"}} aria-label="simple table">
@@ -316,7 +317,7 @@ const Profile = ()=>{
         </AppBar> 
        
        </div>
-      
+      </div>
    )
 }
   
