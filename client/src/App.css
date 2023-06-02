@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
  
+/* .material-icons {
+  color: blue;
+  padding: 2px;
+} */
+
 TableRow, Divider { 
   cursor: auto
 }

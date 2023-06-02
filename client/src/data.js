@@ -35,16 +35,16 @@
         'Surrealism', 
        'Suprematism', 
          'Symbolism', 
-       'Zero Group', 'any category'
+       'Zero Group', 'any categories'
          
     ]
 
     export const Mediums =[
-      'Oil Paint', 'Acrylic', 'Watercolor', 'Oil Pastels', 'Mixed Media','any medium'
+      'Oil Paint', 'Acrylic', 'Watercolor', 'Oil Pastels', 'Mixed Media','any mediums'
     ]  
     
     export const Surfaces = [         
-      'Canvas','Paper','Wood Panel', 'any surface' 
+      'Canvas','Paper','Wood Panel', 'any surfaces' 
      ]     
     
     export const Tags = [         

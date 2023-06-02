@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema({
     },
     followers:[{type:ObjectId, ref:"User"}],
     following:[{type:ObjectId, ref:"User"}],
-    categories:[{type:String}],  
-    mediums:[{type:String}],  
-    surfaces:[{type:String}], 
+    categories:[{type:String, default:'any categories'}],  
+    mediums:[{type:String, default:'any mediums'}],  
+    surfaces:[{type:String, default:'any surfaces'}], 
     tags:[{type:String}]
     
 })

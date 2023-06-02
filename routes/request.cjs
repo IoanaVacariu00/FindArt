@@ -5,10 +5,14 @@ const requireLogin  = require('../middleware/requireLogin.cjs')
 const Gig = mongoose.model("Gig")
 const User = mongoose.model("User")
 
-
 router.get('/allrequests',requireLogin,(req,res)=>{
-    Gig.find({user:{$not:{$eq:req.user._id}}})
-    .populate("user","_id name ")//pic?
+    Gig.find({
+        $and:[
+            {user:{$not:{$eq:req.user._id}}}, {assigned : false}
+        ]
+        
+    })
+    .populate("user","_id name ")
     .sort('-createdAt')
     .then((requests)=>{
         res.json({requests})
@@ -16,7 +20,8 @@ router.get('/allrequests',requireLogin,(req,res)=>{
     .catch(err=>{
         console.log(err)
     })
-})
+})  
+
 router.get('/requestsbyme',requireLogin,(req,res)=>{
     Gig.find({user:req.user._id})
     .populate("user","_id name")
@@ -28,6 +33,7 @@ router.get('/requestsbyme',requireLogin,(req,res)=>{
         console.log(err)
     })
 }) 
+
 router.get('/requestsby/:userid',requireLogin,(req,res)=>{
     Gig.find({user:req.params.userid})
     .populate("user","_id name")
@@ -39,6 +45,63 @@ router.get('/requestsby/:userid',requireLogin,(req,res)=>{
         console.log(err)
     })
 }) 
+
+// router.get('/accepted_by_me',requireLogin,(req,res)=>{
+//     const me = req.user._id;
+//     Gig.find({me:{$in:{acceptedBy}}})
+//     .populate("user","_id name")
+//     .sort('-createdAt')
+//     .then((requests)=>{
+//         res.json({requests})
+//     })               
+//     .catch(err=>{
+//         console.log(err)
+//     })
+// })    
+
+router.get('/assigned_to_me',requireLogin,(req,res)=>{
+    Gig.find({$and:[{assignedTo:{$exists: true}},{assignedTo:req.user._id}]})
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+})       
+        
+         
+       
+
+// router.get('/suggested_requests/:userid',requireLogin,(req,res)=>{
+//     User.findOne({_id:req.params.userid})  
+//     .select("-password")
+//     .then(artist=>{
+//         Gig.find({   
+//             $and:[   
+//                 {assigned:{$eq:false}},
+//                 {$or:[
+//                         {user:{$not:{$eq:req.params.userid}}},
+//                         {category:{$or:[{$in:artist.categories},{$eq:"any categories"}]}},
+//                         {medium:{$or:[{$in:artist.mediums},{$eq:"any mediums"}]}},
+//                         {surface:{$or:[{$in:artist.surfaces},{$eq:"any surfaces"}]}},
+//                         {searchtag:{$or:[{$in:artist.tags},{$eq:""}]}}
+//                     ] 
+//                 }]
+//             }) 
+//         .populate("user", "_id name")
+//         .exec((err,requests)=>{
+//             if(err){
+//                 return res.status(422).json({error:err})
+//             }
+//             res.json({artist,requests})
+//         })
+//     }).catch(err=>{
+//         return res.status(404).json({error:"User not found"})
+//     })
+// })
+
 router.get("/potential_sellers/:requestid", requireLogin,(req,res)=>{  
     Gig.findOne({_id:req.params.requestid})  
     .then(request => { 
@@ -137,7 +200,7 @@ router.put('/declinerequest',requireLogin,(req,res)=>{
 router.put('/assignRequest/:requestid',requireLogin,(req,res)=>{
     Gig.findByIdAndUpdate(req.params.requestid,
     { 
-        $set:{assignedTo:req.body.artistid}
+        $set:{assignedTo:req.body.artistid, assigned: true}
     },{
         new:true
     })
@@ -149,7 +212,5 @@ router.put('/assignRequest/:requestid',requireLogin,(req,res)=>{
         }
     })
 })  
-
-
 
 module.exports = router

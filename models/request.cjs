@@ -50,10 +50,10 @@
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
-    // assigned:{
-    //     type:Boolean,  
-    //     default: false,
-    // }
+    assigned:{
+        type:Boolean,  
+        default: false,
+    }
 },{timestamps:true})
 
 mongoose.model("Gig", gigSchema) 

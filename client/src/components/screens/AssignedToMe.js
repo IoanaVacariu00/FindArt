@@ -8,12 +8,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell, TableContainer, Paper, Button, Chip, TableBody } from '@mui/material';  
 import TextField from '@mui/material/TextField';    
 import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } from "@mui/system";
-const Requests = ()=>{
+const AssignedToMe = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
    console.log(state?.categories);
     useEffect(()=>{
-       fetch('/allrequests',{
+       fetch('/assigned_to_me',{
            headers:{
                "Authorization":"Bearer "+localStorage.getItem("jwt")
            }
@@ -23,58 +23,7 @@ const Requests = ()=>{
        })
     },[])
 
-    const acceptRequest = (id)=>{
-        fetch('/acceptrequest',{
-            method:"put",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem("jwt")
-            },
-            body:JSON.stringify({
-                requestId:id
-            })
-        }).then(res=>res.json())
-        .then(result=>{ 
-          const newData = data.map(item=>{
-              if(item._id===result._id){ 
-                return result
-              }else{
-                return item
-              }
-          })
-          setData(newData)
-        }).catch(err=>{
-            console.log(err)
-        })
-  }
-    const declineRequest = (id)=>{
-          fetch('/declinerequest',{
-              method:"put",
-              headers:{
-                  "Content-Type":"application/json",
-                  "Authorization":"Bearer "+localStorage.getItem("jwt")
-              },
-              body:JSON.stringify({
-                  requestId:id
-              })
-          }).then(res=>res.json())
-          .then(result=>{
-        
-            const newData = data.map(item=>{
-                if(item._id==result._id){
-                   
-                    return result
-                }else{
-                  
-                    return item
-                }
-            })
-            setData(newData)
-          }).catch(err=>{
-            console.log(err)
-        })
-    } 
-    
+       
     const blue = {
         100: "#DAECFF",
         200: "#b6daff",
@@ -147,20 +96,8 @@ const Requests = ()=>{
                         <h5 style={{padding:"5px"}}>
                             <Link to={"/profile/"+item.user._id}>
                             <p style={{float:"left"}}>{item?.user.name} </p>
-                            </Link>
-                      
-                        {item.acceptedBy.includes(state._id)
-                            ? 
-                             <i className="material-icons"  style={{float:"right"}}
-                                    onClick={()=>{declineRequest(item._id)}}
-                              >check_circle</i>
-                            : 
-                            <i className="material-icons"  style={{float:"right"}}
-                            onClick={()=>{acceptRequest(item._id)}}
-                            >add_circle</i>
-                            }    
-                            
-                            </h5>
+                            </Link>                          
+                        </h5>
                                 <TableContainer component={Paper}>
                                     <Table style={{overflowX:"hidden"}} aria-label="simple table">
                                     <TableBody>
@@ -266,7 +203,7 @@ const Requests = ()=>{
             )} 
             </div>
                 : 
-                <h6>No requests yet!</h6>
+            <h6>No requests yet!</h6>
             }      
             
         </>
@@ -274,4 +211,4 @@ const Requests = ()=>{
        )
     }  
 
-export default Requests
+export default AssignedToMe
