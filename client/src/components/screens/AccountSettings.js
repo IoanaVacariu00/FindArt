@@ -25,10 +25,10 @@ const Settings = ()=>{
     useEffect(()=>{
         if(state){
             setAccountType(state.accountType?state.accountType : '' );
-            setCategories(state.categories?state.categories : []);
-            setMediums(state.mediums? state.mediums : []);
-            setSurfaces(state.surfaces? state.surfaces : []);
-            setTags(state?.tags? state.tags : []);
+            setCategories(state.categories?state.categories : ['any categories']);
+            setMediums(state.mediums? state.mediums : ['any mediums']);
+            setSurfaces(state.surfaces? state.surfaces : ['any surfaces']);
+            setTags(state.tags? state.tags : []);
             console.log(
                 accountType, categories, mediums, surfaces, tags
             );

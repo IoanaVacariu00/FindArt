@@ -1,13 +1,9 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'    
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add'; 
-import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell, TableContainer, Paper, Button, Chip, TableBody } from '@mui/material';  
-import TextField from '@mui/material/TextField';    
+import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
 import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } from "@mui/system";
+
 const Requests = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
@@ -132,6 +128,7 @@ const Requests = ()=>{
       );
    return (
     <>
+
     {(data && state)? 
         <div >
            {data.map(item=>{
@@ -199,7 +196,7 @@ const Requests = ()=>{
                                                 Category
                                             </TableCell>
                                             <TableCell align="left">
-                                                {state.categories.includes(item.category) ? 
+                                                {state.categories?.includes(item.category) ? 
                                                     <Chip label={item.category} style={{background:"blue",color:"white"}}/> 
                                                         :
                                                     <p>{item.category}</p>

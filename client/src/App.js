@@ -24,6 +24,7 @@ import { AppBar } from '@mui/material';
 import Container from "@mui/material/Container";
 import PendingRequests from './components/screens/PendingRequests'; 
 import AssignedToMe from './components/screens/AssignedToMe';
+import MainRequests from './components/screens/MainRequests';
 export const UserContext = createContext()
 
 const Routing = ()=>{
@@ -93,6 +94,9 @@ const Routing = ()=>{
       </Route>   
       <Route path="/assigned_to_me">
         <AssignedToMe />        
+      </Route>  
+      <Route path="/main_requests">
+        <MainRequests />        
       </Route>
      </Switch>
   )

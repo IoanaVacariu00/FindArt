@@ -8,9 +8,8 @@ const SignIn  = ()=>{
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("") 
-    const [accountType, setAccountType] = useState("")  
+    const [accountType, setAccountType] = useState("") 
     const [url,setUrl] = useState(undefined) 
-
 
     const account_handleChange = (event) => {
         setAccountType(event.target.value); 

@@ -204,18 +204,17 @@ const NavBar = ()=>{
                 display: { xs: "block", md: "none" }
               }}
             >
-               
-                <MenuItem key="Discover" onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to="/myfollowingpost"> Discover</Link></Typography>
-                </MenuItem>
-                <MenuItem key="Requests" onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link  to={state?.accountType=='Artist'?'/requests':'/my_requests' }>Requests</Link></Typography>
-                </MenuItem>
-                <MenuItem key="Inbox" onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">  
-                    <Link to='/messenger'>Inbox</Link>
-                  </Typography>
-                </MenuItem> 
+            <MenuItem key="Discover" onClick={handleCloseNavMenu}>
+              <Typography textAlign="center"><Link to="/myfollowingpost"> Discover</Link></Typography>
+            </MenuItem>
+            <MenuItem key="Requests" onClick={handleCloseNavMenu}>
+              <Typography textAlign="center"><Link  to={state?.accountType=='Artist'?'/main_requests':'/my_requests' }>Requests</Link></Typography>
+            </MenuItem>
+            <MenuItem key="Inbox" onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">  
+                <Link to='/messenger'>Inbox</Link>
+              </Typography>
+            </MenuItem> 
             </Menu>}
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -249,7 +248,7 @@ const NavBar = ()=>{
               <Button
                 key="Requests" onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-              ><Link to={state?.accountType=="Artist"?"/requests":"/my_requests"}>
+              ><Link to={state?.accountType=="Artist"?"/main_requests":"/my_requests"}>
                 Requests</Link>
               </Button>
               <Button
