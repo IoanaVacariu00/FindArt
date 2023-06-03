@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
+import Palette from "@mui/icons-material/Palette"
 const NavBar = ()=>{
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -155,22 +155,22 @@ const NavBar = ()=>{
       // </AppBar>
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
       // <Container maxWidth="xl">disableguters
-        <Toolbar >
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+      <> <Toolbar >
+          <Palette sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href={state?"/":"/signin"}
+            href={state?"/myfollowingpost":"/signin"}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "white",
               textDecoration: "none"
-            }}
+            }} id="FindArt"
           >
             FindArt
           </Typography>
@@ -205,7 +205,7 @@ const NavBar = ()=>{
               }}
             >
             <MenuItem key="Discover" onClick={handleCloseNavMenu}>
-              <Typography textAlign="center"><Link to="/myfollowingpost"> Discover</Link></Typography>
+              <Typography textAlign="center"><Link to="/"> Discover</Link></Typography>
             </MenuItem>
             <MenuItem key="Requests" onClick={handleCloseNavMenu}>
               <Typography textAlign="center"><Link  to={state?.accountType=='Artist'?'/main_requests':'/my_requests' }>Requests</Link></Typography>
@@ -217,12 +217,12 @@ const NavBar = ()=>{
             </MenuItem> 
             </Menu>}
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Palette sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href={state?"/":'/signin'}
+            href={state?"/myfollowingpost":'/signin'}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -230,9 +230,10 @@ const NavBar = ()=>{
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "white",
               textDecoration: "none"
             }}
+            id="FindArt"
           >
             FindArt
           </Typography>
@@ -242,7 +243,7 @@ const NavBar = ()=>{
               <Button 
                 key="Discover" onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-              ><Link to="/myfollowingpost">Discover</Link>
+              ><Link to="/">Discover</Link>
                 
               </Button>   
               <Button
@@ -310,7 +311,7 @@ const NavBar = ()=>{
 
             </Menu>}
           </Box>
-        </Toolbar>
+        </Toolbar></>
       // </Container>
     // </AppBar>
   );

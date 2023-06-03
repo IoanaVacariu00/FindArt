@@ -2,12 +2,14 @@ import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import Tabsdemo from './tabsdemo'
 const MainRequests  = ()=>{
-
+    const {state} = useContext(UserContext)
     return( 
-
-        <Tabsdemo/>
-
+        <> 
+        { state && 
+            <Tabsdemo/>
+        }
+        </>
     )
 }
 
-export default MainRequests
+export default MainRequests 

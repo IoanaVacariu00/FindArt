@@ -46,18 +46,18 @@ router.get('/requestsby/:userid',requireLogin,(req,res)=>{
     })
 }) 
 
-// router.get('/accepted_by_me',requireLogin,(req,res)=>{
-//     const me = req.user._id;
-//     Gig.find({me:{$in:{acceptedBy}}})
-//     .populate("user","_id name")
-//     .sort('-createdAt')
-//     .then((requests)=>{
-//         res.json({requests})
-//     })               
-//     .catch(err=>{
-//         console.log(err)
-//     })
-// })    
+router.get('/accepted_by_me',requireLogin,(req,res)=>{
+    const me = req.user._id;
+    Gig.find({me:{$in:{acceptedBy}}})
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+})    
 
 router.get('/assigned_to_me',requireLogin,(req,res)=>{
     Gig.find({$and:[{assignedTo:{$exists: true}},{assignedTo:req.user._id}]})

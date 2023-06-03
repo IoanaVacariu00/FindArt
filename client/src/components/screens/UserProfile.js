@@ -158,7 +158,7 @@ const Profile = () =>{
    return (
        <>
        {userProfile ?
-        <div className="home-card" style={{marginTop:'75px'}}>
+        <div className="home-card" >
        <div style={{maxWidth:"550px",margin:"0px auto"}}>
            <div style={{
                display:"flex",

@@ -106,14 +106,15 @@ function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <UserContext.Provider value={{state,dispatch}}>
-      <BrowserRouter>
+      <BrowserRouter> 
+      <div style={{ position: "relative"}}>
         <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
           <Container maxWidth="xl">
             <NavBar /> 
           </Container> 
         </AppBar>  
-      <Routing />
-        
+      <div style={{ paddingTop: "100px"}}><Routing /></div>
+     </div>   
       </BrowserRouter>
     </UserContext.Provider> 
   );

@@ -20,7 +20,7 @@ const PendingRequests = ()=>{
         }
         }).then(res=>res.json())
         .then(result=>{
-                setData(result.requests)
+            setData(result.requests)
         })
       
     },[])

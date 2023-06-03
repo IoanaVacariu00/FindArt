@@ -1,6 +1,12 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {Chip} from '@mui/material';  
 const Home  = ()=>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
@@ -107,7 +113,7 @@ const Home  = ()=>{
         })
     }
    return (
-    <div className="home-card" style={{marginTop:'75px'}}>
+    <div className="home-card" >
            {
                data.map(item=>{
                    return(
@@ -151,6 +157,30 @@ const Home  = ()=>{
                                     makeComment(e.target[0].value,item._id)
                                 }}>
                                   <input type="text" placeholder="add a comment" />  
+                                  <div>  
+                                    {item.tags!='' &&
+                                    <Accordion>
+                                        <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                        >
+                                        <Typography>Tags</Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                        {item.tags.map(tag=>    
+                                                <>
+                                               {state.tags.includes(tag) ? 
+                                               <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
+                                                     :
+                                                    <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
+                                                }
+                                                </>
+                                                )}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                    }
+                                </div> 
                                 </form>
                             </div>
                         </div> 

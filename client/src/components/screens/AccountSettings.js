@@ -8,12 +8,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
-
+import { styled } from "@mui/system";
+import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
+import TextField from '@mui/material/TextField';
 const Settings = ()=>{  
     const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
-
+    const [bio, setBio] = useState('') ;
     const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
@@ -23,7 +25,8 @@ const Settings = ()=>{
     const [open, setOpen] = useState(false);
 
     useEffect(()=>{
-        if(state){
+        if(state){ 
+            setBio(state.bio?state.bio : '');
             setAccountType(state.accountType?state.accountType : '' );
             setCategories(state.categories?state.categories : ['any categories']);
             setMediums(state.mediums? state.mediums : ['any mediums']);
@@ -87,7 +90,61 @@ const Settings = ()=>{
        }
     })
    }
+   const blue = {
+    100: "#DAECFF",
+    200: "#b6daff",
+    400: "#3399FF",
+    500: "#007FFF",
+    600: "#0072E5",
+    900: "#003A75"
+  };
 
+  const grey = {
+    50: "#f6f8fa",
+    100: "#eaeef2",
+    200: "#d0d7de",
+    300: "#afb8c1",
+    400: "#8c959f",
+    500: "#6e7781",
+    600: "#57606a",
+    700: "#424a53",
+    800: "#32383f",
+    900: "#24292f"
+  };
+
+  const StyledTextarea = styled(TextareaAutosize)(
+    ({ theme }) => `
+    width: 320px;
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 12px;
+    border-radius: 12px;
+    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
+  
+    &:hover {
+      border-color: ${blue[400]};
+    }
+  
+    &:focus {
+      border-color: ${blue[400]};
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[500] : blue[200]
+      };
+    }
+  
+    // firefox
+    &:focus-visible {
+      outline: 0;
+    }
+  `
+  );
     return (
     <>
         <div 
@@ -100,17 +157,7 @@ const Settings = ()=>{
        > 
          <h4 style={{padding: "15px"}}>Account Settings</h4>
         <div style={{display:"flex"}}>
-            {/* <FormControl>
-            <FormLabel id="demo-row-radio-buttons-group-label" style={{margin:"10px",textAlign:"left"}}>Account Type</FormLabel>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                >
-                    <FormControlLabel value="Customer" control={<Radio />} label="Customer" onChange={(e) => {setAccountType(e.target.value)}} />
-                    <FormControlLabel value="Artist" control={<Radio />} label="Artist"  onChange={(e) => {setAccountType(e.target.value);console.log(accountType)}} />
-                </RadioGroup>
-            </FormControl> */}
+
      
             <InputLabel id="demo-simple-select-label" style={{width: "50%",margin:"10px",textAlign:"left"}}>Account Type</InputLabel>
             <Select
@@ -126,7 +173,19 @@ const Settings = ()=>{
 
             </Select>
        
+        </div>  
+
+        <div>
+        <InputLabel id="bio" style={{margin:"10px",textAlign:"left"}}>Bio</InputLabel>
+        <TextField  
+        fullWidth 
+        multiline    
+        maxRows={6}
+        value={bio}
+        onChange={(e)=>setBio(e.target.value)}
+        />
         </div>
+
         <div>
             <InputLabel id="categories" style={{margin:"10px",textAlign:"left"}}>Categories</InputLabel>
             <Select
@@ -136,9 +195,6 @@ const Settings = ()=>{
             label="Categories"
             multiple
             style={{width: "100%"}}
-            // open={open}
-            // onClose={handleClose}
-            // onOpen={handleOpen}
             onChange={(e) => {setCategories(e.target.value)}}
             input={<OutlinedInput id="select-multiple-chip-categories" label="ChipCateg" />}
             renderValue={(selected) => (
@@ -165,9 +221,6 @@ const Settings = ()=>{
             label="Mediums"
             multiple
             style={{width: "100%"}}
-            // open={open}
-            // onClose={handleClose}
-            // onOpen={handleOpen}
             onChange={(e) => {setMediums(e.target.value)}}
             input={<OutlinedInput id="select-multiple-chip-mediums" label="Chipmediums" />}
             renderValue={(selected) => (
@@ -194,9 +247,6 @@ const Settings = ()=>{
                 label="Surfaces"
                 multiple
                 style={{width: "100%"}}
-                // open={open}
-                // onClose={handleClose}
-                // onOpen={handleOpen}
                 onChange={(e) => {setSurfaces(e.target.value)}}
                 input={<OutlinedInput id="select-multiple-chip-surfaces" label="Chipsurfaces" />}
                 renderValue={(selected) => (
@@ -243,8 +293,8 @@ const Settings = ()=>{
                         ))}
                 </Select> 
             </div>
-
-            <button 
+            <br/>            
+            <button  style={{float:"right"}}
             className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
             onClick={()=>requestDetails()}
             >

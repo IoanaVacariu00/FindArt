@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Requests from './Requests';
 import PendingRequests from './PendingRequests';
@@ -53,7 +52,8 @@ export default function VerticalTabs() {
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        style={{position:'fixed', zIndex:2, background:"white",
+        style={{ 
+          position:'fixed', zIndex:2, background:"white",
         bottom:'auto',
         left: 0,  top: 70 }}
         value={value}
