@@ -132,17 +132,20 @@ const Home = ()=>{
                             </div>
                             <div className="card-content">
                             <div style={{display:"flex"}}>
-                                <strong>{item.likes.length}</strong>
+                                
                                 {item.likes.includes(state._id)
                                 ? 
                                     <i className="material-icons"
-                                            onClick={()=>{unlikePost(item._id)}}
+                                    onClick={()=>{unlikePost(item._id)}}
                                     >thumb_down</i>
                                 : 
                                     <i className="material-icons"
                                     onClick={()=>{likePost(item._id)}}
                                     >thumb_up</i>
                                 }
+                                <div style={{padding:"5px"}}>
+                                    <strong>{item.likes.length}</strong>
+                                </div>
                             </div>
                                 <h6>{item.title}</h6>
                                 <p>{item.body}</p> 

@@ -70,11 +70,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel value={value} index={1}>    
         <PendingRequests/>
-        
       </TabPanel>
       <TabPanel value={value} index={2}>    
         <AssignedToMe/>
-        
       </TabPanel>
     </Box>
   );

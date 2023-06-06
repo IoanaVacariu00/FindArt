@@ -162,7 +162,7 @@ const Profile = ()=>{
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6  style={{opacity:'80%'}}>{state?.accountType}</h6>
-                        
+                        {state && <>{bio && <div>{bio}</div>}</>}
                         {
                             state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>

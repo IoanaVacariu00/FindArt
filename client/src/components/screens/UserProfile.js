@@ -2,18 +2,15 @@ import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 import { Link } from 'react-router-dom'
-
-import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab'; 
-import Toolbar from '@mui/material/Toolbar';
- 
 import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { styled } from "@mui/system";
-import DeleteIcon from '@mui/icons-material/Delete'; 
+
 const Profile = () =>{
     const [userProfile,setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
+    const [bio, setBio] = useState('');
     const {userid} = useParams()
     const [requests, setRequests] = useState([])
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
@@ -25,6 +22,7 @@ const Profile = () =>{
        }).then(res=>res.json())
        .then(result=>{
            setProfile(result)
+           if(result.user.bio != '') setBio(result.user.bio)
        })
     },[])
     useEffect(()=>{
@@ -182,7 +180,8 @@ const Profile = () =>{
                         <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                                 <h6>{userProfile.posts.length} posts</h6>
                                 <h6>{userProfile.user.followers.length} followers</h6>
-                                <h6>{userProfile.user.following.length} following</h6>
+                                <h6>{userProfile.user.following.length} following</h6>    
+                                {state && <>{bio && <div>{bio}</div>}</>}
                         </div> 
                     
                         {showfollow?

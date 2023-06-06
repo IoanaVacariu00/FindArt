@@ -131,7 +131,7 @@ const Home  = ()=>{
                                 <img src={item.photo}/>
                             </div>
                             <div className="card-content">
-                         
+                            <div style={{display:"flex"}}>
                             {item.likes.includes(state._id)
                             ? 
                              <i className="material-icons" 
@@ -142,7 +142,10 @@ const Home  = ()=>{
                             onClick={()=>{likePost(item._id)}}
                             >thumb_up</i>
                             }
-                                <h6>{item.likes.length} likes</h6>
+                                <div style={{padding:"5px"}}>
+                                    <strong>{item.likes.length}</strong>
+                                </div>
+                                </div>
                                 <h6>{item.title}</h6>
                                 <p>{item.body}</p>
                                 {

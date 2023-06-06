@@ -26,7 +26,7 @@ const Settings = ()=>{
 
     useEffect(()=>{
         if(state){ 
-            setBio(state.bio?state.bio : '');
+            setBio(state.bio? state.bio : '');
             setAccountType(state.accountType?state.accountType : '' );
             setCategories(state.categories?state.categories : ['any categories']);
             setMediums(state.mediums? state.mediums : ['any mediums']);
