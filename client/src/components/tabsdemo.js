@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Requests from './Requests';
-import PendingRequests from './PendingRequests';
-import AssignedToMe from './AssignedToMe';
-
+import Requests from './screens/Requests';
+import Myrequests from './screens/Myrequests';
+import PendingRequests from './screens/PendingRequests';
+import AssignedToMe from './screens/AssignedToMe';
+import { useContext } from 'react';
+import { UserContext } from '../App';    
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  
 
   return (
     <div
@@ -20,7 +23,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-        <div>{children}</div> 
+          <div>{children}</div> 
         </Box>
       )}
     </div>
@@ -42,12 +45,13 @@ function a11yProps(index) {
 
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
-
+  const {state} = useContext(UserContext)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  return (
+  return (   <>
+    { state &&
     <Box>
       <Tabs
         orientation="vertical"
@@ -63,10 +67,12 @@ export default function VerticalTabs() {
       >
         <Tab label="All" {...a11yProps(0)} />
         <Tab label="Pending" {...a11yProps(1)} />
-        <Tab label="Assigned to Me" {...a11yProps(2)} />
+        <Tab label="Assigned to me" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>    
-        <Requests/>
+      {state.accountType === 'Artist' &&  <Requests/>}
+      {state.accountType === 'Customer' &&  <Myrequests/>}
+
       </TabPanel>
       <TabPanel value={value} index={1}>    
         <PendingRequests/>
@@ -74,6 +80,7 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={2}>    
         <AssignedToMe/>
       </TabPanel>
-    </Box>
+    </Box>  
+        }</>
   );
 }

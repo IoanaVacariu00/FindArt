@@ -134,9 +134,9 @@ const Home  = ()=>{
                             <div style={{display:"flex"}}>
                             {item.likes.includes(state._id)
                             ? 
-                             <i className="material-icons" 
-                                    onClick={()=>{unlikePost(item._id)}}
-                              >thumb_down</i>
+                            <i className="material-icons" 
+                            onClick={()=>{unlikePost(item._id)}}
+                            >thumb_down</i>
                             : 
                             <i className="material-icons"
                             onClick={()=>{likePost(item._id)}}
@@ -172,14 +172,14 @@ const Home  = ()=>{
                                         </AccordionSummary>
                                         <AccordionDetails>
                                         {item.tags.map(tag=>    
-                                                <>
-                                               {state.tags.includes(tag) ? 
-                                               <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
-                                                     :
-                                                    <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
-                                                }
-                                                </>
-                                                )}
+                                            <>
+                                            {state.tags.includes(tag) ? 
+                                            <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
+                                                    :
+                                            <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
+                                            }
+                                            </>
+                                        )}
                                         </AccordionDetails>
                                     </Accordion>
                                     }

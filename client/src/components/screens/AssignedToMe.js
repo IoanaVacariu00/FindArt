@@ -1,84 +1,43 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
-import {Link} from 'react-router-dom'    
-import Fab from '@mui/material/Fab';
+import {Link} from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'; 
-import UpIcon from '@mui/icons-material/KeyboardArrowUp';   
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Divider, List, ListItem, ListItemText, Table, TableRow, TableCell, TableContainer, Paper, Button, Chip, TableBody } from '@mui/material';  
-import TextField from '@mui/material/TextField';    
-import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } from "@mui/system";
+import {blue, grey, StyledFab, StyledTextarea} from '../styledComponents'
+import Toolbar from '@mui/material/Toolbar';
+import { AppBar } from '@mui/material';
+import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
+import TextareaAutosize from '@mui/base/TextareaAutosize'; 
+
 const AssignedToMe = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
-   console.log(state?.categories);
-    useEffect(()=>{
-       fetch('/assigned_to_me',{
-           headers:{
-               "Authorization":"Bearer "+localStorage.getItem("jwt")
-           }
-       }).then(res=>res.json())
-       .then(result=>{
-            setData(result.requests)
-       })
-    },[])
 
-       
-    const blue = {
-        100: "#DAECFF",
-        200: "#b6daff",
-        400: "#3399FF",
-        500: "#007FFF",
-        600: "#0072E5",
-        900: "#003A75"
-      };
-    
-      const grey = {
-        50: "#f6f8fa",
-        100: "#eaeef2",
-        200: "#d0d7de",
-        300: "#afb8c1",
-        400: "#8c959f",
-        500: "#6e7781",
-        600: "#57606a",
-        700: "#424a53",
-        800: "#32383f",
-        900: "#24292f"
-      };
-    
-      const StyledTextarea = styled(TextareaAutosize)(
-        ({ theme }) => `
-        width: 320px;
-        font-family: IBM Plex Sans, sans-serif;
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1.5;
-        padding: 12px;
-        border-radius: 12px;
-        color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-        background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-        border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-        box-shadow: 0px 2px 2px ${
-          theme.palette.mode === "dark" ? grey[900] : grey[50]
-        };
-      
-        &:hover {
-          border-color: ${blue[400]};
+    useEffect(()=>{  
+        if(state){
+
+            if(state.accountType === 'Artist')
+            {
+                fetch("/assigned_to_me",{
+                    headers:{
+                        "Authorization":"Bearer "+localStorage.getItem("jwt")
+                    }
+                    }).then(res=>res.json())
+                    .then(result=>{
+                        setData(result.requests)
+                    })
+            }
+            else if(state.accountType === 'Customer') {
+                fetch("/assigned",{
+                    headers:{
+                        "Authorization":"Bearer "+localStorage.getItem("jwt")
+                    }
+                    }).then(res=>res.json())
+                    .then(result=>{
+                        setData(result.requests)
+                    })
+            }
         }
-      
-        &:focus {
-          border-color: ${blue[400]};
-          box-shadow: 0 0 0 3px ${
-            theme.palette.mode === "dark" ? blue[500] : blue[200]
-          };
-        }
-      
-        // firefox
-        &:focus-visible {
-          outline: 0;
-        }
-      `
-      );
+    },[])
    return (
     <>
     {(data && state)? 
@@ -203,7 +162,18 @@ const AssignedToMe = ()=>{
                 : 
             <h6>No requests yet!</h6>
             }      
-            
+            {state.accountType === 'Customer' &&
+                
+                <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
+                    <Toolbar>
+                        <Link to="/createrequest" >
+                            <StyledFab color="primary" aria-label="add"> 
+                                <AddIcon />  
+                            </StyledFab>  
+                        </Link>
+                    </Toolbar>
+                </AppBar>
+            }
         </>
        
        )

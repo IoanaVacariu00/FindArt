@@ -1,14 +1,8 @@
-import React,{useState,useEffect,useContext} from 'react'
-import {UserContext} from '../../App'
-import Tabsdemo from './tabsdemo'
+import React from 'react'
+import Tabsdemo from '../tabsdemo'
 const MainRequests  = ()=>{
-    const {state} = useContext(UserContext)
     return( 
-        <> 
-        { state && 
-            <Tabsdemo/>
-        }
-        </>
+        <Tabsdemo/>
     )
 }
 

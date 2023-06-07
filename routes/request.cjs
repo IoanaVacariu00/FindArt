@@ -22,6 +22,40 @@ router.get('/allrequests',requireLogin,(req,res)=>{
     })
 })  
 
+router.get('/assigned',requireLogin,(req,res)=>{
+    Gig.find({
+        $and:[
+            {user:req.user._id}, {assigned : false}
+        ]
+        
+    })
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+}) 
+
+router.get('/unassigned',requireLogin,(req,res)=>{
+    Gig.find({
+        $and:[
+            {user:req.user._id}, {assigned : false}
+        ]
+        
+    })
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+})   
+
 router.get('/requestsbyme',requireLogin,(req,res)=>{
     Gig.find({user:req.user._id})
     .populate("user","_id name")
@@ -45,19 +79,6 @@ router.get('/requestsby/:userid',requireLogin,(req,res)=>{
         console.log(err)
     })
 }) 
-
-router.get('/accepted_by_me',requireLogin,(req,res)=>{
-    const me = req.user._id;
-    Gig.find({me:{$in:{acceptedBy}}})
-    .populate("user","_id name")
-    .sort('-createdAt')
-    .then((requests)=>{
-        res.json({requests})
-    })               
-    .catch(err=>{
-        console.log(err)
-    })
-})    
 
 router.get('/assigned_to_me',requireLogin,(req,res)=>{
     Gig.find({$and:[{assignedTo:{$exists: true}},{assignedTo:req.user._id}]})

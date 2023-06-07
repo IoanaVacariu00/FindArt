@@ -208,7 +208,7 @@ const NavBar = ()=>{
               <Typography textAlign="center"><Link to="/"> Discover</Link></Typography>
             </MenuItem>
             <MenuItem key="Requests" onClick={handleCloseNavMenu}>
-              <Typography textAlign="center"><Link  to={state?.accountType=='Artist'?'/main_requests':'/my_requests' }>Requests</Link></Typography>
+              <Typography textAlign="center"><Link to='/main_requests'>Requests</Link></Typography>
             </MenuItem>
             <MenuItem key="Inbox" onClick={handleCloseNavMenu}>
               <Typography textAlign="center">  
@@ -249,7 +249,7 @@ const NavBar = ()=>{
               <Button
                 key="Requests" onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-              ><Link to={state?.accountType=="Artist"?"/main_requests":"/my_requests"}>
+              ><Link to="/main_requests">
                 Requests</Link>
               </Button>
               <Button
