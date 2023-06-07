@@ -95,7 +95,7 @@ const AssignedToMe = ()=>{
                                         Category
                                     </TableCell>
                                     <TableCell align="left">
-                                        {state.categories.includes(item.category) ? 
+                                        {state.categories?.includes(item.category) ? 
                                             <Chip label={item.category} style={{background:"blue",color:"white"}}/> 
                                                 :
                                             <p>{item.category}</p>
@@ -110,7 +110,7 @@ const AssignedToMe = ()=>{
                                         Medium
                                     </TableCell>
                                     <TableCell align="left">  
-                                    {state.mediums.includes(item.medium) ? 
+                                    {state.mediums?.includes(item.medium) ? 
                                             <Chip label={item.medium} style={{background:"blue",color:"white"}}/> 
                                                 :
                                             <p>{item.medium}</p>
@@ -125,7 +125,7 @@ const AssignedToMe = ()=>{
                                         Surface
                                     </TableCell>
                                     <TableCell align="left">
-                                    {state.surfaces.includes(item.surface) ? 
+                                    {state.surfaces?.includes(item.surface) ? 
                                             <Chip label={item.surface} style={{background:"blue",color:"white"}}/> 
                                                 :
                                             <p>{item.surface}</p>
@@ -142,7 +142,7 @@ const AssignedToMe = ()=>{
                                     <TableCell align="left">
                                         {item.searchtag.map(tag=>    
                                         <>
-                                        {state.tags.includes(tag) ? 
+                                        {state.tags?.includes(tag) ? 
                                         <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
                                                 :
                                             <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
@@ -162,6 +162,16 @@ const AssignedToMe = ()=>{
                 : 
             <h6>No requests yet!</h6>
             }      
+             {data=='' &&
+                <div className="card input-field"    
+                style={{  
+                   margin:"30px auto",
+                   maxWidth:"500px",
+                   padding:"20px"}}
+                   >
+                    <h6>No assigned requests!</h6>
+                </div>
+            }
             {state.accountType === 'Customer' &&
                 
                 <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>

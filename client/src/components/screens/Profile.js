@@ -23,8 +23,13 @@ const Profile = ()=>{
             }
        }).then(res=>res.json())
        .then(result=>{         
-           setPics(result.mypost)
-           if(result.user.bio != '') setBio(result.user.bio)              
+           setPics(result.mypost)  
+           if(state) {
+                if(state.accountType === 'Artist')
+                    if(state.bio != '') setBio(state.bio)    
+                else if(state.accountType === 'Customer')  
+                    if(state.customerbio != '') setBio(state.customerbio)   
+           }          
        })
     },[])    
     useEffect(()=>{
@@ -167,11 +172,9 @@ const Profile = ()=>{
                             state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                             <h6>{mypics.length} posts</h6>
-                            <h6>{state?state.followers.length:"0"}
-                                 followers
+                            <h6>{state?state.followers.length:"0"} followers
                              </h6>
-                            <h6>{state?state.following.length:"0"} 
-                                 following
+                            <h6>{state?state.following.length:"0"} following
                             </h6>
                             </div>
                         }
@@ -216,9 +219,6 @@ const Profile = ()=>{
                                              }}
                                     >
                                         <div >
-                                            {/* <Link to={"/profile" }>  
-                                                <h5 style={{float:"left", margin:"15px"}}>{state.name}</h5>
-                                            </Link>     */}
                                             <DeleteIcon style={{float:"right",cursor:"pointer"}} onClick={()=>deleteRequest(item._id)}/> 
                                         </div>
     

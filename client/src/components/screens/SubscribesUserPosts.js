@@ -113,6 +113,7 @@ const Home  = ()=>{
         })
     }
    return (
+    <>{(state && data) &&
     <div className="home-card" >
            {
                data.map(item=>{
@@ -173,9 +174,9 @@ const Home  = ()=>{
                                         <AccordionDetails>
                                         {item.tags.map(tag=>    
                                             <>
-                                            {state.tags.includes(tag) ? 
+                                            {state.tags?.includes(tag) ? 
                                             <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
-                                                    :
+                                                :
                                             <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>
                                             }
                                             </>
@@ -191,6 +192,7 @@ const Home  = ()=>{
                })
            }
        </div>
+       }</>
    )
 }
 

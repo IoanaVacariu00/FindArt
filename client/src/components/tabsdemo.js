@@ -67,7 +67,7 @@ export default function VerticalTabs() {
       >
         <Tab label="All" {...a11yProps(0)} />
         <Tab label="Pending" {...a11yProps(1)} />
-        <Tab label="Assigned to me" {...a11yProps(2)} />
+        <Tab label="Assigned" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>    
       {state.accountType === 'Artist' &&  <Requests/>}

@@ -7,7 +7,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } fro
 const Requests = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
-   console.log(state?.categories);
+  
     useEffect(()=>{
        fetch('/allrequests',{
            headers:{
@@ -211,7 +211,7 @@ const Requests = ()=>{
                                                 Medium
                                             </TableCell>
                                             <TableCell align="left">  
-                                            {state.mediums.includes(item.medium) ? 
+                                            {state.mediums?.includes(item.medium) ? 
                                                     <Chip label={item.medium} style={{background:"blue",color:"white"}}/> 
                                                         :
                                                     <p>{item.medium}</p>
@@ -226,7 +226,7 @@ const Requests = ()=>{
                                                 Surface
                                             </TableCell>
                                             <TableCell align="left">
-                                            {state.surfaces.includes(item.surface) ? 
+                                            {state.surfaces?.includes(item.surface) ? 
                                                     <Chip label={item.surface} style={{background:"blue",color:"white"}}/> 
                                                         :
                                                     <p>{item.surface}</p>
@@ -243,7 +243,7 @@ const Requests = ()=>{
                                             <TableCell align="left">
                                                 {item.searchtag.map(tag=>    
                                                 <>
-                                               {state.tags.includes(tag) ? 
+                                               {state.tags?.includes(tag) ? 
                                                <Chip label={tag} style={{background:"blue",color:"white", margin:"3px"}} key={'chip'+tag}/> 
                                                      :
                                                     <Chip label={tag} style={{margin:"3px"}} key={'chip'+tag}/>

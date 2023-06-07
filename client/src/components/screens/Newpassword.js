@@ -34,7 +34,7 @@ const SignIn  = ()=>{
    return (
       <div className="mycard">
           <div className="card auth-card input-field">
-            <h2>Instagram</h2>
+            <h2>FindArt</h2>
         
             <input
             type="password"

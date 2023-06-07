@@ -15,7 +15,7 @@ import TextField from '@mui/material/TextField';
 const Settings = ()=>{  
     const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
-    const [bio, setBio] = useState('') ;
+    const [bio, setBio] = useState('') ;   
     const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
@@ -25,9 +25,13 @@ const Settings = ()=>{
     const [open, setOpen] = useState(false);
 
     useEffect(()=>{
-        if(state){ 
-            setBio(state.bio? state.bio : '');
-            setAccountType(state.accountType?state.accountType : '' );
+        if(state){    
+
+            setAccountType(state.accountType?state.accountType : '' ); 
+            if(accountType === 'Artist' )
+                setBio(state.bio? state.bio : '');
+            else if(accountType === 'Customer')      
+                setBio(state.customerbio? state.customerbio : '');
             setCategories(state.categories?state.categories : ['any categories']);
             setMediums(state.mediums? state.mediums : ['any mediums']);
             setSurfaces(state.surfaces? state.surfaces : ['any surfaces']);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.Schema.Types
+const {ObjectId} = mongoose.Schema.Types 
+
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -13,7 +14,8 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },   
-    bio:{ type:String, default:'' },
+    bio:{ type:String, default:'' },   
+    customerbio:{ type:String, default:'' },   
     accountType:{
         type:String,
     },

@@ -147,7 +147,18 @@ const Myrequests = ()=>{
                 </div>
                 : 
                 <div>No requests yet!</div>
-            }      
+            }     
+            {data=='' &&
+            <div className="card input-field"    
+            style={{  
+               margin:"30px auto",
+               maxWidth:"500px",
+               padding:"20px"}}
+               >
+                <h6>No requests!</h6>
+            </div>
+            } 
+            
             <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
                 <Toolbar>
                     <Link to="/createrequest" >

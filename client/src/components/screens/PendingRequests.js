@@ -94,9 +94,9 @@ const PendingRequests = ()=>{
     <>
     {(data && state)? 
         <div >
-           {data.map(item=>{
-            
-            return(
+           {data.map(item=>
+           {
+                return(
                 <>
                 {
                     item.acceptedBy.includes(state._id) &&
@@ -205,11 +205,30 @@ const PendingRequests = ()=>{
                 }    
                 </>
                 )}
-            )} 
-            </div>
+            
+                )} 
+                </div>
                 : 
-            <h6>No requests yet!</h6>
+                <div className="card input-field"    
+                style={{  
+                   margin:"30px auto",
+                   maxWidth:"500px",
+                   padding:"20px"}}
+                   >
+                    <h6>No requests yet!</h6>
+                </div>
             }   
+            
+             {/* {data=='' &&   
+                <div className="card input-field"    
+                style={{  
+                   margin:"30px auto",
+                   maxWidth:"500px",
+                   padding:"20px"}}
+                   >
+                    <h6>No pending requests!</h6>
+                </div>
+            } */}
             {state.accountType === 'Customer' &&
             
                 <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>

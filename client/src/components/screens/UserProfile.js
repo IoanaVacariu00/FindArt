@@ -21,8 +21,12 @@ const Profile = () =>{
            }
        }).then(res=>res.json())
        .then(result=>{
-           setProfile(result)
-           if(result.user.bio != '') setBio(result.user.bio)
+            setProfile(result) 
+            if(result.user.accountType === 'Artist')
+                if(result.user.bio != '') setBio(result.user.bio)    
+            else if(result.user.accountType === 'Customer')  
+                if(result.user.customerbio != '') setBio(result.user.customerbio)    
+              
        })
     },[])
     useEffect(()=>{

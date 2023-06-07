@@ -25,7 +25,7 @@ router.get('/allrequests',requireLogin,(req,res)=>{
 router.get('/assigned',requireLogin,(req,res)=>{
     Gig.find({
         $and:[
-            {user:req.user._id}, {assigned : false}
+            {user:req.user._id}, {assigned : true}
         ]
         
     })
@@ -92,8 +92,6 @@ router.get('/assigned_to_me',requireLogin,(req,res)=>{
     })
 })       
         
-         
-       
 
 // router.get('/suggested_requests/:userid',requireLogin,(req,res)=>{
 //     User.findOne({_id:req.params.userid})  
