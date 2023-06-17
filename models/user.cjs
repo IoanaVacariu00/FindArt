@@ -14,11 +14,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },   
-    bio:{ type:String, default:'' },   
-    customerbio:{ type:String, default:'' },   
+
     accountType:{
         type:String,
     },
+    bio:{ type:String, default:'' },   
+    customerbio:{ type:String, default:'' },   
     resetToken:String,
     expireToken:Date,
     pic:{

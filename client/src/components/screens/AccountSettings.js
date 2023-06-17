@@ -15,7 +15,7 @@ import TextField from '@mui/material/TextField';
 const Settings = ()=>{  
     const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
-    const [bio, setBio] = useState('') ;   
+    const [bio, setBio] = useState('') ;   const [customerbio, setCustomerBio] = useState('') ;   
     const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
@@ -28,17 +28,13 @@ const Settings = ()=>{
         if(state){    
 
             setAccountType(state.accountType?state.accountType : '' ); 
-            if(accountType === 'Artist' )
-                setBio(state.bio? state.bio : '');
-            else if(accountType === 'Customer')      
-                setBio(state.customerbio? state.customerbio : '');
+            setBio(state.bio? state.bio : '');
+            setCustomerBio(state.customerbio? state.customerbio : '');
             setCategories(state.categories?state.categories : ['any categories']);
             setMediums(state.mediums? state.mediums : ['any mediums']);
             setSurfaces(state.surfaces? state.surfaces : ['any surfaces']);
             setTags(state.tags? state.tags : []);
-            console.log(
-                accountType, categories, mediums, surfaces, tags
-            );
+ 
         }
 
        
@@ -59,7 +55,7 @@ const Settings = ()=>{
     };
 
    const requestDetails = ()=>{
-       
+
        fetch("/save_changes",{
         method:"put",
         headers:{
@@ -67,7 +63,9 @@ const Settings = ()=>{
             "Authorization":"Bearer "+localStorage.getItem("jwt")
         },
         body:JSON.stringify({   
-            accountType:accountType,   
+            accountType:accountType,        
+            bio:bio, 
+            customerbio:customerbio,
             categories:categories,
             mediums: mediums,
             surfaces: surfaces,
@@ -77,7 +75,9 @@ const Settings = ()=>{
         console.log(result)
         localStorage.setItem("user",JSON.stringify(
             {...state, 
-            accountType:accountType,            
+            accountType:accountType,     
+            bio:bio, 
+            customerbio:customerbio,       
             categories:categories,
             mediums: mediums,
             surfaces: surfaces,
@@ -178,18 +178,30 @@ const Settings = ()=>{
             </Select>
        
         </div>  
-
-        <div>
-        <InputLabel id="bio" style={{margin:"10px",textAlign:"left"}}>Bio</InputLabel>
-        <TextField  
-        fullWidth 
-        multiline    
-        maxRows={6}
-        value={bio}
-        onChange={(e)=>setBio(e.target.value)}
-        />
-        </div>
-
+        {accountType==='Artist'  && 
+            <div>
+            <InputLabel id="bio" style={{margin:"10px",textAlign:"left"}}>Bio</InputLabel>
+            <TextField  
+            fullWidth 
+            multiline    
+            maxRows={6}
+            value={bio}
+            onChange={(e)=>setBio(e.target.value)}
+            />
+            </div> 
+        }
+        {accountType==='Customer'  && 
+            <div>
+            <InputLabel id="customerbio" style={{margin:"10px",textAlign:"left"}}>Customer Bio</InputLabel>
+            <TextField  
+            fullWidth 
+            multiline    
+            maxRows={6}
+            value={customerbio}
+            onChange={(e)=>setCustomerBio(e.target.value)}
+            />
+            </div> 
+        }
         <div>
             <InputLabel id="categories" style={{margin:"10px",textAlign:"left"}}>Categories</InputLabel>
             <Select

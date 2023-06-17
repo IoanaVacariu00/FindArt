@@ -24,6 +24,8 @@ export const reducer = (state,action)=>{
         return {
             ...state,
             accounType:action.payload.accountType,  
+            bio:action.payload.bio,  
+            customerbio:action.payload.customerbio,  
             categories:action.payload.categories, 
             mediums:action.payload.mediums,
             surfaces:action.payload.surfaces,

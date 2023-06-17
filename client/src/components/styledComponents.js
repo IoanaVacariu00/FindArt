@@ -115,7 +115,7 @@ export const StyledFab = styled(Fab)({
   export const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    // backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -148,6 +148,7 @@ export const StyledFab = styled(Fab)({
       width: '100%',
       [theme.breakpoints.up('md')]: {
         width: '20ch',
-      },
-    },
+      },   
+      margin:"0 10px",
+     },
   }));

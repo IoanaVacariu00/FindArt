@@ -212,15 +212,16 @@ const NavBar = ()=>{
                 <Link to='/messenger'>Inbox</Link>
               </Typography>
             </MenuItem>   
-            <MenuItem> 
-            <Search >
-            <SearchIconWrapper>
+            <MenuItem>  
+            {/* <SearchIconWrapper>
                <SearchIcon /> 
-            </SearchIconWrapper> 
+            </SearchIconWrapper>  */}
+            <Search >
+
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }} 
-              // style={{padding: '0 10px'}}
+              style={{padding: '0 10px'}}
             />
           </Search>
             </MenuItem>
@@ -267,20 +268,22 @@ const NavBar = ()=>{
               ><Link to="/messenger">Inbox</Link>
                 
               </Button> 
-              <Search>
-            <SearchIconWrapper> 
+              {/* <SearchIconWrapper> 
               <SearchIcon />
-             </SearchIconWrapper>
+             </SearchIconWrapper> */}
+              <Search>
+
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }} 
-              // style={{padding: '0 10px'}}
+              style={{padding: '0 10px'}}
             />
           </Search> 
 
           </Box>
           }   
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0 }}>  
+          
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 { state &&

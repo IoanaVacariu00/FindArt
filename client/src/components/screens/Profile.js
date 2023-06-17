@@ -15,7 +15,6 @@ const Profile = ()=>{
     const [requests, setRequests] = useState([])
     const {state,dispatch} = useContext(UserContext); 
     const [image,setImage] = useState("")
-    const [bio,setBio]=useState('')
     useEffect(()=>{
        fetch('/mypost',{
            headers:{
@@ -24,12 +23,7 @@ const Profile = ()=>{
        }).then(res=>res.json())
        .then(result=>{         
            setPics(result.mypost)  
-           if(state) {
-                if(state.accountType === 'Artist')
-                    if(state.bio != '') setBio(state.bio)    
-                else if(state.accountType === 'Customer')  
-                    if(state.customerbio != '') setBio(state.customerbio)   
-           }          
+     
        })
     },[])    
     useEffect(()=>{
@@ -167,7 +161,12 @@ const Profile = ()=>{
                     <div>
                         <h4>{state?state.name:"loading"}</h4>
                         <h6  style={{opacity:'80%'}}>{state?.accountType}</h6>
-                        {state && <>{bio && <div>{bio}</div>}</>}
+                        {state && 
+                        <>
+                        {state.accountType === 'Customer' && <h6>{state.customerbio}</h6>}
+                        {state.accountType === 'Artist' && <h6>{state.bio}</h6>}
+                        </>
+                        }
                         {
                             state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>

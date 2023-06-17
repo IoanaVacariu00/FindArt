@@ -1,9 +1,8 @@
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
-import {useParams} from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import {useParams,Link} from 'react-router-dom'
 import Fab from '@mui/material/Fab'; 
-import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
+import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Chip } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { styled } from "@mui/system";
 
@@ -22,11 +21,7 @@ const Profile = () =>{
        }).then(res=>res.json())
        .then(result=>{
             setProfile(result) 
-            if(result.user.accountType === 'Artist')
-                if(result.user.bio != '') setBio(result.user.bio)    
-            else if(result.user.accountType === 'Customer')  
-                if(result.user.customerbio != '') setBio(result.user.customerbio)    
-              
+             
        })
     },[])
     useEffect(()=>{
@@ -185,7 +180,7 @@ const Profile = () =>{
                                 <h6>{userProfile.posts.length} posts</h6>
                                 <h6>{userProfile.user.followers.length} followers</h6>
                                 <h6>{userProfile.user.following.length} following</h6>    
-                                {state && <>{bio && <div>{bio}</div>}</>}
+                                
                         </div> 
                     
                         {showfollow?
@@ -259,8 +254,8 @@ const Profile = () =>{
                                                 <TableCell align="left">
                                                 <StyledTextarea      
                                                 value={item.notes}
-                                                readOnly       
-                                                    
+                                                readOnly     
+                                                  
                                                 />
                                                 </TableCell>
                                             </TableRow>

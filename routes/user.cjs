@@ -126,9 +126,9 @@ router.post('/searchusers',(req,res)=>{
     })
 })
 
-router.put('/save_changes',requireLogin,(req,res)=>{
+router.put('/save_changes',requireLogin,(req,res)=>{  
     User.findByIdAndUpdate(req.user._id, 
-        {$set:{accountType:req.body.accountType,categories:req.body.categories, mediums: req.body.mediums, surfaces: req.body.surfaces, tags: req.body.tags}},
+        {$set:{accountType:req.body.accountType, bio:req.body.bio,customerbio:req.body.customerbio, categories:req.body.categories, mediums: req.body.mediums, surfaces: req.body.surfaces, tags: req.body.tags}},
         {new: true},
         (err,result)=>{
             if(err){
