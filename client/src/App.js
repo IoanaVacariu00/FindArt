@@ -1,7 +1,6 @@
 import React,{useEffect,createContext,useReducer,useContext} from 'react';
 import NavBar from './components/Navbar'   
 import "./App.css"
-import { StyledEngineProvider } from '@mui/material/styles';
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
 import Home from './components/screens/Home'
 import Signin from './components/screens/SignIn'
@@ -24,7 +23,10 @@ import { AppBar } from '@mui/material';
 import Container from "@mui/material/Container";
 import PendingRequests from './components/screens/PendingRequests'; 
 import AssignedToMe from './components/screens/AssignedToMe';
-import MainRequests from './components/screens/MainRequests';
+import MainRequests from './components/screens/MainRequests';   
+import CustomerProfile from './components/screens/CustomerProfile';  
+import ArtistProfile from './components/screens/ArtistProfile'; 
+
 export const UserContext = createContext()
 
 const Routing = ()=>{
@@ -97,7 +99,13 @@ const Routing = ()=>{
       </Route>  
       <Route path="/main_requests">
         <MainRequests />        
-      </Route>
+      </Route>   
+      <Route path="/customer_profile/:userid">
+        <CustomerProfile />        
+      </Route>  
+      <Route path="/artist_profile/:userid">
+        <ArtistProfile />        
+      </Route> 
      </Switch>
   )
 }

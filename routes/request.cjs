@@ -7,10 +7,7 @@ const User = mongoose.model("User")
 
 router.get('/allrequests',requireLogin,(req,res)=>{
     Gig.find({
-        $and:[
-            {user:{$not:{$eq:req.user._id}}}, {assigned : false}
-        ]
-        
+        $and:[{user:{$not:{$eq:req.user._id}}}, {assigned : false}]
     })
     .populate("user","_id name ")
     .sort('-createdAt')
@@ -24,10 +21,7 @@ router.get('/allrequests',requireLogin,(req,res)=>{
 
 router.get('/assigned',requireLogin,(req,res)=>{
     Gig.find({
-        $and:[
-            {user:req.user._id}, {assigned : true}
-        ]
-        
+        $and:[{user:req.user._id}, {assigned : true}]
     })
     .populate("user","_id name")
     .sort('-createdAt')
@@ -41,10 +35,7 @@ router.get('/assigned',requireLogin,(req,res)=>{
 
 router.get('/unassigned',requireLogin,(req,res)=>{
     Gig.find({
-        $and:[
-            {user:req.user._id}, {assigned : false}
-        ]
-        
+        $and:[ {user:req.user._id}, {assigned : false}]
     })
     .populate("user","_id name")
     .sort('-createdAt')
@@ -55,6 +46,17 @@ router.get('/unassigned',requireLogin,(req,res)=>{
         console.log(err)
     })
 })   
+router.get('/assigned_to_me',requireLogin,(req,res)=>{
+    Gig.find({$and:[{assignedTo:{$exists: true}},{assignedTo:req.user._id}]})
+    .populate("user","_id name")
+    .sort('-createdAt')
+    .then((requests)=>{
+        res.json({requests})
+    })               
+    .catch(err=>{
+        console.log(err)
+    })
+}) 
 
 router.get('/requestsbyme',requireLogin,(req,res)=>{
     Gig.find({user:req.user._id})
@@ -70,18 +72,6 @@ router.get('/requestsbyme',requireLogin,(req,res)=>{
 
 router.get('/requestsby/:userid',requireLogin,(req,res)=>{
     Gig.find({user:req.params.userid})
-    .populate("user","_id name")
-    .sort('-createdAt')
-    .then((requests)=>{
-        res.json({requests})
-    })               
-    .catch(err=>{
-        console.log(err)
-    })
-}) 
-
-router.get('/assigned_to_me',requireLogin,(req,res)=>{
-    Gig.find({$and:[{assignedTo:{$exists: true}},{assignedTo:req.user._id}]})
     .populate("user","_id name")
     .sort('-createdAt')
     .then((requests)=>{

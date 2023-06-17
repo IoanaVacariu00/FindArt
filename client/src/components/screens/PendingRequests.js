@@ -108,7 +108,7 @@ const PendingRequests = ()=>{
                         textAlign:"center"
                      }}>
                         <h5 style={{padding:"5px"}}>
-                            <Link to={"/profile/"+item.user._id}>
+                            <Link to={"/customer_profile/"+item.user._id}>
                             <p style={{float:"left"}}>{item?.user.name} </p>
                             </Link>
                             {state.accountType === 'Artist' && 

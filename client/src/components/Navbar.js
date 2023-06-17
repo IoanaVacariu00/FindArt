@@ -1,23 +1,18 @@
 import React,{useContext, useRef, useEffect,useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
-import M from 'materialize-css'
-
-
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Palette from "@mui/icons-material/Palette"
+import Palette from "@mui/icons-material/Palette"  
+import SearchIcon from '@mui/icons-material/Search';
+import { SearchIconWrapper, Search, StyledInputBase } from './styledComponents';
 const NavBar = ()=>{
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -155,7 +150,8 @@ const NavBar = ()=>{
       // </AppBar>
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
       // <Container maxWidth="xl">disableguters
-      <> <Toolbar >
+      <>
+       <Toolbar >
           <Palette sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -186,7 +182,8 @@ const NavBar = ()=>{
             >
               <MenuIcon />
             </IconButton>
-            {state && <Menu
+            {state && 
+            <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -214,7 +211,18 @@ const NavBar = ()=>{
               <Typography textAlign="center">  
                 <Link to='/messenger'>Inbox</Link>
               </Typography>
-            </MenuItem> 
+            </MenuItem>   
+            <MenuItem> 
+            <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+            </MenuItem>
             </Menu>}
           </Box>
           <Palette sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -257,7 +265,17 @@ const NavBar = ()=>{
                 sx={{ my: 2, color: "white", display: "block" }}
               ><Link to="/messenger">Inbox</Link>
                 
-              </Button>       
+              </Button> 
+              <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search> 
+
           </Box>
           }   
           <Box sx={{ flexGrow: 0 }}>

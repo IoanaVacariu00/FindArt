@@ -2,7 +2,8 @@ import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'    
 import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
-import TextareaAutosize from '@mui/base/TextareaAutosize'; import { styled } from "@mui/system";
+import TextareaAutosize from '@mui/base/TextareaAutosize';  
+import { styled } from "@mui/system";
 
 const Requests = ()=>{
     const [data,setData] = useState([])
@@ -142,7 +143,7 @@ const Requests = ()=>{
                         textAlign:"center"
                      }}>
                         <h5 style={{padding:"5px"}}>
-                            <Link to={"/profile/"+item.user._id}>
+                            <Link to={"/customer_profile/"+item.user._id}>
                             <p style={{float:"left"}}>{item?.user.name} </p>
                             </Link>
                       
@@ -255,8 +256,7 @@ const Requests = ()=>{
                                         </TableBody>
                                     </Table>
                                  
-                                        
-                                </TableContainer>
+                        </TableContainer>                            
                     </div> 
                        
                 )}

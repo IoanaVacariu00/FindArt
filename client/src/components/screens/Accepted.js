@@ -69,7 +69,7 @@ const Accepted = ()=>{
                 {artists.map(artist=>{
                     return(
                         <ListItem disablePadding  key={'artist2'+artist._id}>
-                            <Link to={"/profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
+                            <Link to={"/artist_profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <Avatar alt={artist?.name} src={artist?.pic} style={{width:"60px",height:"60px"}}/>
