@@ -213,13 +213,14 @@ const NavBar = ()=>{
               </Typography>
             </MenuItem>   
             <MenuItem> 
-            <Search>
+            <Search >
             <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
+               <SearchIcon /> 
+            </SearchIconWrapper> 
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search' }} 
+              // style={{padding: '0 10px'}}
             />
           </Search>
             </MenuItem>
@@ -267,12 +268,13 @@ const NavBar = ()=>{
                 
               </Button> 
               <Search>
-            <SearchIconWrapper>
+            <SearchIconWrapper> 
               <SearchIcon />
-            </SearchIconWrapper>
+             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search' }} 
+              // style={{padding: '0 10px'}}
             />
           </Search> 
 

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import M from 'materialize-css'
+// import M from 'materialize-css'
 import {useHistory} from 'react-router-dom' 
 import Box from "@mui/material/Box";
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -83,10 +83,10 @@ const CreateRequest = ()=>{
     .then(data=>{
         console.log(data)
        if(data.error){
-          M.toast({html: data.error,classes:"#c62828 red darken-3"})
+        //   M.toast({html: data.error,classes:"#c62828 red darken-3"})
        }
        else{
-           M.toast({html:"Request created successfully",classes:"#43a047 green darken-1"})
+        //    M.toast({html:"Request created successfully",classes:"#43a047 green darken-1"})
            history.push('/my_requests')
        }
     }).catch(err=>{

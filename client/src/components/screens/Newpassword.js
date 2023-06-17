@@ -1,6 +1,6 @@
 import React,{useState,useContext,} from 'react'
 import {Link,useHistory,useParams} from 'react-router-dom'
-import M from 'materialize-css'
+// import M from 'materialize-css'
 const SignIn  = ()=>{
     const history = useHistory()
     const [password,setPasword] = useState("")
@@ -20,11 +20,11 @@ const SignIn  = ()=>{
         .then(data=>{
             console.log(data)
            if(data.error){
-              M.toast({html: data.error,classes:"#c62828 red darken-3"})
+            //   M.toast({html: data.error,classes:"#c62828 red darken-3"})
            }
            else{
 
-               M.toast({html:data.message,classes:"#43a047 green darken-1"})
+            //    M.toast({html:data.message,classes:"#43a047 green darken-1"})
                history.push('/signin')
            }
         }).catch(err=>{
