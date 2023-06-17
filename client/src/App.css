@@ -2,6 +2,13 @@
  
 #FindArt{color:white}
 
+body {
+  background: white;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
 TableRow, Divider { 
   cursor: auto
 }
@@ -30,7 +37,6 @@ a{
 .brand-logo {
   font-family: 'Grand Hotel', cursive;
 } 
-
 
 .mycard{
   margin-top: 30px;

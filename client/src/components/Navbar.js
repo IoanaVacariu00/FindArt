@@ -123,29 +123,29 @@ const NavBar = ()=>{
       //     </ul>
       //   </div>
         
-      //   <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
-      //       <div className="modal-content">
-      //         <input
-      //           type="text"
-      //           placeholder="search users"
-      //           value={search}
-      //           onChange={(e)=>fetchUsers(e.target.value)}
-      //         />
-      //         <ul className="collection">
-      //           {userDetails.map(item=>{
-      //             return <Link key={item.name} to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
-      //             onClick={()=>{
-      //               M.Modal.getInstance(searchModal.current).close()
-      //               setSearch('')
-      //             }}><li className="collection-item">{item.name}</li></Link> 
-      //           })}
+        // <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
+        //     <div className="modal-content">
+        //       <input
+        //         type="text"
+        //         placeholder="search users"
+        //         value={search}
+        //         onChange={(e)=>fetchUsers(e.target.value)}
+        //       />
+        //       <ul className="collection">
+        //         {userDetails.map(item=>{
+        //           return <Link key={item.name} to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
+        //           onClick={()=>{
+        //             M.Modal.getInstance(searchModal.current).close()
+        //             setSearch('')
+        //           }}><li className="collection-item">{item.name}</li></Link> 
+        //         })}
                 
-      //         </ul>
-      //       </div>
-      //       <div className="modal-footer">
-      //         <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>close</button>
-      //       </div>
-      //   </div>
+        //       </ul>
+        //     </div>
+        //     <div className="modal-footer">
+        //       <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>close</button>
+        //     </div>
+        // </div>
       //   </Toolbar>
       // </AppBar>
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
@@ -223,7 +223,8 @@ const NavBar = ()=>{
               inputProps={{ 'aria-label': 'search' }} 
               style={{padding: '0 10px'}}
             />
-          </Search>
+          </Search>  
+          
             </MenuItem>
             </Menu>}
           </Box>

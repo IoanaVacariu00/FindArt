@@ -12,10 +12,10 @@ import { UserContext } from '../App';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
-
   return (
     <div
       role="tabpanel"
+      style={{height:'100vh'}}
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}

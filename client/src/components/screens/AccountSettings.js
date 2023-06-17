@@ -153,16 +153,20 @@ const Settings = ()=>{
     <>
         <div 
         style={{
-           margin:"30px auto",
+           margin:"20px auto",
            maxWidth:"90vh",
+           height:'100vh',
            padding:"20px",
-           textAlign:"center"
+           textAlign:"center",
+           background:'white',
+            
         }}
        > 
-         <h4 style={{padding: "15px"}}>Account Settings</h4>
+        <div style={{padding: "0 15px", display:'inline-block'}}>
+            <h4>Account Settings</h4>
+        </div>
+        <br/>
         <div style={{display:"flex"}}>
-
-     
             <InputLabel id="demo-simple-select-label" style={{width: "50%",margin:"10px",textAlign:"left"}}>Account Type</InputLabel>
             <Select
                 style={{width: "50%",textAlign:"left"}}
@@ -308,17 +312,16 @@ const Settings = ()=>{
                         </MenuItem>
                         ))}
                 </Select> 
-            </div>
-            <br/>            
-            <button  style={{float:"right"}}
+            </div>        
+            
+            <button style={{float:"right", margin:'10px 0'}}
             className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
             onClick={()=>requestDetails()}
             >
                 Save
             </button>
+            
             </div>
-
-        
     </>
      );
 }   

@@ -121,7 +121,7 @@ function App() {
             <NavBar /> 
           </Container> 
         </AppBar>  
-      <div style={{ paddingTop: "100px"}}><Routing /></div>
+      <div style={{ paddingTop: "65px"}}><Routing /></div>
      </div>   
       </BrowserRouter>
     </UserContext.Provider> 

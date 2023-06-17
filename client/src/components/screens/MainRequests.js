@@ -2,7 +2,9 @@ import React from 'react'
 import Tabsdemo from '../tabsdemo'
 const MainRequests  = ()=>{
     return( 
-        <Tabsdemo/>
+        <div className='image_background'>
+            <Tabsdemo/>
+        </div> 
     )
 }
 
