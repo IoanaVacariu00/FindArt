@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-// import M from 'materialize-css'
+import M from 'materialize-css'
 import {useHistory} from 'react-router-dom'
 import CreatableSelect from 'react-select/creatable';
 import { Tags } from '../../data';
@@ -37,10 +37,10 @@ const CreatePost = ()=>{
         .then(data=>{
     
            if(data.error){
-            //   M.toast({html: data.error,classes:"#c62828 red darken-3"})
+            M.toast({html: data.error,classes:"#c62828 red darken-3"})
            }
            else{
-            //    M.toast({html:"Created post Successfully",classes:"#43a047 green darken-1"})
+               M.toast({html:"Created post Successfully",classes:"#43a047 green darken-1"})
                history.push('/')
            }
         }).catch(err=>{

@@ -2,7 +2,7 @@ import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useHistory} from 'react-router-dom' 
 import Box from "@mui/material/Box";
-// import M from 'materialize-css'
+import M from 'materialize-css'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -85,10 +85,10 @@ const Settings = ()=>{
             ))
         dispatch({type:"UPDATEINFO",payload:result})
         if(result.error){
-        //   M.toast({html: result.error,classes:"#c62828 red darken-3"})
+          M.toast({html: result.error,classes:"#c62828 red darken-3"})
         }
         else{
-        //    M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
+           M.toast({html:"Account settings updated successfully",classes:"#43a047 green darken-1"})
            history.push('/profile')
            window.location.reload()
        }

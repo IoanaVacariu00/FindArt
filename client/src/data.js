@@ -26,8 +26,7 @@
         'Neoclassicism', 
          'Neon Art', 
         'Op Art', 
-       'Performance Art', 
-      'Pop Art', 
+          'Pop Art', 
       'Post-Impressionism', 
        'Precisionism', 
       'Rococo', 
@@ -44,25 +43,17 @@
     ]  
     
     export const Surfaces = [         
-      'Canvas','Paper','Wood Panel', 'any surfaces' 
+      'any surfaces','Canvas','Paper','Wood Panel','Watercolor Paper', 'Cardboard',   
+      'Card stock','Fabric',
+      'Glass',
+      'Plaster',
+      'Scratchboard',
+      'Vellum',
      ]     
     
     export const Tags = [         
-      'canvas','paper','woodpanel', 'blackandwhite' 
+      '#painting', '#blackandwhite', '#blue', '#realistic', '#portrait', '#landscape','#nature','#swan','#cat','#dog','#abstract','#lineart','#dotwork','#red','#yellow','#colorful','#pink','#orange'
      ]     
-    
-     export const Tags2 = [         
-      {title:'canvas'},
-      {title:'paper'},
-      {title:'woodpanel'},
-      {title:'blackandwhite'} 
-     ]     
-     
-    
-    
-    
-    
-    
     /**
      * import * as React from "react";
 import TextField from "@mui/material/TextField";
