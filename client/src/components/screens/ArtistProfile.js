@@ -8,6 +8,7 @@ const ArtistProfile = () =>{
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
+    
     useEffect(()=>{
        fetch(`/user/${userid}`,{
            headers:{
@@ -16,7 +17,6 @@ const ArtistProfile = () =>{
        }).then(res=>res.json())
        .then(result=>{
             setProfile(result) 
-            
        })
     },[])
 

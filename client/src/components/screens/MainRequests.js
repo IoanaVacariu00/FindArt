@@ -1,5 +1,5 @@
 import React from 'react'
-import Tabsdemo from '../tabsdemo'
+import Tabsdemo from '../TabsComponent'
 const MainRequests  = ()=>{
     return( 
         <div className='image_background'>

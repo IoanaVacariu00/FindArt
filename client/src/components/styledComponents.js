@@ -1,5 +1,4 @@
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
-
 import { styled,alpha } from '@mui/material/styles';
 import Fab from '@mui/material/Fab'; 
 import InputBase from '@mui/material/InputBase';
@@ -68,54 +67,9 @@ export const StyledFab = styled(Fab)({
     margin: '10px',
   });   
 
-  // export const Search = styled('div')(({ theme }) => ({
-  //   position: 'relative',  
-  //   // display: 'flex',
-  //   // borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  // '&:hover': {
-  //   backgroundColor: alpha(theme.palette.common.white, 0.25),
-  // },
-  //   margin:'5px',
-  //   width: '100%',
-  //   [theme.breakpoints.up('sm')]: {
-  //     // marginLeft: theme.spacing(1),
-  //     width: 'auto',
-  //   },
-  // }));
-  
-  // export const SearchIconWrapper = styled('div')(({ theme }) => ({
-  //   padding: '5px', 
-  //   // margin:'5px',
-  //   height: '100%',
-  //   position: 'absolute',
-  //   pointerEvents: 'none',
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // }));
-  
-  // export const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  //   color: 'white',
-  //   '& .MuiInputBase-input': {
-
-  //     // vertical padding + font size from searchIcon
-  //     paddingLeft: '10px',
-  //     transition: theme.transitions.create('width'),
-  //     width: '100%',
-  //     [theme.breakpoints.up('sm')]: {
-  //       width: '12ch',
-  //       '&:focus': {
-  //         width: '20ch',
-  //       },
-  //     },
-  //   },
-  // }));
-   
   export const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    // backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -142,7 +96,6 @@ export const StyledFab = styled(Fab)({
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',

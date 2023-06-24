@@ -5,7 +5,7 @@ import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Ch
 import AddIcon from '@mui/icons-material/Add';
 import Toolbar from '@mui/material/Toolbar';
 import DeleteIcon from '@mui/icons-material/Delete'; 
-import {blue, grey, StyledFab, StyledTextarea} from '../styledComponents'
+import {blue, grey, StyledFab, StyledTextarea} from '../StyledComponents'
 const Myrequests = ()=>{ 
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)

@@ -20,8 +20,7 @@ const Profile = () =>{
            }
        }).then(res=>res.json())
        .then(result=>{
-            setProfile(result) 
-             
+            setProfile(result)
        })
     },[])
     useEffect(()=>{

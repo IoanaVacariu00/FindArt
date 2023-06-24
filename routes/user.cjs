@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const requireLogin  = require('../middleware/requireLogin.cjs')
 const Post =  mongoose.model("Post")
 const User = mongoose.model("User")
-const Gig = mongoose.model("Gig")  
 
 router.get('/user/:id',requireLogin,(req,res)=>{
     User.findOne({_id:req.params.id})

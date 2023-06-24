@@ -7,8 +7,7 @@ const SignIn  = ()=>{
     const history = useHistory()
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
-    //const [customer, setCustomer] = useState(false) /// 
-    const PostData = ()=>{
+       const PostData = ()=>{
         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
             M.toast({html: "invalid email",classes:"#c62828 red darken-3"})
             return
@@ -20,9 +19,7 @@ const SignIn  = ()=>{
             },
             body:JSON.stringify({
                 email,
-                password, 
-                //customer
-                
+                password        
             })
         }).then(res=>res.json())
         .then(data=>{
@@ -67,9 +64,6 @@ const SignIn  = ()=>{
             <h5>
                 <Link to="/signup">Don't have an account?</Link>
             </h5>
-            <h6>
-                <Link to="/reset">Forgot password?</Link>
-            </h6>
             </div>
       </div>
    )

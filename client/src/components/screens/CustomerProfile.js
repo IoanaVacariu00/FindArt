@@ -2,7 +2,7 @@ import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams, Link} from 'react-router-dom'
 import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Chip } from '@mui/material';
-import {StyledTextarea} from '../styledComponents'
+import {StyledTextarea} from '../StyledComponents'
 
 const CustomerProfile = () =>{
     const [userProfile,setProfile] = useState(null)

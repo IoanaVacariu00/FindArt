@@ -2,7 +2,7 @@ import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'    
 import {Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
-import {blue, grey, StyledFab, StyledTextarea} from '../styledComponents'
+import {blue, grey, StyledFab, StyledTextarea} from '../StyledComponents'
 import AddIcon from '@mui/icons-material/Add';
 import Toolbar from '@mui/material/Toolbar';
 import { AppBar } from '@mui/material';

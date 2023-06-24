@@ -8,7 +8,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Button } from '@mui/material';
+
 const Accepted = ()=>{ 
+
     const {state} = useContext(UserContext)
     const [artists, setArtists] = useState([])   
     const {requestid} = useParams();
@@ -54,9 +56,40 @@ const Accepted = ()=>{
     }    
    return (
     <>
-        {artists? 
-        <div className="home" >
-            
+    {artists? 
+    <div className="home" >
+    <div className="card input-field" 
+    style={{  
+        margin:"30px auto",
+        maxWidth:"60%",
+        padding:"20px",
+        textAlign:"center"
+        }}
+    >
+        <List>
+            {artists.map(artist=>{
+            return(
+                <ListItem disablePadding  key={'artist2'+artist._id}>
+                    <Link to={"/artist_profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <Avatar alt={artist?.name} src={artist?.pic} style={{width:"60px",height:"60px"}}/>
+                            </ListItemIcon>
+                            <h6 style={{margin:"0 20px"}}>{artist?.name}</h6> 
+                        </ListItemButton>
+                    </Link>
+                    <Button variant="contained" style={{margin:"10px",padding:"10px" }}
+                        onClick = {()=>{assignrequest(artist._id)}}>
+                        Choose Artist
+                    </Button>
+                </ListItem>
+                )
+            })}
+        </List>
+    </div>
+    </div>
+    : 
+    <div className="home">
         <div className="card input-field" 
         style={{  
             margin:"30px auto",
@@ -65,44 +98,9 @@ const Accepted = ()=>{
             textAlign:"center"
             }}
         >
-            <List>
-                {artists.map(artist=>{
-                    return(
-                        <ListItem disablePadding  key={'artist2'+artist._id}>
-                            <Link to={"/artist_profile/"+artist._id } key={'artist'+artist._id} style={{width:"100%"}}> 
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <Avatar alt={artist?.name} src={artist?.pic} style={{width:"60px",height:"60px"}}/>
-                                    </ListItemIcon>
-                                    <h6 style={{margin:"0 20px"}}>{artist?.name}</h6> 
-                                </ListItemButton>
-                            </Link>
-                            <Button variant="contained" style={{margin:"10px",padding:"10px" }}
-                                onClick = {()=>{
-                                    assignrequest(artist._id)
-                                }}
-                            >
-                                Choose Artist
-                            </Button>
-                        </ListItem>
-                    )
-                })}
-            </List>
+            <p>No artists applied yet!</p>
         </div>
-        </div>
-        : 
-        <div className="home">
-            <div className="card input-field" 
-            style={{  
-                margin:"30px auto",
-                maxWidth:"60%",
-                padding:"20px",
-                textAlign:"center"
-                }}
-            >
-                <p>No artists applied yet!</p>
-            </div>
-        </div>
+    </div>
     }
     </>
     )

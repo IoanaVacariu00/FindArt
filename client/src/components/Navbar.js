@@ -11,8 +11,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Palette from "@mui/icons-material/Palette"  
-import SearchIcon from '@mui/icons-material/Search';
-import { SearchIconWrapper, Search, StyledInputBase } from './styledComponents';
+import { Search, StyledInputBase } from './StyledComponents';
 const NavBar = ()=>{
 
   const [anchorElNav, setAnchorElNav] = useState(null);
