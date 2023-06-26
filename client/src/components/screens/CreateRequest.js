@@ -7,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
-
 import TextField from '@mui/material/TextField';
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 
@@ -139,117 +138,117 @@ const CreateRequest = ()=>{
         onChange={(e)=>setNotes(e.target.value)}
         />
         </div>
-            <div>
-            <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
+        <div>
+        <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
+        <Select            
+            style={{width: "100%"}}
+            labelId="category-simple-select-label"
+            id="category-simple-select"
+            value={category}
+            label="Category"
+            onChange={(e) => {setCategory(e.target.value)}}
+        >
+            {Categories.map(option => (
+                <MenuItem value={option} key={option}>
+                    {option}
+                </MenuItem>
+                ))}
+        </Select>
+        </div> 
+
+        <div>
+            <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
             <Select            
                 style={{width: "100%"}}
-                labelId="category-simple-select-label"
-                id="category-simple-select"
-                value={category}
-                label="Category"
-                onChange={(e) => {setCategory(e.target.value)}}
+                labelId="medium-simple-select-label"
+                id="medium-simple-select"
+                value={medium}
+                label="Medium"
+                onChange={(e) => {setMedium(e.target.value);}}
             >
-                {Categories.map(option => (
+                {Mediums.map(option => (
                     <MenuItem value={option} key={option}>
                         {option}
                     </MenuItem>
                     ))}
             </Select>
-            </div> 
-
-            <div>
-                <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
-                <Select            
-                    style={{width: "100%"}}
-                    labelId="medium-simple-select-label"
-                    id="medium-simple-select"
-                    value={medium}
-                    label="Medium"
-                    onChange={(e) => {setMedium(e.target.value);}}
-                >
-                    {Mediums.map(option => (
-                        <MenuItem value={option} key={option}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select>
-            </div>
-            <div>
-                <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
-                <Select            
-                    style={{width: "100%"}}
-                    labelId="surface-simple-select-label"
-                    id="surface-simple-select"
-                    value={surface}
-                    label="Surface"
-                    onChange={(e) => {setSurface(e.target.value);}}
-                >
-                    {Surfaces.map(option => (
-                        <MenuItem value={option} key={option}>
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select>
-            </div>
-  
-            <div>
-                <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
-                <Select
-                labelId="tag-select-label"
-                id="tag-select"
-                value={searchtag}
-                label="Search Tags"
-                multiple
+        </div>
+        <div>
+            <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
+            <Select            
                 style={{width: "100%"}}
-                open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                onChange={handleChange}
-                input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                        ))}
-                    </Box>  
-                )}
-                >
-                    {Tags.map(option => (
-                        <MenuItem value={option} key={option}  >
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select> 
-            </div>
-
-            {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
-            <Box style={{ width: "50%", margin:"10px auto" }}>
-                <Slider
-                    getAriaLabel={() => 'Minimum distance'}
-                    value={price}
-                    onChange={handleChange1}
-                    valueLabelDisplay="auto"
-                    getAriaValueText={valuetext}
-                    disableSwap
-                />
-            </Box> */}
-
-           <div className="file-field input-field">
-            {/* <div className="btn #64b5f6 blue darken-1">
-                <span>Upload Image</span>
-                <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
-            </div> */}
-            {/* <div className="file-path-wrapper">
-                <input className="file-path validate" type="text" />
-            </div> */}
-            </div>
-            <button 
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
-            onClick={()=>requestDetails()}
+                labelId="surface-simple-select-label"
+                id="surface-simple-select"
+                value={surface}
+                label="Surface"
+                onChange={(e) => {setSurface(e.target.value);}}
             >
-                Submit request
-            </button>
-            </div>
+                {Surfaces.map(option => (
+                    <MenuItem value={option} key={option}>
+                        {option}
+                    </MenuItem>
+                    ))}
+            </Select>
+        </div>
+
+        <div>
+            <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
+            <Select
+            labelId="tag-select-label"
+            id="tag-select"
+            value={searchtag}
+            label="Search Tags"
+            multiple
+            style={{width: "100%"}}
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                    ))}
+                </Box>  
+            )}
+            >
+                {Tags.map(option => (
+                    <MenuItem value={option} key={option}  >
+                        {option}
+                    </MenuItem>
+                    ))}
+            </Select> 
+        </div>
+
+        {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
+        <Box style={{ width: "50%", margin:"10px auto" }}>
+            <Slider
+                getAriaLabel={() => 'Minimum distance'}
+                value={price}
+                onChange={handleChange1}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                disableSwap
+            />
+        </Box> */}
+
+        <div className="file-field input-field">
+        {/* <div className="btn #64b5f6 blue darken-1">
+            <span>Upload Image</span>
+            <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
+        </div> */}
+        {/* <div className="file-path-wrapper">
+            <input className="file-path validate" type="text" />
+        </div> */}
+        </div>
+        <button 
+        className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
+        onClick={()=>requestDetails()}
+        >
+            Submit request
+        </button>
+        </div>
    )
 }
 

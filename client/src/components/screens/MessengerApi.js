@@ -2,9 +2,9 @@ import React,{ useEffect, useState, useContext } from 'react';
 import Talk from 'talkjs';   
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
-import axios from 'axios';
+
 const MessengerApi = () => {   
-    const [friend,setFriend] = useState(null);
+
     const {state} = useContext(UserContext); 
     const {userid} = useParams();   
     const [talkLoaded, markTalkLoaded] = useState(false);

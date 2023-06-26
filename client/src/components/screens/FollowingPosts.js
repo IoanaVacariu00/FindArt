@@ -222,7 +222,7 @@ const Home = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext);
     useEffect(()=>{
-        fetch('/getsubpost',{
+        fetch('/get_following_posts',{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }

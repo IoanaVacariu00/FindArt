@@ -9,7 +9,7 @@ import Signup from './components/screens/Signup'
 import CreatePost from './components/screens/CreatePost'
 import {reducer,initialState} from './reducers/userReducer'
 import UserProfile from './components/screens/UserProfile'
-import SubscribedUserPosts from './components/screens/SubscribesUserPosts'
+import FollowingPosts from './components/screens/FollowingPosts'
 import Reset from './components/screens/Reset'
 import NewPassword from './components/screens/Newpassword'
 import Requests from './components/screens/Requests';
@@ -62,7 +62,7 @@ const Routing = ()=>{
         <UserProfile />
       </Route>
       <Route path="/myfollowingpost">
-        <SubscribedUserPosts />
+        <FollowingPosts />
       </Route>
       <Route exact path="/reset">
         <Reset/>
