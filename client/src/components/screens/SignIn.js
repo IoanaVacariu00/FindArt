@@ -2,6 +2,9 @@ import React,{useState,useContext,} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../../App'
 import M from 'materialize-css'
+import { Button, InputLabel, TextField } from '@mui/material'
+ 
+import Typography from '@mui/material/Typography';
 const SignIn  = ()=>{
     const {state,dispatch} = useContext(UserContext)
     const history = useHistory()
@@ -41,29 +44,31 @@ const SignIn  = ()=>{
    return (
       <div className="mycard">
           <div className="card auth-card input-field">
-            <h2>FindArt</h2>
-            <input
-            type="text"
-            placeholder="email"
+            <h1 style={{fontFamily:'monospace'}}>Welcome Back to FindArt!</h1> 
+            
+            <TextField  style={{margin:'5px'}}
+            sx={{width:'80%'}} 
+            placeholder="Email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            />
-            <input
-            type="password"
-            placeholder="password"
+            />  
+            <br/>
+            <TextField  type="password"  style={{margin:'5px'}}
+              sx={{width:'80%'}} 
+            placeholder="Password"
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
-            />
-            <button 
-            
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"
+            /> 
+            <br/><br/>                      
+            <Button style={{width: '50%'}}
+            variant="contained"
             onClick={()=>PostData()}
             >
                 Login
-            </button>
-            <h5>
+            </Button>
+            <h3>
                 <Link to="/signup">Don't have an account?</Link>
-            </h5>
+            </h3>
             </div>
       </div>
    )

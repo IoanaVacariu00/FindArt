@@ -1,5 +1,5 @@
 
-     export const Categories = [
+     export const Categories = [ 'Any Category',
        'Abstract Expressionism', 
         'Art Deco', 
         'Art Nouveau', 
@@ -34,16 +34,16 @@
         'Surrealism', 
        'Suprematism', 
          'Symbolism', 
-       'Zero Group', 'any categories'
+       'Zero Group', 
          
     ]
 
     export const Mediums =[
-      'Oil Paint', 'Acrylic', 'Watercolor', 'Oil Pastels', 'Mixed Media','any mediums'
+      'Any Medium','Oil Paint', 'Acrylic', 'Watercolor', 'Oil Pastels', 'Mixed Media',
     ]  
     
-    export const Surfaces = [         
-      'any surfaces','Canvas','Paper','Wood Panel','Watercolor Paper', 'Cardboard',   
+    export const Surfaces = [         'Any Surface',
+      'Canvas','Paper','Wood Panel','Watercolor Paper', 'Cardboard',   
       'Card stock','Fabric',
       'Glass',
       'Plaster',

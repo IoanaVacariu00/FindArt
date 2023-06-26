@@ -11,7 +11,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Palette from "@mui/icons-material/Palette"  
-import { Search, StyledInputBase } from './StyledComponents';
+import SearchIcon from '@mui/icons-material/Search';
+import { Search, StyledInputBase,SearchIconWrapper } from './StyledComponents';
 const NavBar = ()=>{
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -211,19 +212,24 @@ const NavBar = ()=>{
                 <Link to='/messenger'>Inbox</Link>
               </Typography>
             </MenuItem>   
-            <MenuItem>  
-            {/* <SearchIconWrapper>
-               <SearchIcon /> 
-            </SearchIconWrapper>  */}
-            <Search >
+            <MenuItem >  
 
-            <StyledInputBase
+          <Search >
+            {/* <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper> */}
+            <StyledInputBase 
+            //  style={{
+            //   fontWeight: '500',
+            //   fontSize: '0.875rem',
+            //   lineHeight: '1.75',
+            //   letterSpacing: '0.02857em',
+             
+            //   }}
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }} 
-              style={{padding: '0 10px'}}
+              inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>  
-          
+          </Search>
             </MenuItem>
             </Menu>}
           </Box>
@@ -268,18 +274,15 @@ const NavBar = ()=>{
               ><Link to="/messenger">Inbox</Link>
                 
               </Button> 
-              {/* <SearchIconWrapper> 
-              <SearchIcon />
-             </SearchIconWrapper> */}
-              <Search>
-
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }} 
-              style={{padding: '0 10px'}}
-            />
-          </Search> 
-
+               <Button  sx={{padding:'0'}}>
+                <Search sx={{padding:'0'}}>
+                  <StyledInputBase 
+                  sx={{color: 'white', paddingLeft:'0', textAlign:'left', animation: 'none'}}
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </Search>
+              </Button>
           </Box>
           }   
           <Box sx={{ flexGrow: 0 }}>  

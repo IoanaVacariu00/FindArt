@@ -3,7 +3,7 @@
     const gigSchema = new mongoose.Schema({
     maintitle:{
         type:String,
-        //required:true,
+        required:true,
     }, 
 
     notes:{
@@ -11,11 +11,11 @@
     },
     category:{
         type:String,
-       // required:true,
+       required:true,
     },
     medium:{
         type:String,
-        //required:true,
+        required:true,
     },
     surface:{
         type:String
@@ -39,7 +39,7 @@
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        //required:true,
+        required:true,
         ref:'User'
     },
     acceptedBy:[{

@@ -21,7 +21,7 @@ const postSchema = new mongoose.Schema({
     }],
     postedBy:{
        type:ObjectId,
-       ref:"User"
+       ref:"User", required:true
     },
     tags:[{
         type:String,

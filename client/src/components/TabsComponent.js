@@ -50,7 +50,11 @@ export default function VerticalTabs() {
     setValue(newValue);
   };
 
-  return (   <>
+  return (   <>        
+   <div style={{ width:'100%',marginTop:'30px', textAlign:'center',border:'none'}}>
+  <h1 style={{fontFamily:'monospace'}}>Requests</h1> 
+  </div>
+
     { state &&
     <Box>
       <Tabs

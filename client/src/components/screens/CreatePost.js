@@ -8,7 +8,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import Chip from '@mui/material/Chip';
+import Chip from '@mui/material/Chip'; 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { Button } from '@mui/material';
 const CreatePost = ()=>{
  
     const history = useHistory()
@@ -16,7 +19,7 @@ const CreatePost = ()=>{
     const [body,setBody] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
-    const [tags, setTags] = useState([])
+    const [tags, setTags] = useState(Tags[0])
     const [open, setOpen] = useState(false) 
  
     useEffect(()=>{
@@ -106,32 +109,32 @@ const CreatePost = ()=>{
             <div>
      
                 <InputLabel id="tags-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
-                <Select
+                <Autocomplete
                 labelId="tags-select-label"
                 id="tags-select"
-                value={tags}
+                value={tags} 
+                onChange={(event, newValue) => {
+                  setTags(newValue);
+                }}
                 label="Tags"
-                multiple
+                renderInput= {(params) => <TextField {...params} label="Controllable" />}
                 style={{width: "100%"}}
-                open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                onChange={handleChange}
-                input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                        ))}
-                    </Box>  
-                )}
+                options={Tags}
+                // input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                // renderValue={(selected) => (
+                //     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                //         {selected.map((value) => (
+                //             <Chip key={value} label={value} />
+                //         ))}
+                //     </Box>  
+                // )}
                 >
-                {Tags.map(option => (
+                {/* {Tags.map(option => (
                     <MenuItem value={option} key={option}  >
                         {option}
                     </MenuItem>
-                    ))}
-                </Select> 
+                    ))} */}
+                </Autocomplete> 
             </div>
            <div className="file-field input-field">
                 <div className="btn #64b5f6 blue darken-1 main_button">
@@ -142,12 +145,12 @@ const CreatePost = ()=>{
                     <input className="file-path validate" type="text" />
                 </div>
             </div>
-            <button 
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"
+            <Button
+            variant='contained'
             onClick={()=>postDetails()}
             >
                 Submit post
-            </button>
+            </Button>
 
        </div>
    )

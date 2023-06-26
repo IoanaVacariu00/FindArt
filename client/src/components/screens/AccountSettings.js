@@ -12,10 +12,13 @@ import { styled } from "@mui/system";
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 import TextField from '@mui/material/TextField';
+import  {Button} from '@mui/material';  
+
 const Settings = ()=>{  
     const {state,dispatch} = useContext(UserContext);
     const history = useHistory() 
-    const [bio, setBio] = useState('') ;   const [customerbio, setCustomerBio] = useState('') ;   
+    const [bio, setBio] = useState('') ;   
+    const [customerbio, setCustomerBio] = useState('') ;   
     const [accountType, setAccountType ] = useState('');     
     const [categories, setCategories] = useState([]);
     const [mediums, setMediums] = useState([]);
@@ -163,9 +166,9 @@ const Settings = ()=>{
         }}
        > 
         <div style={{padding: "0 15px", display:'inline-block'}}>
-            <h4>Account Settings</h4>
+        <h1 style={{fontFamily:'monospace'}}>Account Settings</h1> 
         </div>
-        <br/>
+        <br/><br/>
         <div style={{display:"flex"}}>
             <InputLabel id="demo-simple-select-label" style={{width: "50%",margin:"10px",textAlign:"left"}}>Account Type</InputLabel>
             <Select
@@ -196,14 +199,14 @@ const Settings = ()=>{
         }
         {accountType==='Customer'  && 
             <div>
-            <InputLabel id="customerbio" style={{margin:"10px",textAlign:"left"}}>Customer Bio</InputLabel>
-            <TextField  
-            fullWidth 
-            multiline    
-            maxRows={6}
-            value={customerbio}
-            onChange={(e)=>setCustomerBio(e.target.value)}
-            />
+                <InputLabel id="customerbio" style={{margin:"10px",textAlign:"left"}}>Customer Bio</InputLabel>
+                <TextField  
+                fullWidth 
+                multiline    
+                maxRows={6}
+                value={customerbio}
+                onChange={(e)=>setCustomerBio(e.target.value)}
+                />
             </div> 
         }
         <div>
@@ -259,30 +262,30 @@ const Settings = ()=>{
             </Select> 
         </div>
         <div>
-                <InputLabel id="surfaces" style={{margin:"10px",textAlign:"left"}}>Surfaces</InputLabel>
-                <Select
-                labelId="surfaces"
-                id="surfaces-select"
-                value={surfaces}
-                label="Surfaces"
-                multiple
-                style={{width: "100%"}}
-                onChange={(e) => {setSurfaces(e.target.value)}}
-                input={<OutlinedInput id="select-multiple-chip-surfaces" label="Chipsurfaces" />}
-                renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((value) => (
-                            <Chip variant="outlined" key={value} label={value} />
-                        ))}
-                    </Box>  
-                )}
-                >
-                    {Surfaces.map(option => (
-                        <MenuItem value={option} key={option}  >
-                            {option}
-                        </MenuItem>
-                        ))}
-                </Select> 
+            <InputLabel id="surfaces" style={{margin:"10px",textAlign:"left"}}>Surfaces</InputLabel>
+            <Select
+            labelId="surfaces"
+            id="surfaces-select"
+            value={surfaces}
+            label="Surfaces"
+            multiple
+            style={{width: "100%"}}
+            onChange={(e) => {setSurfaces(e.target.value)}}
+            input={<OutlinedInput id="select-multiple-chip-surfaces" label="Chipsurfaces" />}
+            renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                        <Chip variant="outlined" key={value} label={value} />
+                    ))}
+                </Box>  
+            )}
+            >
+                {Surfaces.map(option => (
+                    <MenuItem value={option} key={option}  >
+                        {option}
+                    </MenuItem>
+                    ))}
+            </Select> 
             </div>
             <div>
                 <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
@@ -314,12 +317,12 @@ const Settings = ()=>{
                 </Select> 
             </div>        
             
-            <button style={{float:"right", margin:'10px 0'}}
-            className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
+            <Button style={{float:"right", margin:'10px 0'}}
+             variant='contained'
             onClick={()=>requestDetails()}
             >
                 Save
-            </button>
+            </Button>
             
             </div>
     </>

@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     },   
     accountType:{
         type:String,
+        required:true,
     },
     bio:{ type:String, default:'' },   
     customerbio:{ type:String, default:'' },   

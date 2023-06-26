@@ -8,16 +8,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material'; 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
-
+import Autocomplete from '@mui/material/Autocomplete'; 
 const CreateRequest = ()=>{
     const history = useHistory()
     const [maintitle, setMaintitle] = useState(""); 
     const [notes, setNotes] = useState("");
-    const [category, setCategory] = useState("");
-    const [medium, setMedium] = useState("");
-    const [surface, setSurface] = useState("");
-    const [dimension, setDimension] = useState("");
+    const [category, setCategory] = useState(Categories[0]);
+    const [medium, setMedium] = useState(Mediums[0]);
+    const [surface, setSurface] = useState(Surfaces[0]);
+    const [dimension, setDimension] = useState('');
     const [searchtag, setSearchtag] = useState([]);
     const [days, setDays] = useState("");
     const [price, setPrice] = useState("");
@@ -138,9 +139,9 @@ const CreateRequest = ()=>{
         onChange={(e)=>setNotes(e.target.value)}
         />
         </div>
-        <div>
-        <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel>
-        <Select            
+       
+        {/* <InputLabel id="category-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Category</InputLabel> */}
+        {/* <Select            
             style={{width: "100%"}}
             labelId="category-simple-select-label"
             id="category-simple-select"
@@ -153,10 +154,30 @@ const CreateRequest = ()=>{
                     {option}
                 </MenuItem>
                 ))}
-        </Select>
-        </div> 
-
-        <div>
+        </Select> */}   
+        <br/>
+        <Autocomplete
+        value={category}
+        onChange={(event, newValue) => {
+          setCategory(newValue);
+        }}
+        id="controllable-states-demo-categ"  
+        style={{padding:" 0"}}
+        options={Categories}
+        renderInput={(params) => <TextField {...params} label="Category" />}
+        />
+        <br/>
+        <Autocomplete
+        value={medium}
+        onChange={(event, newValue) => {
+          setMedium(newValue);
+        }}
+        id="controllable-states-demo-medium"  
+        style={{padding:" 0"}}
+        options={Mediums}
+        renderInput={(params) => <TextField {...params} label="Medium" />}
+        />
+      {/* <div>
             <InputLabel id="medium-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Medium</InputLabel>
             <Select            
                 style={{width: "100%"}}
@@ -172,9 +193,9 @@ const CreateRequest = ()=>{
                     </MenuItem>
                     ))}
             </Select>
-        </div>
-        <div>
-            <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
+        </div> */}
+    
+            {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Surface</InputLabel>
             <Select            
                 style={{width: "100%"}}
                 labelId="surface-simple-select-label"
@@ -188,10 +209,20 @@ const CreateRequest = ()=>{
                         {option}
                     </MenuItem>
                     ))}
-            </Select>
-        </div>
+            </Select> */}
+        <br/>
+        <Autocomplete
+        value={surface}
+        onChange={(event, newValue) => {
+          setSurface(newValue);
+        }}
+        id="controllable-states-demo-medium"  
+        style={{padding:" 0"}}
+        options={Surfaces}
+        renderInput={(params) => <TextField {...params} label="Surface" />}
+        />
 
-        <div>
+        {/* <div>
             <InputLabel id="tag-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
             <Select
             labelId="tag-select-label"
@@ -219,8 +250,36 @@ const CreateRequest = ()=>{
                     </MenuItem>
                     ))}
             </Select> 
-        </div>
-
+        </div> */}
+        <Autocomplete
+        
+        multiple
+        id="tags-filled"
+        options={Tags.map((option) => option)}
+        defaultValue={['']}
+        freeSolo
+        value={searchtag}
+        onChange={(event, newValue) => {
+          setSearchtag(newValue);
+        }}
+        renderTags={(value) =>
+          value.map((option) => (
+            <Chip
+              variant="outlined"
+              label={option}
+              
+            />
+          ))
+        }
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="filled"
+            label="Tags"
+           
+          />
+        )}
+      /> 
         {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
         <Box style={{ width: "50%", margin:"10px auto" }}>
             <Slider
@@ -242,12 +301,12 @@ const CreateRequest = ()=>{
             <input className="file-path validate" type="text" />
         </div> */}
         </div>
-        <button 
-        className="btn waves-effect waves-light #64b5f6 blue darken-1 main_button"  
+        <Button 
+        variant='contained'
         onClick={()=>requestDetails()}
         >
             Submit request
-        </button>
+        </Button>
         </div>
    )
 }
