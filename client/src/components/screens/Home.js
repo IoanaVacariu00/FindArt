@@ -125,18 +125,18 @@ const Home = ()=>{
         })
     }
    return (
-    <>
+    <div style={{margin:'40px',border:'groove', }} >
     {(data && state) &&
-       <div >
-    <Box sx={{ minHeight: 829, margin: '20px auto',display:'block'}}>
-    <Grid container spacing={4} 
-    style={{margin:'10px' }}
+       
+    <Box>
+    <Grid container spacing={3} 
+  
     >
            {data.map(item=>{
                 return( 
                     <Grid item xs="auto" style={{padding:'5px'}}>
                         <Item >
-                       <div  key={item._id}>
+                            <div  key={item._id}>
                             <h5 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 
                             && <i className="material-icons" style={{
                                 float:"right"
@@ -146,7 +146,7 @@ const Home = ()=>{
 
                             }</h5>
                             <div style={{ height: 'fit-content', }}>
-                                <img src={item.photo} style={{maxHeight: '350px'}}/>
+                                <img src={item.photo} style={{height: '350px', width:'350px', objectFit:'cover'}}/>
                             </div>
                             <div className="card-content">
                                                          
@@ -260,7 +260,7 @@ const Home = ()=>{
                                 </form>
                                 
                             </div>
-                        </div>  
+                            </div>  
                        </Item>
                     </Grid>
                    )
@@ -268,9 +268,10 @@ const Home = ()=>{
            }
         </Grid> 
         </Box>
-       </div>
+      
         }
-        </>
+           
+        </div>
    )
 }
 
