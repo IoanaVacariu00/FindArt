@@ -125,28 +125,28 @@ const Home = ()=>{
         })
     }
    return (
-    <div style={{margin:'40px',border:'groove', }} >
+    <div style={{margin:'40px',border:'none', }} >
     {(data && state) &&
        
-    <Box>
-    <Grid container spacing={3} 
+    <Box style={{margin:"auto"}}>
+    <Grid container spacing={2} 
   
     >
            {data.map(item=>{
                 return( 
                     <Grid item xs="auto" style={{padding:'5px'}}>
                         <Item >
-                            <div  key={item._id}>
-                            <h5 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 
+                            <div key={item._id}>
+                            <h4 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 
                             && <i className="material-icons" style={{
                                 float:"right"
                             }} 
                             onClick={()=>deletePost(item._id)}
                             >delete</i>
 
-                            }</h5>
+                            }</h4>
                             <div style={{ height: 'fit-content', }}>
-                                <img src={item.photo} style={{height: '350px', width:'350px', objectFit:'cover'}}/>
+                                <img src={item.photo} style={{height: '330px', width:'330px', objectFit:'cover'}}/>
                             </div>
                             <div className="card-content">
                                                          

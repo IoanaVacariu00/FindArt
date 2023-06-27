@@ -89,7 +89,7 @@ const SignIn  = ()=>{
    return (
       
         <div className="card auth-card input-field mycard">
-       <h1 style={{fontFamily:'monospace'}}>Welcome to FindArt!</h1> 
+            <h1 style={{fontFamily:'monospace'}}>Welcome to FindArt!</h1> 
             <div style={{display:'flex'}}>
                 <div id="register_left" style={{border:'none', margin:'5px', padding:'10px'}}>
                     <TextField  style={{margin:'5px'}}
@@ -143,9 +143,7 @@ const SignIn  = ()=>{
                         >
                             <MenuItem value="Artist">Artist</MenuItem>
                             <MenuItem value="Customer">Customer</MenuItem>
-
                         </Select>
-       
                     </div>  
                     <div style={{width:'100%',textAlign:'left'}}>  
                         <input type="file" onChange={(e)=>setImage(e.target.files[0])} className='custom-file-input' style={{margin:'10px', float:'left'}}/>

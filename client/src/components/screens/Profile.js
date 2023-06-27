@@ -5,10 +5,11 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab'; 
 import Toolbar from '@mui/material/Toolbar';
 import {Link} from 'react-router-dom'  
-import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
+import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Chip, AppBar } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { styled } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete'; 
+import Button from '@mui/material/Button'; 
 
 const Profile = ()=>{
     const [mypics,setPics] = useState([])
@@ -170,16 +171,17 @@ const Profile = ()=>{
                         {
                             state?.accountType ==  'Artist'  &&
                             <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
-                            <h6>{mypics.length} posts</h6>
-                            <h6>{state?state.followers.length:"0"} followers
-                             </h6>
-                            <h6>{state?state.following.length:"0"} following
-                            </h6>
+                            <h4>{mypics.length} posts</h4>
+                            <h4>{state?state.followers.length:"0"} followers</h4>
+                            <h4>{state?state.following.length:"0"} following</h4>
                             </div>
                         }
                     </div>
                 </div>
-                <div className="file-field input-field" style={{margin:"10px"}}>
+                <div style={{width:'100%',textAlign:'left'}}>  
+                        <input type="file" onChange={(e)=>setImage(e.target.files[0])} className='custom-file-input' style={{margin:'10px', float:'left'}}/>
+                </div> 
+                {/* <div className="file-field input-field" style={{margin:"10px"}}>
                     <div className="btn #64b5f6 blue darken-1 main_button">
                         <span>Update pic</span>
                         <input type="file" onChange={(e)=>updatePhoto(e.target.files[0])} />
@@ -187,7 +189,7 @@ const Profile = ()=>{
                     <div className="file-path-wrapper" style={{width: "max-content"}}>
                         <input className="file-path validate" type="text" />
                     </div>
-                </div>
+                </div> */}
             </div>      
                
             {

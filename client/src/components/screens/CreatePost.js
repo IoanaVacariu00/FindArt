@@ -11,7 +11,7 @@ import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip'; 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Button } from '@mui/material';
+import { Button } from '@mui/material'; 
 const CreatePost = ()=>{
  
     const history = useHistory()
@@ -19,7 +19,7 @@ const CreatePost = ()=>{
     const [body,setBody] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
-    const [tags, setTags] = useState(Tags[0])
+    const [tags, setTags] = useState([])
     const [open, setOpen] = useState(false) 
  
     useEffect(()=>{
@@ -87,29 +87,58 @@ const CreatePost = ()=>{
   
    return(
        <div className="card input-filed"
-       style={{
-           margin:"30px auto",
-           maxWidth:"500px",
-           padding:"20px",
-           textAlign:"center"
-       }}
-       >
-           <input 
-            type="text"
-            placeholder="title"
+        style={{
+            margin:"30px auto",
+            maxWidth:"500px",
+            padding:"20px",
+            textAlign:"center"
+        }}
+        >
+           <TextField
+            fullWidth 
+            placeholder="Title"
             value={title}
             onChange={(e)=>setTitle(e.target.value)}
             />
-           <input
-            type="text"
-            placeholder="body"
+            <br/><br/>
+             
+            <TextField
+            placeholder="Description" 
+            fullWidth 
+            multiline   
             value={body}
             onChange={(e)=>setBody(e.target.value)}
-            />
+            />  
+            <br/><br/>
             <div>
-     
-                <InputLabel id="tags-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel>
-                <Autocomplete
+                {/* <InputLabel id="tags-select-label" style={{margin:"10px",textAlign:"left"}}>Tags</InputLabel> */}
+            <Autocomplete
+                multiple
+                id="tags-filled"
+                options={Tags.map((option) => option)}
+                defaultValue={['']}
+            
+                value={tags}
+                onChange={(event, newValue) => {
+                setTags(newValue);
+                }}
+                renderTags={(value) =>
+                value.map((option) => (
+                    <Chip
+                    variant="outlined"
+                    label={option}
+                    />
+                ))
+                }
+                renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label="Tags"
+                
+                />
+                )}
+            /> 
+                {/* <Autocomplete
                 labelId="tags-select-label"
                 id="tags-select"
                 value={tags} 
@@ -128,23 +157,19 @@ const CreatePost = ()=>{
                 //         ))}
                 //     </Box>  
                 // )}
-                >
+                > */}
                 {/* {Tags.map(option => (
                     <MenuItem value={option} key={option}  >
                         {option}
                     </MenuItem>
                     ))} */}
-                </Autocomplete> 
+                {/* </Autocomplete>  */}
             </div>
-           <div className="file-field input-field">
-                <div className="btn #64b5f6 blue darken-1 main_button">
-                    <span>Upload Image</span>
-                    <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
-                </div>
-                <div className="file-path-wrapper" style={{width: "max-content"}}>
-                    <input className="file-path validate" type="text" />
-                </div>
-            </div>
+             <br/>
+            <div style={{width:'100%',textAlign:'left'}}>  
+                <input type="file" onChange={(e)=>setImage(e.target.files[0])} className='custom-file-input' style={{ float:'left'}}/>
+            </div> 
+             <br/>
             <Button
             variant='contained'
             onClick={()=>postDetails()}

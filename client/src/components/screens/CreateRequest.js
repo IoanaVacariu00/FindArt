@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material'; 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 import Autocomplete from '@mui/material/Autocomplete'; 
+ 
 const CreateRequest = ()=>{
     const history = useHistory()
     const [maintitle, setMaintitle] = useState(""); 
@@ -122,8 +123,8 @@ const CreateRequest = ()=>{
        > 
        <h4>Create a Request!</h4>
        <InputLabel id="title-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Title</InputLabel>
-        <input 
-        type="text"
+        <TextField
+        fullWidth
         placeholder=""
         value={maintitle}
         onChange={(e)=>setMaintitle(e.target.value)}
@@ -251,13 +252,13 @@ const CreateRequest = ()=>{
                     ))}
             </Select> 
         </div> */}
+         <br/>
         <Autocomplete
-        
         multiple
         id="tags-filled"
         options={Tags.map((option) => option)}
         defaultValue={['']}
-        freeSolo
+      
         value={searchtag}
         onChange={(event, newValue) => {
           setSearchtag(newValue);
@@ -267,19 +268,18 @@ const CreateRequest = ()=>{
             <Chip
               variant="outlined"
               label={option}
-              
             />
           ))
         }
         renderInput={(params) => (
           <TextField
             {...params}
-            variant="filled"
             label="Tags"
            
           />
         )}
-      /> 
+        /> 
+       <br/>
         {/* <InputLabel id="surface-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Price Range</InputLabel>
         <Box style={{ width: "50%", margin:"10px auto" }}>
             <Slider

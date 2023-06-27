@@ -33,11 +33,10 @@ const Accepted = ()=>{
             headers:{
                 "Content-Type":"application/json",
                 'Authorization':"Bearer "+localStorage.getItem("jwt")
-            }
-            ,
-              body:JSON.stringify({
-                  artistid: artistid
-              })
+            }            ,
+            body:JSON.stringify({
+                artistid: artistid
+            })
         }).then(res=>res.json())
         .then(result=>{
             const newData = artists.map(item=>{

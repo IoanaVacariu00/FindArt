@@ -329,7 +329,7 @@ const Home = ()=>{
     {(data && state) &&
        <div >
     <Box sx={{ minHeight: 829, margin: '20px auto',display:'block'}}>
-    <Grid container spacing={4} 
+    <Grid container spacing={2} 
     style={{margin:'10px' }}
     >
            {data.map(item=>{
@@ -346,7 +346,7 @@ const Home = ()=>{
 
                             }</h5>
                             <div style={{ height: 'fit-content', }}>
-                                <img src={item.photo} style={{maxHeight: '350px'}}/>
+                                <img src={item.photo} style={{height: '330px', width:'330px', objectFit:'cover'}}/>
                             </div>
                             <div className="card-content">
                                                          

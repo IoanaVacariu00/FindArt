@@ -2,7 +2,11 @@ import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 import { Link } from 'react-router-dom'
-
+import { Button } from '@mui/material' 
+import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+ 
 const ArtistProfile = () =>{
     const [userProfile,setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
@@ -80,14 +84,16 @@ const ArtistProfile = () =>{
    return (
        <>
        {userProfile ?
-        <div className="home-card" >
-       <div style={{maxWidth:"550px",margin:"0px auto"}}>
-           <div style={{  
+        <div className="home-card" style={{border:'groove'}} >
+        <div>
+           <div 
+            style={{  
                display:"flex",
                justifyContent:"space-around",
                margin:"18px 0px",
-               borderBottom:"1px solid grey"
-           }}>
+            //    borderBottom:"1px solid grey"
+            }}
+            >
                <div>
                    <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
                     src={userProfile.user.pic}
@@ -106,26 +112,24 @@ const ArtistProfile = () =>{
                         </div> 
                     
                         {showfollow?
-                            <button style={{margin:"10px"}} 
-                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            <Button style={{margin:"10px"}} 
+                            variant='contained'
                             onClick={()=>followUser()}
-                            >Follow</button>
+                            >Follow</Button>
                             : 
-                            <button style={{margin:"10px"}} 
-                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            <Button style={{margin:"10px"}} 
+                            variant='contained'
                             onClick={()=>unfollowUser()}
-                            >UnFollow</button>   
+                            >UnFollow</Button>   
                         }
-                
-         
-                    <button className="btn waves-effect waves-light #64b5f6 blue darken-1" >
+                       
+                    <Button variant='contained' >
                         <Link to={'/messenger/'+userProfile.user._id} key={userProfile.user._id}>Message</Link>
-                    </button>
-               
-               </div>
+                    </Button>
+                </div>
            </div>
                           
-        <div className="gallery">
+        {/* <div className="gallery">
             {
                 userProfile.posts.map(item=>{
                     return(
@@ -133,7 +137,21 @@ const ArtistProfile = () =>{
                     )
                 })
             }
-        </div>
+        </div> */} 
+          {/* <Box sx={{ width: 500, height: 450, overflowY: 'scroll' }}>
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {userProfile.posts.map((item) => (
+          <ImageListItem key={item._id}>
+            <img
+              src={`${item.photo}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box> */}
 
        </div>
        </div>
