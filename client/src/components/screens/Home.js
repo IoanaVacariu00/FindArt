@@ -14,7 +14,7 @@ import Grid from '@mui/material/Grid';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+//   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
@@ -134,7 +134,7 @@ const Home = ()=>{
     >
            {data.map(item=>{
                 return( 
-                    <Grid item xs="auto" style={{padding:'5px'}}>
+                    <Grid item xs={3} style={{padding:'5px'}}>
                         <Item >
                             <div key={item._id}>
                             <h4 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 

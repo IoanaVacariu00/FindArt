@@ -26,7 +26,6 @@ import AssignedToMe from './components/screens/AssignedToMe';
 import MainRequests from './components/screens/MainRequests';   
 import CustomerProfile from './components/screens/CustomerProfile';  
 import ArtistProfile from './components/screens/ArtistProfile'; 
-
 export const UserContext = createContext()
 
 const Routing = ()=>{

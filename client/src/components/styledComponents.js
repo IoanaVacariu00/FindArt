@@ -2,6 +2,18 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { styled,alpha } from '@mui/material/styles';
 import Fab from '@mui/material/Fab'; 
 import InputBase from '@mui/material/InputBase';
+import { Box } from '@mui/material';  
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+ 
+
+export const Item = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  textAlign: "center",
+  color: theme.palette.text.secondary
+})); 
+  
 
 export const blue = {
     100: "#DAECFF",

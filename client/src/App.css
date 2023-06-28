@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
  
 #FindArt{color:white}
-
-body {
+/* .Grid{border: groove;} */
+body { 
+  color:rgba(0, 0, 0, 0.6);
   background: white;
   background-repeat: repeat;
   background-attachment: fixed;
@@ -105,6 +106,7 @@ Link a{ text-decoration: none !important;}
 TableRow, Divider { 
   cursor: auto
 }
+Button .outlined Link a{color:#1976d2 !important;} 
 Link {
   width: 100%;
 }

@@ -1,18 +1,22 @@
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { Button } from '@mui/material' 
+import { Button, Grid, ImageListItemBar } from '@mui/material' 
 import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
- 
+import Typography from "@mui/material/Typography";
+import { Item } from '../StyledComponents' 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Modal from '@mui/material';
 const ArtistProfile = () =>{
     const [userProfile,setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
-    
+    const [showModal, setShowModal] = useState(false);
+
+    // const handleModalShow = () => setShowModal(true);
+    // const handleModalClose = () => setShowModal(false);
     useEffect(()=>{
        fetch(`/user/${userid}`,{
            headers:{
@@ -70,11 +74,11 @@ const ArtistProfile = () =>{
              setProfile((prevState)=>{
                 const newFollower = prevState.user.followers.filter(item=>item != data._id )
                  return {
-                     ...prevState,
-                     user:{
-                         ...prevState.user,
-                         followers:newFollower
-                        }
+                    ...prevState,
+                    user:{
+                        ...prevState.user,
+                        followers:newFollower
+                    }
                  }
              })
              setShowFollow(true)
@@ -82,52 +86,86 @@ const ArtistProfile = () =>{
     }
     
    return (
-       <>
-       {userProfile ?
-        <div className="home-card" style={{border:'groove'}} >
-        <div>
-           <div 
-            style={{  
-               display:"flex",
-               justifyContent:"space-around",
-               margin:"18px 0px",
-            //    borderBottom:"1px solid grey"
-            }}
-            >
-               <div>
-                   <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-                    src={userProfile.user.pic}
-                   />
-               </div>
-               
-               <div>
-                   <h4>{userProfile.user.name}</h4>
-                   <h6  style={{opacity:'80%'}}>Artist</h6>
-                   <h6>{userProfile.user.bio}</h6>
-                        <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
-                            <h6>{userProfile.posts.length} posts</h6>
-                            <h6>{userProfile.user.followers.length} followers</h6>
-                            <h6>{userProfile.user.following.length} following</h6>    
-                                
-                        </div> 
+        <div style={{height:'100vh'}}>
+       {userProfile &&  
+            <Box sx={{ flexGrow: 1 }} style={{margin:'30px'}}>
+                <Grid className='Grid' container spacing={1} style={{width:'80vw',margin:'auto'}}>
+                    <Grid className='Grid' item xs={2}  style={{border: 'none',borderRadius:'5px',padding:'5px'}}> 
+                        <Grid className='Grid' item xs={12}style={{padding:'10px'}}>
+                            <Item>
+                                <img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={userProfile.user.pic}/>
+                            </Item>
+                        </Grid>
+                        <Grid className='Grid'item xs={12} >
+                            <Item>
+                                <Typography variant="h6" style={{border:'none',fontWeight:'600'}}>{userProfile.user.name}</Typography>                       
+                                <Typography variant="h7" style={{border:'none',}}>Artist</Typography>                       
+                            </Item>
+                        </Grid> 
+                        <Grid className='Grid' item xs={12}>  
+                            <Grid className='Grid' container spacing={1} style={{padding:'10px'}}>
                     
-                        {showfollow?
-                            <Button style={{margin:"10px"}} 
-                            variant='contained'
-                            onClick={()=>followUser()}
-                            >Follow</Button>
-                            : 
-                            <Button style={{margin:"10px"}} 
-                            variant='contained'
-                            onClick={()=>unfollowUser()}
-                            >UnFollow</Button>   
-                        }
-                       
-                    <Button variant='contained' >
-                        <Link to={'/messenger/'+userProfile.user._id} key={userProfile.user._id}>Message</Link>
-                    </Button>
-                </div>
-           </div>
+                                <Grid className='Grid' item xs={6}  style={{border:'none',padding:'5px'}}>
+                                
+                                    {showfollow?
+                                        <Button fullWidth
+                                        variant='outlined'
+                                        onClick={()=>followUser()}
+                                        >Follow</Button>
+                                        : 
+                                        <Button fullWidth
+                                        variant='outlined'
+                                        onClick={()=>unfollowUser()}
+                                        >UnFollow</Button>   
+                                    }
+                                    
+                                </Grid> 
+                                <Grid className='Grid'item xs={6} style={{border:'none',padding:'5px'}}>
+                                    
+                                    <Button variant='outlined' fullWidth
+                                    className='outlined'
+                                    onclick="location.href='/messenger/'+userProfile.user._id'">
+                                        Message
+                                    </Button> 
+                                    
+                                </Grid> 
+                        
+                            </Grid>
+                        </Grid>  
+                    </Grid> 
+                              
+                </Grid> 
+                <Grid className='Grid' container  >
+                <ImageList sx={{ width:'80vw', height:'80vh', margin:'10px auto',color:'rgba(0, 0, 0, 0.6)' }} cols={3} >
+                {userProfile.posts.map((item) => (
+                
+                    <ImageListItem key={item.photo} style={{padding:' 10px 5px'}}>
+                        <img
+                        src={`${item.photo}?w=164&h=164&fit=crop&auto=format`}
+                        srcSet={`${item.photo}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                        alt={item.title} 
+                        // style={{height: '100%', width:'100%', objectFit:'cover'}}
+                        loading="lazy"
+                        />
+                        <ImageListItemBar
+                        title={<strong>{item.title}</strong>}
+                        subtitle={<span style={{textAlign:'center'}}> {item.body}</span>}
+                        position="below"
+                        /> 
+                    </ImageListItem>
+                  
+                ))}
+                </ImageList> 
+                </Grid>
+            </Box>
+             
+        }
+
+       </div>
+   )
+}
+        //         </div>
+        //    </div>
                           
         {/* <div className="gallery">
             {
@@ -153,11 +191,10 @@ const ArtistProfile = () =>{
       </ImageList>
     </Box> */}
 
-       </div>
-       </div>
-       : <h4>loading...!</h4>}
-       </>
-   )
-}
+    //    </div>
+    //    </div>
+    //    : <h4>loading...!</h4> 
+
+
 
 export default ArtistProfile
