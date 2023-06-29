@@ -168,8 +168,8 @@ const ArtistProfile = () =>{
                 <ImageList sx={{ width:'80vw', height:'80vh', margin:'10px auto',color:'rgba(0, 0, 0, 0.6)' }} cols={3} >
                 {userProfile.posts.map((item) => (
                 
-                    <ImageListItem key={item.photo} style={{padding:' 10px 5px',cursor:'pointer'}}   
-                     onClick={handleOpen} 
+                    <ImageListItem key={item.photo} style={{padding:' 10px 5px',}}   
+                    //  onClick={handleOpen} 
                      >
                         <img
                         src={`${item.photo}?w=164&h=164&fit=crop&auto=format`}

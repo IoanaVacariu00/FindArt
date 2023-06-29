@@ -151,29 +151,7 @@ const NavBar = ()=>{
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
       // <Container maxWidth="xl">disableguters
       <> 
-            {/* <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
-            <div className="modal-content">
-             <input
-                type="text"
-                placeholder="search users"
-                value={search}
-                onChange={(e)=>fetchUsers(e.target.value)}
-              />
-              <ul className="collection">
-                {userDetails.map(item=>{
-                  return <Link key={item.name} to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
-                  onClick={()=>{
-                    M.Modal.getInstance(searchModal.current).close()
-                    setSearch('')
-                  }}><li className="collection-item">{item.name}</li></Link> 
-                })}
-                
-              </ul>
-            </div>
-            <div className="modal-footer">
-              <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>close</button>
-            </div>
-        </div> */}
+
        <Toolbar >
           <Palette sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -235,7 +213,7 @@ const NavBar = ()=>{
                 <Link to='/messenger'>Inbox</Link>
               </Typography>
             </MenuItem>   
-            <MenuItem >  
+            {/* <MenuItem >  
 
           <Search >
             <StyledInputBase 
@@ -245,7 +223,7 @@ const NavBar = ()=>{
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-            </MenuItem>
+            </MenuItem> */}
             </Menu>}
           </Box>
           <Palette sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -289,7 +267,7 @@ const NavBar = ()=>{
               ><Link to="/messenger">Inbox</Link>
                 
               </Button> 
-               <Button  sx={{padding:'0'}}>
+               {/* <Button  sx={{padding:'0'}}>
                 <Search sx={{padding:'0'}}>
                   <StyledInputBase 
                   sx={{color: 'white', paddingLeft:'0', textAlign:'left', animation: 'none'}}
@@ -297,7 +275,7 @@ const NavBar = ()=>{
                     inputProps={{ 'aria-label': 'search' }}
                   />
                 </Search>
-              </Button>
+              </Button> */}
           </Box>
           }   
           <Box sx={{ flexGrow: 0 }}>  

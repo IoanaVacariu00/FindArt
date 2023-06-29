@@ -126,7 +126,15 @@ router.get("/potential_sellers/:requestid", requireLogin,(req,res)=>{
         return res.status(404).json({error:"Not found"})
     })
 })
-
+router.get('/request/:requestid',requireLogin,(req,res)=>{
+    Gig.findOne({_id:req.params.requestid})
+     .then(request=>{
+        res.json(request)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
 router.post('/createrequest',requireLogin,(req,res)=>{
     const {maintitle, notes, category, medium, surface, dimension, searchtag, price, days} = req.body 
     if(!maintitle || !notes ){

@@ -156,7 +156,7 @@ const Requests = ()=>{
                             <i className="material-icons"  style={{float:"right"}}
                             onClick={()=>{acceptRequest(item._id)}}
                             >add_circle</i>
-                            }    
+                        }    
                             
                             </div>
                                 <TableContainer component={Paper}>

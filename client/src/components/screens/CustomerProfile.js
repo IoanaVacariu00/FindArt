@@ -355,7 +355,7 @@ const CustomerProfile = ()=>{
                                </Grid> 
                     </Grid> 
                 
-                        {(userProfile.user.accountType=='Customer' && userProfile.user.customerbio!='') &&
+                        {(userProfile  && userProfile.user.customerbio!='') &&
                         <Grid className='' item xs={10}  style={{border: '',borderRadius:'5px',padding:'30px',margin:'auto'}}>
                         <Item><Typography variant="h6"  style={{textAlign:'right'}}><i>"{userProfile.user.customerbio}"</i></Typography></Item>     
                         </Grid> 
@@ -364,10 +364,10 @@ const CustomerProfile = ()=>{
 
               
                 {
-                    userProfile?.user.accountType == 'Customer' &&
+                    userProfile &&
                     <div> 
                     {requests.map(item=>{
-                            return( <>  {item.assigned == false && 
+                            return( <>  {(item.assigned == false || item.assignedTo== state._id) && 
                                 <div key={item._id}>
                                    
                                         <div className="card input-field" 
@@ -461,7 +461,13 @@ const CustomerProfile = ()=>{
                                                     </TableBody>
                                                 </Table> 
                                                 </TableContainer>
-
+                                                {
+                                                    (item.assigned==true  && item.assignedTo== state._id) && 
+                                                    <Button disabled variant="contained" style={{margin:"20px auto",padding:"10px" ,background:'red', position:'relative'}}>
+                                                      <Link >Assigned to me</Link>
+                                                    </Button>
+                                                    
+                                                } 
                                         </div> 
                                 </div>
                                 }</>

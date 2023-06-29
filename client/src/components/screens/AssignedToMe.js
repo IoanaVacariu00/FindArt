@@ -53,11 +53,11 @@ const AssignedToMe = ()=>{
                         padding:"20px",
                         textAlign:"center"
                      }}>
-                        <h5 style={{padding:"5px"}}>
-                            <Link to={"/customer_profile/"+item.user._id}>
-                            <p style={{float:"left"}}>{item?.user.name} </p>
-                            </Link>                          
-                        </h5>
+                      
+                        <Link to={"/customer_profile/"+item.user._id}>
+                            <Typography variant='h6' style={{float:"left", margin:"15px",padding:'5px'}}>{item?.user.name}</Typography>
+                        </Link> 
+                        
                         <TableContainer component={Paper}>
                             <Table style={{overflowX:"hidden"}} aria-label="simple table">
                             <TableBody>
