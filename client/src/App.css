@@ -7,8 +7,26 @@ body {
   background: white;
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: 100%;
+  background-size: 100%; 
+  font-family: monospace;
 }
+ 
+.noContent {
+  background-color: #fff;max-width: 350px;
+  border-radius: 5px;
+  border: 1px solid #e7ecee;
+  padding: 1rem 1rem 2rem;
+  overflow-x: hidden;
+  height:60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: baseline;
+  text-align: center;
+  color: #4E606A;
+}
+
 .custom-file-input {
   color: transparent;
 }
@@ -16,7 +34,7 @@ body {
   visibility: hidden;
 }
 .custom-file-input::before {
-   
+
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -81,7 +99,7 @@ body {
   text-transform: uppercase;
   font-weight: 500;
   font-size: 0.875rem;
-  text-align: left;
+  text-align: center;
 }
 .custom-file-input:hover::before {
   -webkit-text-decoration: none;
@@ -110,6 +128,7 @@ Button .outlined Link a{color:#1976d2 !important;}
 Link {
   width: 100%;
 }
+ AppBar {box-shadow: none;}
 .dropdown {
 	display: none;
 	position: absolute;
@@ -126,7 +145,7 @@ nav {
 button a {color: white !important;}
 a{
   text-decoration: none;
-  color: black ;
+  color: rgba(0, 0, 0, 0.6);
 }
 a:hover {
   text-decoration: underline;

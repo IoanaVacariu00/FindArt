@@ -1,7 +1,8 @@
 
 import React,{useEffect, useState, useContext} from 'react'
 import {UserContext} from '../../App'
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add';  
+import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab'; 
 import Toolbar from '@mui/material/Toolbar';
 import {Link} from 'react-router-dom'  
@@ -9,8 +10,11 @@ import {  Table, TableRow, TableCell,TableBody, TableContainer, Paper, Chip, App
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
 import { styled } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete'; 
-import Button from '@mui/material/Button'; 
-
+import Typography from "@mui/material/Typography";
+import { Item } from '../StyledComponents' 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import { Button, Grid, ImageListItemBar } from '@mui/material' 
 const Profile = ()=>{
     const [mypics,setPics] = useState([])
     const [requests, setRequests] = useState([])
@@ -153,175 +157,198 @@ const Profile = ()=>{
         right: -10,  
         margin: '10px',
       });
-   return (
-    <div className="home-card" >
-       <div style={{maxWidth:"550px",margin:"0px auto"}}>
-            <div style={{margin:"18px 0px",  borderBottom:"1px solid grey"}}>
-               <div style={{display:"flex", justifyContent:"space-around"}}>
-                    <div><img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state?.pic}/></div>
-                    <div>
-                        <h4>{state?state.name:"loading"}</h4>
-                        <h6  style={{opacity:'80%'}}>{state?.accountType}</h6>
-                        {state && 
-                        <>
-                        {state.accountType === 'Customer' && <h6>{state.customerbio}</h6>}
-                        {state.accountType === 'Artist' && <h6>{state.bio}</h6>}
-                        </>
+   return ( 
+    <div style={{height:'100vh'}}>
+     {state && <Box sx={{ flexGrow: 1 }} style={{margin:'30px'}}>
+  
+        <Grid className='Grid' container spacing={1} style={{width:'80vw',margin:'auto',}}>
+                    <Grid className='Grid' item xs={2}  style={{border: 'none',borderRadius:'5px',padding:'5px'}}> 
+                        <Grid className='Grid' item xs={12} style={{padding:'10px'}}>
+                            <Item>
+                                <img style={{width:"160px",height:"160px",borderRadius:"80px"}} src={state.pic}/>
+                            </Item>
+                        </Grid>
+                        <Grid className='Grid'item xs={12} >
+                            <Item>
+                                <Typography variant="h6" style={{border:'none',fontWeight:'600'}}>{state.name}</Typography>                       
+                                <Typography variant="h7" style={{border:'none',}}>{state.accountType}</Typography>                       
+                            </Item>
+                        </Grid> 
+                        <Grid className='Grid' item xs={12} style={{border:'none'}}>  
+                            <Grid className='Grid' container spacing={1} style={{padding:'30px' ,}}>
+                                <Item>
+                                    <input type="file" onChange={(e)=>setImage(e.target.files[0])}  
+                                    className='custom-file-input' 
+                                    style={{border:'none',}}/>
+                                </Item>
+                        
+                            </Grid>
+                        </Grid>  
+                    </Grid> 
+                    {(state.accountType=='Artist' && state.bio!='') &&
+                  <Grid className='' item xs={10}  style={{border: '',borderRadius:'5px',padding:'30px',margin:'auto'}}>
+                  <Item><Typography variant="h6"  style={{textAlign:'right'}}><i>"{state.bio}"</i></Typography></Item>     
+                  </Grid> 
+                        }        
+                        {(state.accountType=='Customer' && state.customerbio!='') &&
+                        <Grid className='' item xs={10}  style={{border: '',borderRadius:'5px',padding:'30px',margin:'auto'}}>
+                        <Item><Typography variant="h6"  style={{textAlign:'right'}}><i>"{state.customerbio}"</i></Typography></Item>     
+                        </Grid> 
                         }
-                        {
-                            state?.accountType ==  'Artist'  &&
-                            <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
-                            <h4>{mypics.length} posts</h4>
-                            <h4>{state?state.followers.length:"0"} followers</h4>
-                            <h4>{state?state.following.length:"0"} following</h4>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div style={{width:'100%',textAlign:'left'}}>  
-                        <input type="file" onChange={(e)=>setImage(e.target.files[0])} className='custom-file-input' style={{margin:'10px', float:'left'}}/>
-                </div> 
-                {/* <div className="file-field input-field" style={{margin:"10px"}}>
-                    <div className="btn #64b5f6 blue darken-1 main_button">
-                        <span>Update pic</span>
-                        <input type="file" onChange={(e)=>updatePhoto(e.target.files[0])} />
-                    </div>
-                    <div className="file-path-wrapper" style={{width: "max-content"}}>
-                        <input className="file-path validate" type="text" />
-                    </div>
-                </div> */}
-            </div>      
-               
-            {
-                state?.accountType == 'Artist' &&
-                <div className="gallery"> 
-                {mypics.map(item=>{
-                        return(
-                            <img key={item._id} className="item" src={item.photo} alt={item.title}/>  
-                        )
-                    })
-                }   
-                </div>  
-              }
-            
-            {
-                state?.accountType == 'Customer' &&
-                <div> 
-                {requests.map(item=>{
-                        return(
-                            <div key={item._id}>
-                                
-                                    <div className="card input-field" 
-                                            style={{  
-                                                margin:"30px auto",
-                                                maxWidth:"500px",
-                                                padding:"20px",
-                                                textAlign:"center"
-                                             }}
-                                    >
-                                        <div >
-                                            <DeleteIcon style={{float:"right",cursor:"pointer"}} onClick={()=>deleteRequest(item._id)}/> 
-                                        </div>
-    
+        </Grid> 
+
+                    {
+                    state?.accountType == 'Artist' &&
+
+                    <Grid className='Grid' container  >
+                        <ImageList sx={{ width:'80vw', height:'80vh', margin:'10px auto',color:'rgba(0, 0, 0, 0.6)' }} cols={3} >
+                        {mypics.map((item) => (
+                    
+                        <ImageListItem key={item.photo} style={{padding:' 10px 5px'}}>
+                            <img
+                            src={`${item.photo}?w=164&h=164&fit=crop&auto=format`}
+                            srcSet={`${item.photo}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                            alt={item.title} 
+                            // style={{height: '100%', width:'100%', objectFit:'cover'}}
+                            loading="lazy"
+                            />
+                            <ImageListItemBar
+                            title={<strong>{item.title}</strong>}
+                            subtitle={<span style={{textAlign:'center'}}> {item.body}</span>}
+                            position="below"
+                            /> 
+                        </ImageListItem>
+                    
+                        ))}
+                        </ImageList> 
+                    </Grid>
+                    }
                 
-                                        <TableContainer component={Paper}>
-                                            <Table style={{overflow:"hidden"}} aria-label="simple table">
-                                            <TableBody>
-                                                <TableRow
-                                                    key={item.maintitle}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Title
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.maintitle}</TableCell>
-                                                </TableRow>
+                {
+                    state?.accountType == 'Customer' &&
+                    <div> 
+                    {requests.map(item=>{
+                            return(
+                                <div key={item._id}>
+                                    
+                                        <div className="card input-field" 
+                                                style={{  
+                                                    margin:"30px auto",
+                                                    maxWidth:"500px",
+                                                    padding:"20px",
+                                                    textAlign:"center"
+                                                }}
+                                        >
+                                            <div >
+                                                <DeleteIcon style={{float:'right',cursor:"pointer",padding:'5px'}} onClick={()=>deleteRequest(item._id)}/> 
+                                            </div>
+        
+                    
+                                            <TableContainer component={Paper}>
+                                                <Table style={{overflow:"hidden"}} aria-label="simple table">
+                                                <TableBody>
+                                                    <TableRow
+                                                        key={item.maintitle}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Title
+                                                        </TableCell>
+                                                        <TableCell align="left">{item.maintitle}</TableCell>
+                                                    </TableRow>
 
-                                                <TableRow 
-                                                    key={item.notes}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Description
-                                                    </TableCell>
-                                                    <TableCell align="left">
-                                                    <StyledTextarea      
-                                                    value={item.notes}
-                                                    readOnly       
-                                                     
-                                                    />
-                                                    </TableCell>
-                                                </TableRow>
+                                                    <TableRow 
+                                                        key={item.notes}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Description
+                                                        </TableCell>
+                                                        <TableCell align="left">
+                                                        <StyledTextarea      
+                                                        value={item.notes}
+                                                        readOnly       
+                                                        
+                                                        />
+                                                        </TableCell>
+                                                    </TableRow>
 
-                                                <TableRow
-                                                    key={item.category}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Category
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.category}</TableCell>
-                                                </TableRow>
-                                                <TableRow
-                                                    key={item.medium}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Medium
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.medium}</TableCell>
-                                                </TableRow>  
-                                                <TableRow
-                                                    key={item.surface}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Surface
-                                                    </TableCell>
-                                                    <TableCell align="left">{item.surface}</TableCell>
-                                                </TableRow>
-                                                <TableRow
-                                                    key={item.searchtag}
-                                                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                                >
-                                                    <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
-                                                        Tags
-                                                    </TableCell>
-                                                    <TableCell align="left">
-                                                        {item.searchtag.map(tag=>  
-                                                            <Chip label={tag} style={{margin:"3px"}}/>
-                                                        )}
-                                                    </TableCell>
-                                                </TableRow>
-                                                </TableBody>
-                                            </Table>
-                                            <Button variant="contained" style={{margin:"20px auto",padding:"10px" , position:'relative'}}>
-                                                <Link to={"/accepted/"+item._id} >See potential sellers</Link>
-                                            </Button>
-                                        </TableContainer>
+                                                    <TableRow
+                                                        key={item.category}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Category
+                                                        </TableCell>
+                                                        <TableCell align="left">{item.category}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow
+                                                        key={item.medium}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Medium
+                                                        </TableCell>
+                                                        <TableCell align="left">{item.medium}</TableCell>
+                                                    </TableRow>  
+                                                    <TableRow
+                                                        key={item.surface}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Surface
+                                                        </TableCell>
+                                                        <TableCell align="left">{item.surface}</TableCell>
+                                                    </TableRow>
+                                                    <TableRow
+                                                        key={item.searchtag}
+                                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row" style={{fontWeight: "800", opacity:"75%"}}>
+                                                            Tags
+                                                        </TableCell>
+                                                        <TableCell align="left">
+                                                            {item.searchtag.map(tag=>  
+                                                                <Chip label={tag} style={{margin:"3px"}}/>
+                                                            )}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    </TableBody>
+                                                </Table> 
+                                                {item.assigned==false  &&  
+                                                <Button variant="contained" style={{margin:"20px auto",padding:"10px" , position:'relative'}}>
+                                                    <Link to={"/accepted/"+item._id} >See potential sellers</Link>
+                                                </Button>
+                                                }
+                                                {
+                                                    (item.assigned==true  &&  item.assignedTo) &&
+                                                    <Item>Assigned to {item.assignedTo} </Item>
+                                                } 
 
-                                    </div> 
-                              </div>
-                            // <img key={item._id} className="item" src={item.photo} alt={item.title}/>  
-                        )
-                    })
-                }   
-                </div>  
-              }
+                                            </TableContainer>
+
+                                        </div> 
+                                </div>
+                                
+                            )
+                        })
+                    }   
+                    </div>  
+                }
        
-            <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
-            <Toolbar >
-                <Link to={state?.accountType=='Artist'? "/create" : '/createrequest'} >
-                    <StyledFab color="primary" aria-label="add"> 
-                        <AddIcon />  
-                    </StyledFab>  
-                </Link>
-            </Toolbar>
-        </AppBar> 
-       
-       </div>
-      </div>
-   )
+                <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0, boxShadow:'none' }} style={{background:"transparent"}}>
+                    <Toolbar >
+                        <Link to={state?.accountType=='Artist'? "/create" : '/createrequest'} >
+                            <StyledFab color="primary" aria-label="add"> 
+                                <AddIcon />  
+                            </StyledFab>  
+                        </Link>
+                    </Toolbar>
+                </AppBar> 
+   
+      </Box>}
+     </div> 
+      )
 }
   
 export default Profile

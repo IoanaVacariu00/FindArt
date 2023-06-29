@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { AppBar } from '@mui/material';
 import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
 import TextareaAutosize from '@mui/base/TextareaAutosize'; 
+ import Typography from '@mui/material/Typography';
 
 const AssignedToMe = ()=>{
     const [data,setData] = useState([])
@@ -162,16 +163,12 @@ const AssignedToMe = ()=>{
                 : 
             <h6>No requests yet!</h6>
             }      
-             {data=='' &&
-                <div className="card input-field"    
-                style={{  
-                   margin:"30px auto",
-                   maxWidth:"500px",
-                   padding:"20px"}}
-                   >
-                    <h6>No assigned requests!</h6>
+            {data=='' &&
+                <div style={{height:'70vh',width:'95vw',border:'none'}}>
+                            
+                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests!<br/>Once you create a request, it will appear here. </Typography>
                 </div>
-            }
+            } 
             {state.accountType === 'Customer' &&
                 
                 <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>

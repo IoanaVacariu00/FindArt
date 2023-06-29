@@ -1,11 +1,11 @@
 import React,{ useState,useEffect,useContext } from 'react'
 import { UserContext } from '../../App'  
 import { Link } from 'react-router-dom'  
-import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
+import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Toolbar from '@mui/material/Toolbar';
 import DeleteIcon from '@mui/icons-material/Delete'; 
-import {blue, grey, StyledFab, StyledTextarea} from '../StyledComponents'
+import {blue, grey, StyledFab, StyledTextarea,Item} from '../StyledComponents'
 const Myrequests = ()=>{ 
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
@@ -146,20 +146,16 @@ const Myrequests = ()=>{
 
                 </div>
                 : 
-                <div>No requests yet!</div>
+                <div></div>
             }     
             {data=='' &&
-            <div className="card input-field"    
-            style={{  
-               margin:"30px auto",
-               maxWidth:"500px",
-               padding:"20px"}}
-               >
-                <h6>No requests!</h6>
-            </div>
+                <div style={{height:'70vh',width:'95vw',border:'none'}}>
+                            
+                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests!<br/>Once you create a request, it will appear here. </Typography>
+                </div>
             } 
             
-            <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
+            <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>
                 <Toolbar>
                     <Link to="/createrequest" >
                         <StyledFab color="primary" aria-label="add"> 

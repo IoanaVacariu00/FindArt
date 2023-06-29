@@ -8,7 +8,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
-import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar } from '@mui/material';
+import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -136,15 +136,18 @@ const Home = ()=>{
                 return( 
                     <Grid item xs={3} style={{padding:'5px'}}>
                         <Item >
-                            <div key={item._id}>
-                            <h4 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 
-                            && <i className="material-icons" style={{
-                                float:"right"
-                            }} 
-                            onClick={()=>deletePost(item._id)}
-                            >delete</i>
+                            <div key={item._id}> 
 
-                            }</h4>
+                            {item.postedBy && 
+                                <h4 style={{padding:"15px", textAlign:'center'}}><Link to={item.postedBy._id !== state._id?"/artist_profile/"+item.postedBy._id :"/profile"  }>{item.postedBy.name}</Link> {item.postedBy._id == state._id 
+                                && <i className="material-icons" style={{
+                                    float:"right"
+                                }} 
+                                onClick={()=>deletePost(item._id)}
+                                >delete</i>
+
+                                }</h4>
+                             }
                             <div style={{ height: 'fit-content', }}>
                                 <img src={item.photo} style={{height: '330px', width:'330px', objectFit:'cover'}}/>
                             </div>
@@ -168,21 +171,21 @@ const Home = ()=>{
                                             <AccordionDetails>  
                                             <div style={{display:"flex"}}>
                                 
-                                {item.likes.includes(state._id)
-                                    ? 
-                                    <i className="material-icons"
-                                    onClick={()=>{unlikePost(item._id)}}
-                                    >thumb_down</i>
-                                    : 
-                                    <i className="material-icons"
-                                    onClick={()=>{likePost(item._id)}}
-                                    >thumb_up</i>
-                                }
+                                            {item.likes.includes(state._id)
+                                                ? 
+                                                <i className="material-icons"
+                                                onClick={()=>{unlikePost(item._id)}}
+                                                >thumb_down</i>
+                                                : 
+                                                <i className="material-icons"
+                                                onClick={()=>{likePost(item._id)}}
+                                                >thumb_up</i>
+                                            }
                                 <div style={{padding:"5px"}}>
                                     <strong>{item.likes.length}</strong>
                                 </div>
-                            </div>
-                            <input type="text" placeholder="add a comment" /> 
+                                </div>
+                            <TextField fullWidth placeholder="Add a comment" /> 
                             <TableContainer component={Paper}> 
                                 <Table aria-label="home_page_table"> 
                                     <TableBody> 

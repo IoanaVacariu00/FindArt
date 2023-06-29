@@ -5,7 +5,7 @@ import {Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } fro
 import {blue, grey, StyledFab, StyledTextarea} from '../StyledComponents'
 import AddIcon from '@mui/icons-material/Add';
 import Toolbar from '@mui/material/Toolbar';
-import { AppBar } from '@mui/material';
+import { AppBar } from '@mui/material';import Typography from "@mui/material/Typography";
 const PendingRequests = ()=>{
     const [data,setData] = useState([])
     const {state} = useContext(UserContext)
@@ -209,26 +209,14 @@ const PendingRequests = ()=>{
                 )} 
                 </div>
                 : 
-                <div className="card input-field"    
-                style={{  
-                   margin:"30px auto",
-                   maxWidth:"500px",
-                   padding:"20px"}}
-                   >
-                    <h6>No requests yet!</h6>
+         
+                <div style={{height:'70vh',width:'95vw',border:'none'}}>
+                            
+                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests!<br/>Once you create a request, it will appear here. </Typography>
                 </div>
+           
             }   
             
-             {/* {data=='' &&   
-                <div className="card input-field"    
-                style={{  
-                   margin:"30px auto",
-                   maxWidth:"500px",
-                   padding:"20px"}}
-                   >
-                    <h6>No pending requests!</h6>
-                </div>
-            } */}
             {state.accountType === 'Customer' &&
             
                 <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 }} style={{background:"transparent"}}>

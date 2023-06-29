@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material'; 
+import { Button, Typography } from '@mui/material'; 
 import { Categories, Mediums, Surfaces, Tags } from '../../data'
 import Autocomplete from '@mui/material/Autocomplete'; 
  
@@ -121,7 +121,7 @@ const CreateRequest = ()=>{
            textAlign:"center"
         }}
        > 
-       <h4>Create a Request!</h4>
+       <h1>Create a Request!</h1>
        <InputLabel id="title-simple-select-label" style={{margin:"10px",textAlign:"left"}}>Title</InputLabel>
         <TextField
         fullWidth
