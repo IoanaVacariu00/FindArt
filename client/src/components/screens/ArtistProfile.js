@@ -150,17 +150,13 @@ const ArtistProfile = () =>{
                                     
                                      <Button variant='outlined' fullWidth
                                     className='outlined'
-                                    // onclick={ history.push('/messenger/'+ userProfile.user._id)} 
-                                    // {"location.href='/messenger/'"+userProfile.user._id+"'"} 
+                       
                                     >
                                         <Link to={'/messenger/'+userProfile.user._id}> 
                                         <span style={{color:'#1976d2'}}>Message </span>
                                         </Link>
                                     </Button>  
-                                    {/* <div style={{width:'100%',textAlign:'left'}}>  
-                                        <div className='custom-button' ><Link to={'/messenger/'+userProfile.user._id}> </Link></div>
-                                    </div>  */}
-                                    
+                                                              
                                 </Grid> 
                         
                             </Grid>

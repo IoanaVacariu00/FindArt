@@ -209,7 +209,6 @@ const Profile = ()=>{
                             src={`${item.photo}?w=164&h=164&fit=crop&auto=format`}
                             srcSet={`${item.photo}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title} 
-                            // style={{height: '100%', width:'100%', objectFit:'cover'}}
                             loading="lazy"
                             />
                             <ImageListItemBar
@@ -321,8 +320,11 @@ const Profile = ()=>{
                                                 </Button>
                                                 }
                                                 {
-                                                    (item.assigned==true  &&  item.assignedTo) &&
-                                                    <Item>Assigned to {item.assignedTo} </Item>
+                                                    (item.assigned==true  &&  item.assignedTo) && 
+                                                    <Button disabled variant="contained" style={{margin:"20px auto",padding:"10px" ,background:'red', position:'relative'}}>
+                                                      <Link >Assigned</Link>
+                                                    </Button>
+                                                    // <Item><Typography>Assigned to {item.assignedTo} </Typography></Item>
                                                 } 
 
                                             </TableContainer>

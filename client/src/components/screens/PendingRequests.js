@@ -107,9 +107,9 @@ const PendingRequests = ()=>{
                         padding:"20px",
                         textAlign:"center"
                      }}>
-                        <h5 style={{padding:"5px"}}>
-                            <Link to={"/customer_profile/"+item.user._id}>
-                            <p style={{float:"left"}}>{item?.user.name} </p>
+                        <div style={{padding:"5px"}}>
+                        <Link to={"/customer_profile/"+item.user._id}>
+                            <Typography variant='h6' style={{float:"left"}}>{item?.user.name} </Typography>
                             </Link>
                             {state.accountType === 'Artist' && 
                                 <>
@@ -125,7 +125,7 @@ const PendingRequests = ()=>{
                                         }    
                                 </>
                             }
-                        </h5>
+                        </div>
                         <TableContainer component={Paper}>
                             <Table style={{overflowX:"hidden"}} aria-label="simple table">
                                 <TableBody>
@@ -212,7 +212,7 @@ const PendingRequests = ()=>{
          
                 <div style={{height:'70vh',width:'95vw',border:'none'}}>
                             
-                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests!<br/>Once you create a request, it will appear here. </Typography>
+                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No pending requests yet!<br/>All pending requests will appear here. </Typography>
                 </div>
            
             }   

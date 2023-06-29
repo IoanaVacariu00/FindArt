@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Palette from "@mui/icons-material/Palette"  
+import Palette from "@mui/icons-material/Palette"   
 import SearchIcon from '@mui/icons-material/Search';
 import { Search, StyledInputBase,SearchIconWrapper } from './StyledComponents';
 const NavBar = ()=>{
@@ -33,8 +33,8 @@ const NavBar = ()=>{
     setAnchorElUser(null);
   };
     // const searchModal = useRef(null)
-    // const [search, setSearch] = useState('')
-    // const [userDetails, setUserDetails] = useState([])
+    const [search, setSearch] = useState('')
+    const [userDetails, setUserDetails] = useState([])
     const {state, dispatch} = useContext(UserContext);
     const history = useHistory()
 
@@ -97,21 +97,21 @@ const NavBar = ()=>{
     //    }
     //  }
 
-    //  const fetchUsers = (query)=>{
-    //     setSearch(query)
-    //     fetch('/searchusers',{
-    //       method:"post",
-    //       headers:{
-    //         "Content-Type":"application/json"
-    //       },
-    //       body:JSON.stringify({
-    //         query
-    //       })
-    //     }).then(res=>res.json())
-    //     .then(results=>{
-    //       setUserDetails(results.user)
-    //     })
-    //  }
+     const fetchUsers = (query)=>{
+        setSearch(query)
+        fetch('/searchusers',{
+          method:"post",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            query
+          })
+        }).then(res=>res.json())
+        .then(results=>{
+          setUserDetails(results.user)
+        })
+     }
 
      return(
       //   <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:"white"}}>
@@ -150,7 +150,30 @@ const NavBar = ()=>{
       // </AppBar>
       // <AppBar position="fixed"  sx={{ top:0 , bottom:'auto'}} style={{background:'black'}}>
       // <Container maxWidth="xl">disableguters
-      <>
+      <> 
+            {/* <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
+            <div className="modal-content">
+             <input
+                type="text"
+                placeholder="search users"
+                value={search}
+                onChange={(e)=>fetchUsers(e.target.value)}
+              />
+              <ul className="collection">
+                {userDetails.map(item=>{
+                  return <Link key={item.name} to={item._id !== state._id ? "/profile/"+item._id:'/profile'} 
+                  onClick={()=>{
+                    M.Modal.getInstance(searchModal.current).close()
+                    setSearch('')
+                  }}><li className="collection-item">{item.name}</li></Link> 
+                })}
+                
+              </ul>
+            </div>
+            <div className="modal-footer">
+              <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>close</button>
+            </div>
+        </div> */}
        <Toolbar >
           <Palette sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -216,7 +239,8 @@ const NavBar = ()=>{
 
           <Search >
             <StyledInputBase 
-      
+              value={search}
+              onChange={(e)=>fetchUsers(e.target.value)}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />

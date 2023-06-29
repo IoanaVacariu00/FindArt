@@ -88,7 +88,7 @@ const CreateRequest = ()=>{
        }
        else{
            M.toast({html:"Request created successfully",classes:"#43a047 green darken-1"})
-           history.push('/my_requests')
+           history.push('/main_requests')
        }
     }).catch(err=>{
         console.log(err)

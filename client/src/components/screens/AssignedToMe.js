@@ -166,7 +166,7 @@ const AssignedToMe = ()=>{
             {data=='' &&
                 <div style={{height:'70vh',width:'95vw',border:'none'}}>
                             
-                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests!<br/>Once you create a request, it will appear here. </Typography>
+                    <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>No requests yet!<br/>Assigned requests will appear here. </Typography>
                 </div>
             } 
             {state.accountType === 'Customer' &&

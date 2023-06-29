@@ -3,6 +3,7 @@ import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'  
 import { Table, TableRow, TableCell,TableBody, TableContainer, Paper, Button, Chip, AppBar, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+
 import Toolbar from '@mui/material/Toolbar';
 import DeleteIcon from '@mui/icons-material/Delete'; 
 import {blue, grey, StyledFab, StyledTextarea,Item} from '../StyledComponents'
@@ -59,7 +60,7 @@ const Myrequests = ()=>{
                                 >
                                     <div>
                                         <Link to={"/profile" }>  
-                                            <h5 style={{float:"left", margin:"15px"}}>{state.name}</h5>
+                                            <Typography variant='h6' style={{float:"left", margin:"15px"}}>{state.name}</Typography>
                                         </Link>    
                                         <DeleteIcon style={{float:"right",cursor:"pointer"}} onClick={()=>deleteRequest(item._id)}/> 
                                     </div>

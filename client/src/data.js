@@ -39,12 +39,28 @@
     ]
 
     export const Mediums =[
-      'Any Medium','Oil Paint', 'Acrylic', 'Watercolor', 'Oil Pastels', 'Mixed Media',
+      'Any Medium',
+      'Oil Paint',
+      'Acrylic',
+      'Watercolors',
+      'Oil Pastels', 
+      'Mixed Media', 
+      'Charcoal',
+      'Chalk',
+      'Graphite Pencils',
+      'Color Pencils',
+      'Ink and Pen',
+      'Markers',
+      'Watercolor Pencils',
+      'Guache'
     ]  
     
-    export const Surfaces = [         'Any Surface',
-      'Canvas','Paper','Wood Panel','Watercolor Paper', 'Cardboard',   
-      'Card stock','Fabric',
+    export const Surfaces = [          
+      'Any Surface',
+      'Canvas','Paper',
+      'Wood Panel','Watercolor Paper',
+      'Cardboard',   
+      'Fabric',
       'Glass',
       'Plaster',
       'Scratchboard',
@@ -52,7 +68,8 @@
      ]     
     
     export const Tags = [         
-      '#painting', '#blackandwhite', '#blue', '#realistic', '#portrait', '#landscape','#nature','#swan','#cat','#dog','#abstract','#lineart','#dotwork','#red','#yellow','#colorful','#pink','#orange'
+      '#painting', '#blackandwhite', '#blue', '#realistic', '#portrait', '#landscape','#nature','#swan','#cat','#dog','#abstract','#lineart','#dotwork','#red','#yellow','#colorful','#pink','#orange', 
+      '#drawing', '#charcoal', '#fox', '#birds', '#minimalism','#canvasart', '#monochrom', '#eyes','#plants', '#ocean', '#love','#lineart', '#people', '#paint', '#colors', '#pink', '#purple', '#grey', '#magenta'
      ]     
     /**
      * import * as React from "react";
