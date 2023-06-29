@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'    
-import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody } from '@mui/material';  
+import { Table, TableRow, TableCell, TableContainer, Paper, Chip, TableBody, Typography } from '@mui/material';  
 import TextareaAutosize from '@mui/base/TextareaAutosize';  
 import { styled } from "@mui/system";
 
@@ -142,9 +142,9 @@ const Requests = ()=>{
                         padding:"20px",
                         textAlign:"center"
                      }}>
-                        <h5 style={{padding:"5px"}}>
+                        <div style={{padding:"10px"}}>
                             <Link to={"/customer_profile/"+item.user._id}>
-                            <p style={{float:"left"}}>{item?.user.name} </p>
+                            <Typography variant='h6' style={{float:"left"}}>{item?.user.name} </Typography>
                             </Link>
                       
                         {item.acceptedBy.includes(state._id)
@@ -158,7 +158,7 @@ const Requests = ()=>{
                             >add_circle</i>
                             }    
                             
-                            </h5>
+                            </div>
                                 <TableContainer component={Paper}>
                                     <Table style={{overflowX:"hidden"}} aria-label="simple table">
                                     <TableBody>

@@ -30,7 +30,7 @@ const Messenger = ()=>{
     }
   }, [talkLoaded]);
 
-  return (<div className='chat_box' id="talkjs-container">Loading...</div>);
+  return (<div className='chat_box' id="talkjs-container"><div className='noContent'>Loading...</div></div>);
 }    
 
 export default Messenger 

@@ -215,17 +215,8 @@ const NavBar = ()=>{
             <MenuItem >  
 
           <Search >
-            {/* <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper> */}
             <StyledInputBase 
-            //  style={{
-            //   fontWeight: '500',
-            //   fontSize: '0.875rem',
-            //   lineHeight: '1.75',
-            //   letterSpacing: '0.02857em',
-             
-            //   }}
+      
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />

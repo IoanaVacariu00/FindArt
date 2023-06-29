@@ -1,7 +1,8 @@
 import React,{ useEffect, useState, useContext } from 'react';      
 import Talk from 'talkjs';   
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../../App';
+import { UserContext } from '../../App'; 
+import { Typography } from '@mui/material';
 
 const MessengerApi = () => {   
 
@@ -27,45 +28,7 @@ const MessengerApi = () => {
     function getBoth () {
       return Promise.all([getFriend(), loadTalkjs()])
     }
-    // useEffect(() => {
-      
-    //   const getUser = async () => {
-    //     try {
-    //       const res = await axios(`/finduser/${userid}`,
-    //       {
-    //         headers:{
-    //           "Authorization":"Bearer " + localStorage.getItem("jwt")
-    //         }
-    //       }
-    //       )
-    //       setFriend(res.data);
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   };
-    //   getUser();
-    // }, []); 
-    // console.log(friend);
-
-    // useEffect(()=>{
-      // fetch(`/finduser/${userid}`,
-      // {
-      //   headers:{
-      //     "Authorization":"Bearer " + localStorage.getItem("jwt")
-      //   }
-      // }
-      // ).then(res=>res.json())
-    //   .then(result=>{
-    //     setFriend(result); 
-    //   })
-      
-    // },[])
-
-  //  useEffect(() => { 
-
-    // Talk.ready.then(() => markTalkLoaded(true));
-      // if (talkLoaded) {
-        
+          
       useEffect(() => {
        getBoth ().then(([friend, talkLoaded]) => {
 
@@ -103,13 +66,14 @@ const MessengerApi = () => {
       
     })
   },[]);
- 
-
 
     return (  
       <div className='chat_box' id="talkjs-container">
-        Loading...
-       
+        <div style={{height:'70vh',width:'95vw',border:'none'}}>
+          <Typography variant="h6" className='noContent' style={{margin:'10px auto',color: '#4E606A;',opacity:'60%'}}>
+            Loading... 
+          </Typography>
+        </div>
       </div>
      )
 

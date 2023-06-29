@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useContext} from 'react'
+import React,{useEffect, useState, useContext, } from 'react'
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 import { Button, Grid, ImageListItemBar } from '@mui/material' 
@@ -7,16 +7,19 @@ import Typography from "@mui/material/Typography";
 import { Item } from '../StyledComponents' 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import Modal from '@mui/material';
+import Modal from '@mui/material/Modal'; 
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'; 
+import {useHistory} from 'react-router-dom'
 const ArtistProfile = () =>{
     const [userProfile,setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
     const [showfollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
-    const [showModal, setShowModal] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false); 
+    const history = useHistory()
 
-    // const handleModalShow = () => setShowModal(true);
-    // const handleModalClose = () => setShowModal(false);
     useEffect(()=>{
        fetch(`/user/${userid}`,{
            headers:{
@@ -87,6 +90,29 @@ const ArtistProfile = () =>{
     
    return (
         <div style={{height:'100vh'}}>
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,}}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
        {userProfile &&  
             <Box sx={{ flexGrow: 1 }} style={{margin:'30px'}}>
                 <Grid className='Grid' container spacing={1} style={{width:'80vw',margin:'auto'}}>
@@ -120,13 +146,20 @@ const ArtistProfile = () =>{
                                     }
                                     
                                 </Grid> 
-                                <Grid className='Grid'item xs={6} style={{border:'none',padding:'5px'}}>
+                                <Grid className='Grid' item xs={6} style={{border:'none',padding:'5px'}}>
                                     
-                                    <Button variant='outlined' fullWidth
+                                     <Button variant='outlined' fullWidth
                                     className='outlined'
-                                    onclick="location.href='/messenger/'+userProfile.user._id'">
-                                        Message
-                                    </Button> 
+                                    // onclick={ history.push('/messenger/'+ userProfile.user._id)} 
+                                    // {"location.href='/messenger/'"+userProfile.user._id+"'"} 
+                                    >
+                                        <Link to={'/messenger/'+userProfile.user._id}> 
+                                        <span style={{color:'#1976d2'}}>Message </span>
+                                        </Link>
+                                    </Button>  
+                                    {/* <div style={{width:'100%',textAlign:'left'}}>  
+                                        <div className='custom-button' ><Link to={'/messenger/'+userProfile.user._id}> </Link></div>
+                                    </div>  */}
                                     
                                 </Grid> 
                         
@@ -139,15 +172,16 @@ const ArtistProfile = () =>{
                 <ImageList sx={{ width:'80vw', height:'80vh', margin:'10px auto',color:'rgba(0, 0, 0, 0.6)' }} cols={3} >
                 {userProfile.posts.map((item) => (
                 
-                    <ImageListItem key={item.photo} style={{padding:' 10px 5px'}}>
+                    <ImageListItem key={item.photo} style={{padding:' 10px 5px',cursor:'pointer'}}   
+                     onClick={handleOpen} 
+                     >
                         <img
                         src={`${item.photo}?w=164&h=164&fit=crop&auto=format`}
                         srcSet={`${item.photo}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                         alt={item.title} 
-                        // style={{height: '100%', width:'100%', objectFit:'cover'}}
                         loading="lazy"
                         />
-                        <ImageListItemBar
+                        <ImageListItemBar 
                         title={<strong>{item.title}</strong>}
                         subtitle={<span style={{textAlign:'center'}}> {item.body}</span>}
                         position="below"
@@ -164,37 +198,6 @@ const ArtistProfile = () =>{
        </div>
    )
 }
-        //         </div>
-        //    </div>
-                          
-        {/* <div className="gallery">
-            {
-                userProfile.posts.map(item=>{
-                    return(
-                        <img key={item._id} className="item" src={item.photo} alt={item.title}/>  
-                    )
-                })
-            }
-        </div> */} 
-          {/* <Box sx={{ width: 500, height: 450, overflowY: 'scroll' }}>
-      <ImageList variant="masonry" cols={3} gap={8}>
-        {userProfile.posts.map((item) => (
-          <ImageListItem key={item._id}>
-            <img
-              src={`${item.photo}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.photo}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box> */}
-
-    //    </div>
-    //    </div>
-    //    : <h4>loading...!</h4> 
-
 
 
 export default ArtistProfile
